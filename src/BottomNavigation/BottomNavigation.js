@@ -1,10 +1,11 @@
 import React, {Children, cloneElement} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     bottomNavigation,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const styles = {
     root: {
@@ -23,7 +24,7 @@ function getStyles(props, context) {
   return styles;
 }
 
-const BottomNavigation = (props, context) => {
+const BottomNavigation = (props) => {
   const {
     children,
     style,
@@ -31,8 +32,8 @@ const BottomNavigation = (props, context) => {
     ...other
   } = props;
 
-  const {prepareStyles} = context.muiTheme;
-  const styles = getStyles(props, context);
+  const {prepareStyles} = props.muiTheme;
+  const styles = getStyles(props);
 
   const preparedChildren = Children.map(children, (child, index) => {
     if (!child) {
@@ -68,8 +69,4 @@ BottomNavigation.propTypes = {
   style: PropTypes.object,
 };
 
-BottomNavigation.contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
-};
-
-export default BottomNavigation;
+export default withTheme(BottomNavigation);

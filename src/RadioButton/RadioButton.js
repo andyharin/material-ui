@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import EnhancedSwitch from '../internal/EnhancedSwitch';
 import RadioButtonOff from '../svg-icons/toggle/radio-button-unchecked';
 import RadioButtonOn from '../svg-icons/toggle/radio-button-checked';
 
-function getStyles(props, context) {
-  const {radioButton} = context.muiTheme;
+function getStyles(props) {
+  const {radioButton} = props.muiTheme;
 
   return {
     icon: {
@@ -116,10 +117,6 @@ class RadioButton extends Component {
     labelPosition: 'right',
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   // Only called when selected, not when unselected.
   handleSwitch = (event) => {
     if (this.props.onCheck) {
@@ -154,7 +151,7 @@ class RadioButton extends Component {
       ...other
     } = this.props;
 
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props);
 
     const uncheckedStyles = Object.assign(
       styles.target,
@@ -202,4 +199,4 @@ class RadioButton extends Component {
   }
 }
 
-export default RadioButton;
+export default withTheme(RadioButton);

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import warning from 'warning';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import FocusRipple from '../internal/FocusRipple';
 
@@ -129,7 +130,7 @@ function getPercent(value, min, max) {
   return percent;
 }
 
-const getStyles = (props, context, state) => {
+const getStyles = (props, state) => {
   const {
     axis,
     disabled,
@@ -151,7 +152,7 @@ const getStyles = (props, context, state) => {
       rippleColor,
       selectionColor,
     },
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const fillGutter = handleSize / 2;
   const disabledGutter = trackSize + handleSizeDisabled / 2;
@@ -369,10 +370,6 @@ class Slider extends Component {
     style: {},
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     active: false,
     dragging: false,
@@ -436,7 +433,7 @@ class Slider extends Component {
       max,
       step,
     } = this.props;
-    const {isRtl} = this.context.muiTheme;
+    const {isRtl} = this.props.muiTheme;
 
     const calculatedAxis = calculateAxis(axis, isRtl);
 
@@ -565,7 +562,7 @@ class Slider extends Component {
       axis,
       disabled,
     } = this.props;
-    const {isRtl} = this.context.muiTheme;
+    const {isRtl} = this.props.muiTheme;
 
     if (disabled) {
       return;
@@ -618,7 +615,7 @@ class Slider extends Component {
       axis,
       disabled,
     } = this.props;
-    const {isRtl} = this.context.muiTheme;
+    const {isRtl} = this.props.muiTheme;
 
     if (disabled) {
       return;
@@ -668,10 +665,10 @@ class Slider extends Component {
 
   getTrackOffset() {
     const {axis} = this.props;
-    const {isRtl} = this.context.muiTheme;
+    const {isRtl} = this.props.muiTheme;
 
     const calculatedAxis = calculateAxis(axis, isRtl);
-    
+
     if (!this.track) return 0;
     return this.track.getBoundingClientRect()[mainAxisOffsetProperty[calculatedAxis]];
   }
@@ -692,7 +689,7 @@ class Slider extends Component {
       axis,
       disabled,
     } = this.props;
-    const {isRtl} = this.context.muiTheme;
+    const {isRtl} = this.props.muiTheme;
 
     if (this.dragRunning) {
       return;
@@ -736,7 +733,7 @@ class Slider extends Component {
       min,
       max,
     } = this.props;
-    const {isRtl} = this.context.muiTheme;
+    const {isRtl} = this.props.muiTheme;
 
     const calculatedAxis = calculateAxis(axis, isRtl);
     const positionMax = this.track[mainAxisClientProperty[calculatedAxis]];
@@ -794,8 +791,8 @@ class Slider extends Component {
       value,
     } = this.state;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
     const percent = getPercent(value, min, max);
 
     let handleStyles = {};
@@ -870,4 +867,4 @@ class Slider extends Component {
   }
 }
 
-export default Slider;
+export default withTheme(Slider);

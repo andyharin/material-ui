@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
+import withTheme from '../styles/withTheme';
 import {fade} from '../utils/colorManipulator';
 import transitions from '../styles/transitions';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -10,7 +11,7 @@ import OpenIcon from '../svg-icons/navigation/expand-less';
 import CloseIcon from '../svg-icons/navigation/expand-more';
 import NestedList from './NestedList';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {
     autoGenerateNestedIndicator,
     insetChildren,
@@ -27,7 +28,7 @@ function getStyles(props, context, state) {
     secondaryTextLines,
   } = props;
 
-  const {muiTheme} = context;
+  const {muiTheme} = props;
   const {listItem} = muiTheme;
 
   const textColor = muiTheme.baseTheme.palette.textColor;
@@ -330,10 +331,6 @@ class ListItem extends Component {
     secondaryTextLines: 1,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
     isKeyboardFocused: false,
@@ -357,11 +354,10 @@ class ListItem extends Component {
       this.setState({hovered: false});
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState) {
     return (
       !shallowEqual(this.props, nextProps) ||
-      !shallowEqual(this.state, nextState) ||
-      !shallowEqual(this.context, nextContext)
+      !shallowEqual(this.state, nextState)
     );
   }
 
@@ -401,7 +397,7 @@ class ListItem extends Component {
     return (
       <div
         {...additionalProps}
-        style={this.context.muiTheme.prepareStyles(mergedDivStyles)}
+        style={this.props.muiTheme.prepareStyles(mergedDivStyles)}
       >
         {contentChildren}
       </div>
@@ -425,7 +421,7 @@ class ListItem extends Component {
     return (
       <label
         {...additionalProps}
-        style={this.context.muiTheme.prepareStyles(mergedLabelStyles)}
+        style={this.props.muiTheme.prepareStyles(mergedLabelStyles)}
       >
         {contentChildren}
       </label>
@@ -433,7 +429,7 @@ class ListItem extends Component {
   }
 
   createTextElement(styles, data, key) {
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
     if (React.isValidElement(data)) {
       let style = Object.assign({}, styles, data.props.style);
       if (typeof data.type === 'string') { // if element is a native dom node
@@ -597,13 +593,13 @@ class ListItem extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
     const contentChildren = [children];
 
     if (leftIcon) {
       const additionalProps = {
-        color: leftIcon.props.color || this.context.muiTheme.listItem.leftIconColor,
+        color: leftIcon.props.color || this.props.muiTheme.listItem.leftIconColor,
       };
       this.pushElement(
         contentChildren,
@@ -615,7 +611,7 @@ class ListItem extends Component {
 
     if (rightIcon) {
       const additionalProps = {
-        color: rightIcon.props.color || this.context.muiTheme.listItem.rightIconColor,
+        color: rightIcon.props.color || this.props.muiTheme.listItem.rightIconColor,
       };
       this.pushElement(
         contentChildren,
@@ -746,4 +742,4 @@ class ListItem extends Component {
   }
 }
 
-export default ListItem;
+export default withTheme(ListItem);

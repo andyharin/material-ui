@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     baseTheme,
     toolbar,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   return {
     root: {
@@ -39,10 +40,6 @@ class ToolbarTitle extends Component {
     text: PropTypes.node,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       style,
@@ -50,8 +47,8 @@ class ToolbarTitle extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <span
@@ -64,4 +61,4 @@ class ToolbarTitle extends Component {
   }
 }
 
-export default ToolbarTitle;
+export default withTheme(ToolbarTitle);

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     baseTheme,
     toolbar,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   return {
     root: {
@@ -32,10 +33,6 @@ class ToolbarSeparator extends Component {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       className,
@@ -43,8 +40,8 @@ class ToolbarSeparator extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <span {...other} className={className} style={prepareStyles(Object.assign({}, styles.root, style))} />
@@ -52,4 +49,4 @@ class ToolbarSeparator extends Component {
   }
 }
 
-export default ToolbarSeparator;
+export default withTheme(ToolbarSeparator);

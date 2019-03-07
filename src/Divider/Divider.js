@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-const Divider = (props, context) => {
+const Divider = (props) => {
   const {
     inset,
     style,
@@ -11,7 +12,7 @@ const Divider = (props, context) => {
   const {
     baseTheme,
     prepareStyles,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const styles = {
     root: {
@@ -46,8 +47,4 @@ Divider.defaultProps = {
   inset: false,
 };
 
-Divider.contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
-};
-
-export default Divider;
+export default withTheme(Divider);

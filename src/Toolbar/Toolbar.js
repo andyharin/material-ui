@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {noGutter} = props;
 
   const {
     baseTheme,
     toolbar,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   return {
     root: {
@@ -46,10 +47,6 @@ class Toolbar extends Component {
     noGutter: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       children,
@@ -59,8 +56,8 @@ class Toolbar extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div {...other} className={className} style={prepareStyles(Object.assign({}, styles.root, style))}>
@@ -70,4 +67,4 @@ class Toolbar extends Component {
   }
 }
 
-export default Toolbar;
+export default withTheme(Toolbar);

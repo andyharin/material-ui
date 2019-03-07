@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import EnhancedSwitch from '../internal/EnhancedSwitch';
 import transitions from '../styles/transitions';
 import CheckboxOutline from '../svg-icons/toggle/check-box-outline-blank';
 import CheckboxChecked from '../svg-icons/toggle/check-box';
 
-function getStyles(props, context) {
-  const {checkbox} = context.muiTheme;
+function getStyles(props) {
+  const {checkbox} = props.muiTheme;
   const checkboxSize = 24;
 
   return {
@@ -119,10 +120,6 @@ class Checkbox extends Component {
     disabled: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     switched: false,
   };
@@ -173,7 +170,7 @@ class Checkbox extends Component {
       uncheckedIcon,
       ...other
     } = this.props;
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props);
     const boxStyles =
       Object.assign(
         styles.box,
@@ -236,4 +233,4 @@ class Checkbox extends Component {
   }
 }
 
-export default Checkbox;
+export default withTheme(Checkbox);

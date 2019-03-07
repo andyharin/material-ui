@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import TimeDisplay from './TimeDisplay';
 import ClockHours from './ClockHours';
 import ClockMinutes from './ClockMinutes';
@@ -16,11 +17,6 @@ class Clock extends Component {
   static defaultProps = {
     initialTime: new Date(),
   };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     selectedTime: null,
     mode: 'hour',
@@ -127,7 +123,7 @@ class Clock extends Component {
     const {
       prepareStyles,
       timePicker,
-    } = this.context.muiTheme;
+    } = this.props.muiTheme;
 
     const styles = {
       root: {
@@ -189,4 +185,4 @@ class Clock extends Component {
   }
 }
 
-export default Clock;
+export default withTheme(Clock);

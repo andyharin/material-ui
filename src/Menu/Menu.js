@@ -2,20 +2,21 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
+import withTheme from '../styles/withTheme';
 import ClickAwayListener from '../internal/ClickAwayListener';
 import keycode from 'keycode';
 import propTypes from '../utils/propTypes';
 import List from '../List/List';
 import {HotKeyHolder} from './menuUtils';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     desktop,
     maxHeight,
     width,
   } = props;
 
-  const {muiTheme} = context;
+  const {muiTheme} = props;
 
   const styles = {
     root: {
@@ -169,12 +170,8 @@ class Menu extends Component {
     onKeyDown: () => {},
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     const filteredChildren = this.getFilteredChildren(props.children);
     const selectedIndex = this.getLastSelectedIndex(props, filteredChildren);
 
@@ -218,11 +215,10 @@ class Menu extends Component {
     });
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState) {
     return (
       !shallowEqual(this.props, nextProps) ||
-      !shallowEqual(this.state, nextState) ||
-      !shallowEqual(this.context, nextContext)
+      !shallowEqual(this.state, nextState)
     );
   }
 
@@ -537,8 +533,8 @@ class Menu extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     const mergedRootStyles = Object.assign(styles.root, style);
     const mergedListStyles = Object.assign(styles.list, listStyle);
@@ -593,4 +589,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default withTheme(Menu);

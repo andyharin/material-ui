@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import propTypes from '../utils/propTypes';
 import transitions from '../styles/transitions';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     rounded,
     circle,
@@ -15,7 +16,7 @@ function getStyles(props, context) {
     baseTheme,
     paper,
     borderRadius,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   return {
     root: {
@@ -67,9 +68,6 @@ class Paper extends Component {
     zDepth: 1,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
 
   render() {
     const {
@@ -82,8 +80,8 @@ class Paper extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
@@ -93,4 +91,4 @@ class Paper extends Component {
   }
 }
 
-export default Paper;
+export default withTheme(Paper);

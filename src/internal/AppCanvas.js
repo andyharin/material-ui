@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
 class AppCanvas extends Component {
   static propTypes = {
     children: PropTypes.node,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       baseTheme,
       prepareStyles,
-    } = this.context.muiTheme;
+    } = this.props.muiTheme;
 
     const styles = {
       height: '100%',
@@ -48,4 +45,4 @@ class AppCanvas extends Component {
   }
 }
 
-export default AppCanvas;
+export default withTheme(AppCanvas);

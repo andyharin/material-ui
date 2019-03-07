@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import Checkbox from '../Checkbox';
 import TableRowColumn from './TableRowColumn';
 import ClickAwayListener from '../internal/ClickAwayListener';
@@ -115,10 +116,6 @@ class TableBody extends Component {
     preScanRows: true,
     selectable: true,
     style: {},
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -446,7 +443,7 @@ class TableBody extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     return (
       <ClickAwayListener onClickAway={this.handleClickAway}>
@@ -458,4 +455,4 @@ class TableBody extends Component {
   }
 }
 
-export default TableBody;
+export default withTheme(TableBody);

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import EnhancedButton from '../internal/EnhancedButton';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {selected, year, utils} = props;
-  const {baseTheme, datePicker} = context.muiTheme;
+  const {baseTheme, datePicker} = props.muiTheme;
   const {hover} = state;
 
   return {
@@ -47,10 +48,6 @@ class YearButton extends Component {
     selected: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hover: false,
   };
@@ -80,8 +77,8 @@ class YearButton extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     return (
       <EnhancedButton
@@ -101,4 +98,4 @@ class YearButton extends Component {
   }
 }
 
-export default YearButton;
+export default withTheme(YearButton);

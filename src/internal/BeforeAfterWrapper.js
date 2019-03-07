@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
 /**
  *  BeforeAfterWrapper
@@ -61,10 +62,6 @@ class BeforeAfterWrapper extends Component {
     elementType: 'div',
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       beforeStyle,
@@ -75,7 +72,7 @@ class BeforeAfterWrapper extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     let beforeElement;
     let afterElement;
@@ -105,4 +102,4 @@ class BeforeAfterWrapper extends Component {
   }
 }
 
-export default BeforeAfterWrapper;
+export default withTheme(BeforeAfterWrapper);

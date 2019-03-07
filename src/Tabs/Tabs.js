@@ -1,11 +1,12 @@
 import React, {Component, createElement, cloneElement, Children, isValidElement} from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
+import withTheme from '../styles/withTheme';
 import TabTemplate from './TabTemplate';
 import InkBar from './InkBar';
 
-function getStyles(props, context) {
-  const {tabs} = context.muiTheme;
+function getStyles(props) {
+  const {tabs} = props.muiTheme;
 
   return {
     tabItemContainer: {
@@ -81,10 +82,6 @@ class Tabs extends Component {
     onChange: () => {},
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {selectedIndex: 0};
 
   componentWillMount() {
@@ -100,10 +97,10 @@ class Tabs extends Component {
     });
   }
 
-  componentWillReceiveProps(newProps, nextContext) {
+  componentWillReceiveProps(newProps) {
     const valueLink = this.getValueLink(newProps);
     const newState = {
-      muiTheme: nextContext.muiTheme || this.context.muiTheme,
+      muiTheme: newProps.muiTheme || this.props.muiTheme,
     };
 
     if (valueLink.value !== undefined) {
@@ -187,8 +184,8 @@ class Tabs extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const valueLink = this.getValueLink(this.props);
     const tabValue = valueLink.value;
     const tabContent = [];
@@ -252,4 +249,4 @@ class Tabs extends Component {
   }
 }
 
-export default Tabs;
+export default withTheme(Tabs);

@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     backgroundColor,
     color,
     size,
   } = props;
 
-  const {avatar} = context.muiTheme;
+  const {avatar} = props.muiTheme;
 
   const styles = {
     root: {
@@ -77,7 +78,7 @@ class Avatar extends Component {
     size: 40,
   };
 
-  static contextTypes = {
+  static propsTypes = {
     muiTheme: PropTypes.object.isRequired,
   };
 
@@ -91,8 +92,8 @@ class Avatar extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     if (src) {
       return (
@@ -121,4 +122,4 @@ class Avatar extends Component {
   }
 }
 
-export default Avatar;
+export default withTheme(Avatar);

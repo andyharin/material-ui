@@ -1,5 +1,6 @@
 import React, {Component, Children} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import {fade} from '../utils/colorManipulator';
 
 export const makeSelectable = (MyComponent) => {
@@ -9,10 +10,6 @@ export const makeSelectable = (MyComponent) => {
       onChange: PropTypes.func,
       selectedItemStyle: PropTypes.object,
       value: PropTypes.any,
-    };
-
-    static contextTypes = {
-      muiTheme: PropTypes.object.isRequired,
     };
 
     extendChild(child, styles, selectedItemStyle) {
@@ -83,7 +80,7 @@ export const makeSelectable = (MyComponent) => {
       const styles = {};
 
       if (!selectedItemStyle) {
-        const textColor = this.context.muiTheme.baseTheme.palette.textColor;
+        const textColor = this.props.muiTheme.baseTheme.palette.textColor;
         styles.backgroundColor = fade(textColor, 0.2);
       }
 
@@ -98,4 +95,4 @@ export const makeSelectable = (MyComponent) => {
   };
 };
 
-export default makeSelectable;
+export default withTheme(makeSelectable);

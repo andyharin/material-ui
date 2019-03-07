@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import withTheme from '../styles/withTheme';
 import autoPrefix from '../utils/autoPrefix';
 import transitions from '../styles/transitions';
 
@@ -17,10 +18,6 @@ class ScaleInChild extends Component {
     enterDelay: 0,
     maxScale: 1,
     minScale: 0,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   componentWillUnmount() {
@@ -79,7 +76,7 @@ class ScaleInChild extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     const mergedRootStyles = Object.assign({}, {
       position: 'absolute',
@@ -98,4 +95,4 @@ class ScaleInChild extends Component {
   }
 }
 
-export default ScaleInChild;
+export default withTheme(ScaleInChild);

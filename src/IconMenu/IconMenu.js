@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import withTheme from '../styles/withTheme';
 import Events from '../utils/events';
 import propTypes from '../utils/propTypes';
 import Menu from '../Menu/Menu';
@@ -147,10 +148,6 @@ class IconMenu extends Component {
     useLayerForClickAway: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     menuInitiallyKeyboardFocused: false,
     open: false,
@@ -253,7 +250,7 @@ class IconMenu extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
     const {open, anchorEl} = this.state;
 
     const styles = {
@@ -320,12 +317,10 @@ You should wrapped it with an <IconButton />.`);
           targetOrigin={targetOrigin}
           open={open}
           anchorEl={anchorEl}
-          childContextTypes={this.constructor.childContextTypes}
           useLayerForClickAway={useLayerForClickAway}
           onRequestClose={this.handleRequestClose}
           animated={animated}
           animation={animation}
-          context={this.context}
         >
           {menu}
         </Popover>
@@ -334,4 +329,4 @@ You should wrapped it with an <IconButton />.`);
   }
 }
 
-export default IconMenu;
+export default withTheme(IconMenu);

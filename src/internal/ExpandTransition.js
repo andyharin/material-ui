@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
 import ExpandTransitionChild from './ExpandTransitionChild';
+import withTheme from '../styles/withTheme';
 
 class ExpandTransition extends Component {
   static propTypes = {
@@ -21,10 +22,6 @@ class ExpandTransition extends Component {
     transitionDuration: 450,
     loading: false,
     open: false,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   renderChildren(children) {
@@ -57,7 +54,7 @@ class ExpandTransition extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     const mergedRootStyles = Object.assign({}, {
       position: 'relative',
@@ -79,4 +76,4 @@ class ExpandTransition extends Component {
   }
 }
 
-export default ExpandTransition;
+export default withTheme(ExpandTransition);

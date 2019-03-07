@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import PropTypes from 'prop-types';
 import {unstable_renderSubtreeIntoContainer, unmountComponentAtNode} from 'react-dom';
+import withTheme from '../styles/withTheme';
 
 import Dom from '../utils/dom';
 
@@ -15,10 +16,6 @@ class RenderToLayer extends Component {
 
   static defaultProps = {
     useLayerForClickAway: true,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -98,7 +95,7 @@ class RenderToLayer extends Component {
           this.layer.style.bottom = 0;
           this.layer.style.left = 0;
           this.layer.style.right = 0;
-          this.layer.style.zIndex = this.context.muiTheme.zIndex.layer;
+          this.layer.style.zIndex = this.props.muiTheme.zIndex.layer;
         } else {
           setTimeout(() => {
             window.addEventListener('click', this.onClickAway);
@@ -118,4 +115,4 @@ class RenderToLayer extends Component {
   }
 }
 
-export default RenderToLayer;
+export default withTheme(RenderToLayer);

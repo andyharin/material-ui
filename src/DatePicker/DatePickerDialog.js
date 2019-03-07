@@ -44,10 +44,6 @@ class DatePickerDialog extends Component {
     openToYearSelection: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     open: false,
   };

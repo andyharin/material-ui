@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
+import { withContext } from './Context';
 
-const getStyles = ({index}, {stepper}) => {
+const getStyles = ({ index, stepper }) => {
   const {orientation} = stepper;
   const styles = {
     root: {
@@ -53,12 +55,6 @@ class Step extends Component {
      */
     style: PropTypes.object,
   };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-    stepper: PropTypes.object,
-  };
-
   renderChild = (child) => {
     const {
       active,
@@ -88,8 +84,8 @@ class Step extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div style={prepareStyles(Object.assign(styles.root, style))} {...other}>
@@ -99,4 +95,4 @@ class Step extends Component {
   }
 }
 
-export default Step;
+export default withContext(Step);

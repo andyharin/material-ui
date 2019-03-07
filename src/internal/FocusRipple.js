@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
+import withTheme from '../styles/withTheme';
 import autoPrefix from '../utils/autoPrefix';
 import transitions from '../styles/transitions';
 import ScaleIn from './ScaleIn';
@@ -15,10 +16,6 @@ class FocusRipple extends Component {
     opacity: PropTypes.number,
     show: PropTypes.bool,
     style: PropTypes.object,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -55,7 +52,7 @@ class FocusRipple extends Component {
       opacity,
     } = props;
 
-    const {prepareStyles, ripple} = this.context.muiTheme;
+    const {prepareStyles, ripple} = this.props.muiTheme;
 
     const innerStyles = Object.assign({
       position: 'absolute',
@@ -125,4 +122,4 @@ class FocusRipple extends Component {
   }
 }
 
-export default FocusRipple;
+export default withTheme(FocusRipple);

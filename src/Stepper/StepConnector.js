@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import pure from 'recompose/pure';
+import withTheme from '../styles/withTheme';
+import { withContext } from './Context';
 
 const propTypes = {
   /**
@@ -9,13 +11,8 @@ const propTypes = {
   style: PropTypes.object,
 };
 
-const contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
-  stepper: PropTypes.object,
-};
-
-const StepConnector = (props, context) => {
-  const {muiTheme, stepper} = context;
+const StepConnector = (props) => {
+  const {muiTheme, stepper } = props;
 
   const styles = {
     wrapper: {
@@ -51,7 +48,7 @@ const StepConnector = (props, context) => {
 };
 
 StepConnector.propTypes = propTypes;
-StepConnector.contextTypes = contextTypes;
+const SC = withTheme(withContext(StepConnector))
 
-export {StepConnector as PlainStepConnector};
-export default pure(StepConnector);
+export {SC as PlainStepConnector};
+export default pure(SC);

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 
 function getRelativeValue(value, min, max) {
@@ -9,14 +10,14 @@ function getRelativeValue(value, min, max) {
   return relValue * 100;
 }
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     max,
     min,
     value,
   } = props;
 
-  const {baseTheme: {palette}, borderRadius} = context.muiTheme;
+  const {baseTheme: {palette}, borderRadius} = props.muiTheme;
 
   const styles = {
     root: {
@@ -100,10 +101,6 @@ class LinearProgress extends Component {
     max: 100,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     this.timers = {};
 
@@ -132,8 +129,8 @@ class LinearProgress extends Component {
     step = step || 0;
     step %= 4;
 
-    const right = this.context.muiTheme.isRtl ? 'left' : 'right';
-    const left = this.context.muiTheme.isRtl ? 'right' : 'left';
+    const right = this.props.muiTheme.isRtl ? 'left' : 'right';
+    const left = this.props.muiTheme.isRtl ? 'right' : 'left';
 
     if (step === 0) {
       barElement.style[left] = `${stepValues[0][0]}%`;
@@ -155,8 +152,8 @@ class LinearProgress extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
@@ -169,4 +166,4 @@ class LinearProgress extends Component {
   }
 }
 
-export default LinearProgress;
+export default withTheme(LinearProgress);

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-const Subheader = (props, context) => {
+const Subheader = (props) => {
   const {
     children,
     inset,
@@ -12,7 +13,7 @@ const Subheader = (props, context) => {
   const {
     prepareStyles,
     subheader,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const styles = {
     root: {
@@ -54,8 +55,4 @@ Subheader.defaultProps = {
   inset: false,
 };
 
-Subheader.contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
-};
-
-export default Subheader;
+export default withTheme(Subheader);

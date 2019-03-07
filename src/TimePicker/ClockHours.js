@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import withTheme from '../styles/withTheme';
 import ClockNumber from './ClockNumber';
 import ClockPointer from './ClockPointer';
 import {getTouchEventOffsetValues, rad2deg} from './timeUtils';
@@ -16,10 +17,6 @@ class ClockHours extends Component {
     initialHours: new Date().getHours(),
     onChange: () => {},
     format: 'ampm',
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -163,7 +160,7 @@ class ClockHours extends Component {
       },
     };
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
     const hours = this.getSelected();
     const numbers = this.getHourNumbers();
 
@@ -180,4 +177,4 @@ class ClockHours extends Component {
   }
 }
 
-export default ClockHours;
+export default withTheme(ClockHours);

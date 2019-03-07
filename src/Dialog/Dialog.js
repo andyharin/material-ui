@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import Overlay from '../internal/Overlay';
 import RenderToLayer from '../internal/RenderToLayer';
@@ -15,11 +16,6 @@ class TransitionItem extends Component {
     children: PropTypes.node,
     style: PropTypes.object,
   };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     style: {},
   };
@@ -34,7 +30,7 @@ class TransitionItem extends Component {
   }
 
   componentWillAppear(callback) {
-    const spacing = this.context.muiTheme.baseTheme.spacing;
+    const spacing = this.props.muiTheme.baseTheme.spacing;
 
     this.setState({
       style: {
@@ -64,7 +60,7 @@ class TransitionItem extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     return (
       <div {...other} style={prepareStyles(Object.assign({}, this.state.style, style))}>
@@ -74,7 +70,7 @@ class TransitionItem extends Component {
   }
 }
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     autoScrollBodyContent,
     open,
@@ -87,7 +83,7 @@ function getStyles(props, context) {
     },
     dialog,
     zIndex,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const gutter = spacing.desktopGutter;
   const borderScroll = `1px solid ${palette.borderColor}`;
@@ -175,10 +171,6 @@ class DialogInline extends Component {
     titleStyle: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     this.positionDialog();
   }
@@ -224,7 +216,7 @@ class DialogInline extends Component {
 
     // Force a height if the dialog is taller than clientHeight
     if (autoDetectWindowHeight || autoScrollBodyContent) {
-      const styles = getStyles(this.props, this.context);
+      const styles = getStyles(this.props);
       styles.body = Object.assign(styles.body, bodyStyle);
       let maxDialogContentHeight = clientHeight - 2 * 64;
 
@@ -288,8 +280,8 @@ class DialogInline extends Component {
       title,
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     styles.root = Object.assign(styles.root, style);
     styles.content = Object.assign(styles.content, contentStyle);
@@ -466,10 +458,6 @@ class Dialog extends Component {
     titleStyle: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   static defaultProps = {
     autoDetectWindowHeight: true,
     autoScrollBodyContent: false,
@@ -490,4 +478,4 @@ class Dialog extends Component {
   }
 }
 
-export default Dialog;
+export default withTheme(Dialog);

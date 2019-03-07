@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import EnhancedButton from '../internal/EnhancedButton';
 
-function getStyles(props, context) {
-  const {tabs} = context.muiTheme;
+function getStyles(props) {
+  const {tabs} = props.muiTheme;
 
   return {
     root: {
@@ -82,10 +83,6 @@ class Tab extends Component {
     width: PropTypes.string,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   handleClick = (event) => {
     if (this.props.onClick) {
       this.props.onClick(this.props.value, event, this);
@@ -107,7 +104,7 @@ class Tab extends Component {
       ...other
     } = this.props;
 
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props);
 
     let iconElement;
     if (icon && React.isValidElement(icon)) {
@@ -122,7 +119,7 @@ class Tab extends Component {
     }
 
     const rippleOpacity = 0.3;
-    const rippleColor = this.context.muiTheme.tabs.selectedTextColor;
+    const rippleColor = this.props.muiTheme.tabs.selectedTextColor;
 
     return (
       <EnhancedButton
@@ -143,4 +140,4 @@ class Tab extends Component {
   }
 }
 
-export default Tab;
+export default withTheme(Tab);

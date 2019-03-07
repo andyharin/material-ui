@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import propTypes from '../utils/propTypes';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -7,8 +8,8 @@ import FontIcon from '../FontIcon';
 import Tooltip from '../internal/Tooltip';
 import {extendChildren} from '../utils/childUtils';
 
-function getStyles(props, context) {
-  const {baseTheme} = context.muiTheme;
+function getStyles(props) {
+  const {baseTheme} = props.muiTheme;
 
   return {
     root: {
@@ -126,10 +127,6 @@ class IconButton extends Component {
     touch: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
     isKeyboardFocused: false,
@@ -245,7 +242,7 @@ class IconButton extends Component {
     } = this.props;
     let fonticon;
 
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props);
     const tooltipPosition = tooltipPositionProp.split('-');
 
     const hovered = (this.state.hovered || this.state.isKeyboardFocused) && !disabled;
@@ -282,7 +279,7 @@ class IconButton extends Component {
             disabled && styles.disabled,
             iconStyleFontIcon
           )}
-          color={this.context.muiTheme.baseTheme.palette.textColor}
+          color={this.props.muiTheme.baseTheme.palette.textColor}
         >
           {children}
         </FontIcon>
@@ -317,4 +314,4 @@ class IconButton extends Component {
   }
 }
 
-export default IconButton;
+export default withTheme(IconButton);

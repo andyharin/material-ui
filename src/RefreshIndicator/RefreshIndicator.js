@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import autoPrefix from '../utils/autoPrefix';
 import transitions from '../styles/transitions';
 import Paper from '../Paper';
@@ -72,10 +73,6 @@ class RefreshIndicator extends Component {
     status: 'hide',
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     this.scalePath(this.refs.path, 0);
     this.rotateWrapper(this.refs.wrapper);
@@ -97,7 +94,7 @@ class RefreshIndicator extends Component {
   }
 
   renderChildren() {
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
     const paperSize = this.getPaperSize();
 
     let childrenCmp = null;
@@ -156,7 +153,7 @@ class RefreshIndicator extends Component {
   }
 
   getTheme() {
-    return this.context.muiTheme.refreshIndicator;
+    return this.props.muiTheme.refreshIndicator;
   }
 
   getPaddingSize() {
@@ -312,7 +309,7 @@ class RefreshIndicator extends Component {
       ...other
     } = this.props;
 
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props);
 
     return (
       <Paper
@@ -326,4 +323,4 @@ class RefreshIndicator extends Component {
   }
 }
 
-export default RefreshIndicator;
+export default withTheme(RefreshIndicator);

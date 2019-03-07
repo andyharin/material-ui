@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 
 const reflow = (elem) => elem.offsetHeight;
@@ -18,10 +19,6 @@ class ExpandTransitionChild extends Component {
     enterDelay: 0,
     transitionDelay: 0,
     transitionDuration: 450,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   componentWillUnmount() {
@@ -86,7 +83,7 @@ class ExpandTransitionChild extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     const mergedRootStyles = Object.assign({
       position: 'relative',
@@ -110,4 +107,4 @@ class ExpandTransitionChild extends Component {
   }
 }
 
-export default ExpandTransitionChild;
+export default withTheme(ExpandTransitionChild);

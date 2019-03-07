@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     firstChild,
     lastChild,
@@ -11,7 +12,7 @@ function getStyles(props, context) {
     baseTheme,
     button,
     toolbar,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const marginHorizontal = baseTheme.spacing.desktopGutter;
   const marginVertical = (toolbar.height - button.height) / 2;
@@ -91,10 +92,6 @@ class ToolbarGroup extends Component {
     lastChild: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   handleMouseLeaveFontIcon(style) {
     return (event) => {
       event.target.style.zIndex = 'auto';
@@ -112,8 +109,8 @@ class ToolbarGroup extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     const newChildren = React.Children.map(children, (currentChild) => {
       if (!currentChild) {
@@ -136,8 +133,8 @@ class ToolbarGroup extends Component {
         case 'FontIcon' :
           return React.cloneElement(currentChild, {
             style: Object.assign({}, styles.icon.root, currentChild.props.style),
-            color: currentChild.props.color || this.context.muiTheme.toolbar.iconColor,
-            hoverColor: currentChild.props.hoverColor || this.context.muiTheme.toolbar.hoverColor,
+            color: currentChild.props.color || this.props.muiTheme.toolbar.iconColor,
+            hoverColor: currentChild.props.hoverColor || this.props.muiTheme.toolbar.hoverColor,
           });
         case 'ToolbarSeparator' :
         case 'ToolbarTitle' :
@@ -157,4 +154,4 @@ class ToolbarGroup extends Component {
   }
 }
 
-export default ToolbarGroup;
+export default withTheme(ToolbarGroup);

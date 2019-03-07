@@ -1,5 +1,6 @@
 import React, {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import {fade} from '../utils/colorManipulator';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -13,13 +14,13 @@ function validateLabel(props, propName, componentName) {
   }
 }
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {
     baseTheme,
     button,
     raisedButton,
     borderRadius,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const {
     disabled,
@@ -244,10 +245,6 @@ class RaisedButton extends Component {
     secondary: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
     keyboardFocused: false,
@@ -376,8 +373,8 @@ class RaisedButton extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
     const mergedRippleStyles = Object.assign({}, styles.ripple, rippleStyle);
 
     const buttonEventHandlers = disabled ? {} : {
@@ -449,4 +446,4 @@ class RaisedButton extends Component {
   }
 }
 
-export default RaisedButton;
+export default withTheme(RaisedButton);

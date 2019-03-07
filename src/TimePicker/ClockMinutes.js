@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import ClockNumber from './ClockNumber';
 import ClockPointer from './ClockPointer';
 import {getTouchEventOffsetValues, rad2deg} from './timeUtils';
@@ -15,10 +16,6 @@ class ClockMinutes extends Component {
     initialMinutes: new Date().getMinutes(),
     onChange: () => {},
     step: 1,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -139,7 +136,7 @@ class ClockMinutes extends Component {
       },
     };
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
     const minutes = this.getMinuteNumbers();
 
     return (
@@ -159,4 +156,4 @@ class ClockMinutes extends Component {
   }
 }
 
-export default ClockMinutes;
+export default withTheme(ClockMinutes);

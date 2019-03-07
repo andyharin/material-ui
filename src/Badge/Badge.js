@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {primary, secondary} = props;
-  const {badge} = context.muiTheme;
+  const {badge} = props.muiTheme;
 
   let badgeBackgroundColor;
   let badgeTextColor;
@@ -86,10 +87,6 @@ class Badge extends Component {
     secondary: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       badgeContent,
@@ -101,8 +98,8 @@ class Badge extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div {...other} style={prepareStyles(Object.assign({}, styles.root, style))}>
@@ -115,4 +112,4 @@ class Badge extends Component {
   }
 }
 
-export default Badge;
+export default withTheme(Badge);

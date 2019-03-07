@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Paper from '../Paper';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import propTypes from '../utils/propTypes';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {targetOrigin} = props;
   const {open} = state;
-  const {muiTheme} = context;
+  const {muiTheme} = props;
   const horizontal = targetOrigin.horizontal.replace('middle', 'center');
 
   return {
@@ -41,10 +42,6 @@ class PopoverAnimationVertical extends Component {
     zDepth: 1,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     open: false,
   };
@@ -66,7 +63,7 @@ class PopoverAnimationVertical extends Component {
       zDepth,
     } = this.props;
 
-    const styles = getStyles(this.props, this.context, this.state);
+    const styles = getStyles(this.props, this.state);
 
     return (
       <Paper
@@ -80,4 +77,4 @@ class PopoverAnimationVertical extends Component {
   }
 }
 
-export default PopoverAnimationVertical;
+export default withTheme(PopoverAnimationVertical);

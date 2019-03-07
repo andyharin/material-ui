@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const verticalPosition = props.verticalPosition;
   const horizontalPosition = props.horizontalPosition;
   const touchMarginOffset = props.touch ? 10 : 0;
@@ -15,7 +16,7 @@ function getStyles(props, context, state) {
     zIndex,
     tooltip,
     borderRadius,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const styles = {
     root: {
@@ -97,10 +98,6 @@ class Tooltip extends Component {
     verticalPosition: PropTypes.oneOf(['top', 'bottom']),
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     offsetWidth: null,
   };
@@ -150,8 +147,8 @@ class Tooltip extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     return (
       <div
@@ -179,4 +176,4 @@ class Tooltip extends Component {
   }
 }
 
-export default Tooltip;
+export default withTheme(Tooltip);

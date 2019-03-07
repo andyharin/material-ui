@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import autoPrefix from '../utils/autoPrefix';
 import transitions from '../styles/transitions';
 
@@ -12,7 +13,7 @@ function getArcLength(fraction, props) {
   return fraction * Math.PI * (props.size - props.thickness);
 }
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     max,
     min,
@@ -20,7 +21,7 @@ function getStyles(props, context) {
     value,
   } = props;
 
-  const {baseTheme: {palette}} = context.muiTheme;
+  const {baseTheme: {palette}} = props.muiTheme;
 
   const styles = {
     root: {
@@ -107,10 +108,6 @@ class CircularProgress extends Component {
     thickness: 3.5,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     this.scalePath(this.refs.path);
     this.rotateWrapper(this.refs.wrapper);
@@ -167,8 +164,8 @@ class CircularProgress extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div {...other} style={prepareStyles(Object.assign(styles.root, style))} >
@@ -194,4 +191,4 @@ class CircularProgress extends Component {
   }
 }
 
-export default CircularProgress;
+export default withTheme(CircularProgress);

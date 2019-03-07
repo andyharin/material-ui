@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import CalendarActionButtons from './CalendarActionButtons';
 import CalendarMonth from './CalendarMonth';
@@ -49,10 +50,6 @@ class Calendar extends Component {
     initialDate: new Date(),
     locale: 'en-US',
     utils: defaultUtils,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -123,8 +120,8 @@ class Calendar extends Component {
     const newDisplayDate = this.props.utils.getFirstDayOfMonth(date);
 
     if (newDisplayDate !== this.state.displayDate) {
-      const nextDirection = this.context.muiTheme.isRtl ? 'right' : 'left';
-      const prevDirection = this.context.muiTheme.isRtl ? 'left' : 'right';
+      const nextDirection = this.props.muiTheme.isRtl ? 'right' : 'left';
+      const prevDirection = this.props.muiTheme.isRtl ? 'left' : 'right';
       const direction = newDisplayDate > this.state.displayDate ? nextDirection : prevDirection;
       this.setState({
         displayDate: newDisplayDate,
@@ -160,8 +157,8 @@ class Calendar extends Component {
   };
 
   handleMonthChange = (months) => {
-    const nextDirection = this.context.muiTheme.isRtl ? 'right' : 'left';
-    const prevDirection = this.context.muiTheme.isRtl ? 'left' : 'right';
+    const nextDirection = this.props.muiTheme.isRtl ? 'right' : 'left';
+    const prevDirection = this.props.muiTheme.isRtl ? 'left' : 'right';
     const direction = months >= 0 ? nextDirection : prevDirection;
     this.setState({
       transitionDirection: direction,
@@ -195,8 +192,8 @@ class Calendar extends Component {
 
   handleWindowKeyDown = (event) => {
     if (this.props.open) {
-      const nextArrow = this.context.muiTheme.isRtl ? 'left' : 'right';
-      const prevArrow = this.context.muiTheme.isRtl ? 'right' : 'left';
+      const nextArrow = this.props.muiTheme.isRtl ? 'left' : 'right';
+      const prevArrow = this.props.muiTheme.isRtl ? 'right' : 'left';
       switch (keycode(event)) {
         case 'up':
           if (event.altKey && event.shiftKey) {
@@ -259,11 +256,11 @@ class Calendar extends Component {
   }
 
   render() {
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
     const {hideCalendarDate} = this.props;
     const toolbarInteractions = this.getToolbarInteractions();
     const isLandscape = this.props.mode === 'landscape';
-    const {calendarTextColor} = this.context.muiTheme.datePicker;
+    const {calendarTextColor} = this.props.muiTheme.datePicker;
 
     const styles = {
       root: {
@@ -399,4 +396,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default withTheme(Calendar);

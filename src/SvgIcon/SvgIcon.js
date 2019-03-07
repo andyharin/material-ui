@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 
 class SvgIcon extends Component {
@@ -45,10 +46,6 @@ class SvgIcon extends Component {
     viewBox: '0 0 24 24',
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
   };
@@ -78,7 +75,7 @@ class SvgIcon extends Component {
     const {
       svgIcon,
       prepareStyles,
-    } = this.context.muiTheme;
+    } = this.props.muiTheme;
 
     const offColor = color ? color : 'currentColor';
     const onColor = hoverColor ? hoverColor : offColor;
@@ -107,4 +104,4 @@ class SvgIcon extends Component {
   }
 }
 
-export default SvgIcon;
+export default withTheme(SvgIcon);

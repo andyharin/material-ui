@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     baseTheme,
     gridTile,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const actionPos = props.actionIcon && props.actionPosition;
 
@@ -134,10 +135,6 @@ class GridTile extends Component {
     containerElement: 'div',
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     this.ensureImageCover();
   }
@@ -152,7 +149,7 @@ class GridTile extends Component {
     if (imgEl) {
       const fit = () => {
         if (imgEl.offsetWidth < imgEl.parentNode.offsetWidth) {
-          const {isRtl} = this.context.muiTheme;
+          const {isRtl} = this.props.muiTheme;
           imgEl.style.height = 'auto';
           if (isRtl) {
             imgEl.style.right = '0';
@@ -190,8 +187,8 @@ class GridTile extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const mergedRootStyles = Object.assign(styles.root, style);
 
     let titleBar = null;
@@ -247,4 +244,4 @@ class GridTile extends Component {
   }
 }
 
-export default GridTile;
+export default withTheme(GridTile);

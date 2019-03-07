@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import SlideInTransitionGroup from '../internal/SlideIn';
 
-function getStyles(props, context, state) {
-  const {datePicker} = context.muiTheme;
+function getStyles(props, state) {
+  const {datePicker} = props.muiTheme;
   const {selectedYear} = state;
   const isLandscape = props.mode === 'landscape';
 
@@ -74,10 +75,6 @@ class DateDisplay extends Component {
     monthDaySelected: true,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     selectedYear: false,
     transitionDirection: 'up',
@@ -136,8 +133,8 @@ class DateDisplay extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     const year = new DateTimeFormat(locale, {
       year: 'numeric',
@@ -170,4 +167,4 @@ class DateDisplay extends Component {
   }
 }
 
-export default DateDisplay;
+export default withTheme(DateDisplay);

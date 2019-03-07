@@ -1,9 +1,10 @@
 import React, {Component, isValidElement} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import Avatar from '../Avatar';
 
-function getStyles(props, context) {
-  const {card} = context.muiTheme;
+function getStyles(props) {
+  const {card} = props.muiTheme;
 
   return {
     root: {
@@ -111,10 +112,6 @@ class CardHeader extends Component {
     avatar: null,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       actAsExpander, // eslint-disable-line no-unused-vars
@@ -136,8 +133,8 @@ class CardHeader extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     let avatar = avatarProp;
 
@@ -166,4 +163,4 @@ class CardHeader extends Component {
   }
 }
 
-export default CardHeader;
+export default withTheme(CardHeader);

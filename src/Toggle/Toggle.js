@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import Paper from '../Paper';
 import EnhancedSwitch from '../internal/EnhancedSwitch';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {
     disabled,
     elementStyle,
@@ -20,7 +21,7 @@ function getStyles(props, context, state) {
   const {
     baseTheme,
     toggle,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const toggleSize = 20;
   const toggleTrackWidth = 36;
@@ -187,10 +188,6 @@ class Toggle extends Component {
     labelPosition: 'left',
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     switched: false,
   };
@@ -236,8 +233,8 @@ class Toggle extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     const toggleElement = (
       <div style={prepareStyles(Object.assign({}, styles.toggleElement))}>
@@ -277,4 +274,4 @@ class Toggle extends Component {
   }
 }
 
-export default Toggle;
+export default withTheme(Toggle);

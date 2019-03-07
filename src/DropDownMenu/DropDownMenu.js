@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import DropDownArrow from '../svg-icons/navigation/arrow-drop-down';
 import Menu from '../Menu/Menu';
@@ -13,11 +14,11 @@ import IconButton from '../IconButton';
 import propTypes from '../utils/propTypes';
 
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {disabled} = props;
-  const spacing = context.muiTheme.baseTheme.spacing;
-  const palette = context.muiTheme.baseTheme.palette;
-  const accentColor = context.muiTheme.dropDownMenu.accentColor;
+  const spacing = props.muiTheme.baseTheme.spacing;
+  const palette = props.muiTheme.baseTheme.palette;
+  const accentColor = props.muiTheme.dropDownMenu.accentColor;
   return {
     control: {
       cursor: disabled ? 'not-allowed' : 'pointer',
@@ -55,7 +56,7 @@ function getStyles(props, context) {
       display: 'inline-block',
       fontSize: spacing.desktopDropDownMenuFontSize,
       height: spacing.desktopSubheaderHeight,
-      fontFamily: context.muiTheme.baseTheme.fontFamily,
+      fontFamily: props.muiTheme.baseTheme.fontFamily,
       outline: 'none',
       position: 'relative',
       transition: transitions.easeOut(),
@@ -222,10 +223,6 @@ class DropDownMenu extends Component {
     },
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     open: false,
   };
@@ -387,8 +384,8 @@ class DropDownMenu extends Component {
       open,
     } = this.state;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     let displayValue = '';
     if (!multiple) {
@@ -491,4 +488,4 @@ class DropDownMenu extends Component {
   }
 }
 
-export default DropDownMenu;
+export default withTheme(DropDownMenu);

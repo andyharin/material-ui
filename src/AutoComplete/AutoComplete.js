@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import keycode from 'keycode';
+import withTheme from '../styles/withTheme';
 import TextField from '../TextField';
 import Menu from '../Menu';
 import MenuItem from '../MenuItem';
@@ -9,7 +10,7 @@ import Divider from '../Divider';
 import Popover from '../Popover/Popover';
 import propTypes from '../utils/propTypes';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {anchorEl} = state;
   const {fullWidth} = props;
 
@@ -200,10 +201,6 @@ class AutoComplete extends Component {
       vertical: 'top',
       horizontal: 'left',
     },
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -442,8 +439,8 @@ class AutoComplete extends Component {
       focusTextField,
     } = this.state;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     const requestsList = [];
 

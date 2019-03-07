@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import Tooltip from '../internal/Tooltip';
 
-function getStyles(props, context) {
-  const {tableHeaderColumn} = context.muiTheme;
+function getStyles(props) {
+  const {tableHeaderColumn} = props.muiTheme;
 
   return {
     root: {
@@ -69,10 +70,6 @@ class TableHeaderColumn extends Component {
     tooltipStyle: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
   };
@@ -110,8 +107,8 @@ class TableHeaderColumn extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     const handlers = {
       onMouseEnter: this.onMouseEnter,
@@ -145,4 +142,4 @@ class TableHeaderColumn extends Component {
   }
 }
 
-export default TableHeaderColumn;
+export default withTheme(TableHeaderColumn);

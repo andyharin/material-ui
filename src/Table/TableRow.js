@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context, state) {
-  const {tableRow} = context.muiTheme;
+function getStyles(props, state) {
+  const {tableRow} = props.muiTheme;
 
   let cellBgColor = 'inherit';
   if (props.hovered || state.hovered) {
@@ -123,10 +124,6 @@ class TableRow extends Component {
     striped: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
   };
@@ -193,8 +190,8 @@ class TableRow extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     const rowColumns = React.Children.map(this.props.children, (child, columnNumber) => {
       if (React.isValidElement(child)) {
@@ -222,4 +219,4 @@ class TableRow extends Component {
   }
 }
 
-export default TableRow;
+export default withTheme(TableRow);

@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
+import withTheme from '../styles/withTheme';
 import {fade, emphasize} from '../utils/colorManipulator';
 import EnhancedButton from '../internal/EnhancedButton';
 import DeleteIcon from '../svg-icons/navigation/cancel';
 
-function getStyles(props, context, state) {
-  const {chip} = context.muiTheme;
+function getStyles(props, state) {
+  const {chip} = props.muiTheme;
 
   const backgroundColor = props.backgroundColor || chip.backgroundColor;
   const focusColor = emphasize(backgroundColor, 0.08);
@@ -129,8 +130,6 @@ class Chip extends Component {
     onTouchStart: () => {},
   };
 
-  static contextTypes = {muiTheme: PropTypes.object.isRequired};
-
   state = {
     clicked: false,
     deleteHovered: false,
@@ -243,8 +242,8 @@ class Chip extends Component {
       onKeyboardFocus: this.handleKeyboardFocus,
     };
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     const {
       children: childrenProp,
@@ -309,4 +308,4 @@ class Chip extends Component {
   }
 }
 
-export default Chip;
+export default withTheme(Chip);

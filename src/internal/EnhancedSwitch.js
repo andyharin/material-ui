@@ -2,14 +2,15 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import FocusRipple from './FocusRipple';
 import TouchRipple from './TouchRipple';
 import Paper from './../Paper';
 import warning from 'warning';
 
-function getStyles(props, context) {
-  const {baseTheme} = context.muiTheme;
+function getStyles(props) {
+  const {baseTheme} = props.muiTheme;
 
   return {
     root: {
@@ -101,10 +102,6 @@ class EnhancedSwitch extends Component {
     thumbStyle: PropTypes.object,
     trackStyle: PropTypes.object,
     value: PropTypes.any,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -287,8 +284,8 @@ class EnhancedSwitch extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const wrapStyles = Object.assign(styles.wrap, iconStyle);
     const mergedRippleStyle = Object.assign(styles.ripple, rippleStyle);
 
@@ -312,7 +309,7 @@ class EnhancedSwitch extends Component {
         key="touchRipple"
         style={mergedRippleStyle}
         color={mergedRippleStyle.color}
-        muiTheme={this.context.muiTheme}
+        muiTheme={this.props.muiTheme}
         centerRipple={true}
       />
     );
@@ -322,7 +319,7 @@ class EnhancedSwitch extends Component {
         key="focusRipple"
         innerStyle={mergedRippleStyle}
         color={mergedRippleStyle.color}
-        muiTheme={this.context.muiTheme}
+        muiTheme={this.props.muiTheme}
         show={this.state.isKeyboardFocused}
       />
     );
@@ -397,4 +394,4 @@ class EnhancedSwitch extends Component {
   }
 }
 
-export default EnhancedSwitch;
+export default withTheme(EnhancedSwitch);

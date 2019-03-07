@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import withWidth, {SMALL} from '../utils/withWidth';
 import FlatButton from '../FlatButton';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     open,
     width,
@@ -26,7 +27,7 @@ function getStyles(props, context) {
       },
       borderRadius,
     },
-  } = context;
+  } = props;
 
   const isSmall = width === SMALL;
 
@@ -64,7 +65,7 @@ function getStyles(props, context) {
   return styles;
 }
 
-export const SnackbarBody = (props, context) => {
+export const SnackbarBody = (props) => {
   const {
     action,
     contentStyle,
@@ -75,8 +76,8 @@ export const SnackbarBody = (props, context) => {
     ...other
   } = props;
 
-  const {prepareStyles} = context.muiTheme;
-  const styles = getStyles(props, context);
+  const {prepareStyles} = props.muiTheme;
+  const styles = getStyles(props);
 
   const actionButton = action && (
     <FlatButton
@@ -135,8 +136,4 @@ SnackbarBody.propTypes = {
   width: PropTypes.number.isRequired,
 };
 
-SnackbarBody.contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
-};
-
-export default withWidth()(SnackbarBody);
+export default withWidth()(withTheme(SnackbarBody));

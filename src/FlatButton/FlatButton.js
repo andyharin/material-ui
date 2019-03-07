@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import {fade} from '../utils/colorManipulator';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -137,10 +138,6 @@ class FlatButton extends Component {
     secondary: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
     isKeyboardFocused: false,
@@ -212,7 +209,7 @@ class FlatButton extends Component {
         textColor,
         textTransform = buttonTextTransform || 'uppercase',
       },
-    } = this.context.muiTheme;
+    } = this.props.muiTheme;
     const defaultTextColor = disabled ? disabledTextColor :
       primary ? primaryTextColor :
       secondary ? secondaryTextColor :
@@ -306,4 +303,4 @@ class FlatButton extends Component {
   }
 }
 
-export default FlatButton;
+export default withTheme(FlatButton);

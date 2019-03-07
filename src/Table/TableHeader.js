@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import Checkbox from '../Checkbox';
 import TableHeaderColumn from './TableHeaderColumn';
 
-function getStyles(props, context) {
-  const {tableHeader} = context.muiTheme;
+function getStyles(props) {
+  const {tableHeader} = props.muiTheme;
 
   return {
     root: {
@@ -66,10 +67,6 @@ class TableHeader extends Component {
     displaySelectAll: true,
     enableSelectAll: true,
     selectAllSelected: false,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   createSuperHeaderRows() {
@@ -187,8 +184,8 @@ class TableHeader extends Component {
       style,
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const superHeaderRows = this.createSuperHeaderRows();
     const baseHeaderRow = this.createBaseHeaderRow();
 
@@ -201,4 +198,4 @@ class TableHeader extends Component {
   }
 }
 
-export default TableHeader;
+export default withTheme(TableHeader);

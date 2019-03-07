@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
-  const {card} = context.muiTheme;
+function getStyles(props) {
+  const {card} = props.muiTheme;
 
   return {
     root: {
@@ -77,10 +78,6 @@ class CardTitle extends Component {
     titleStyle: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       actAsExpander, // eslint-disable-line no-unused-vars
@@ -98,8 +95,8 @@ class CardTitle extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const rootStyle = Object.assign({}, styles.root, style);
     const extendedTitleStyle = Object.assign({}, styles.title, titleStyle);
     const extendedSubtitleStyle = Object.assign({}, styles.subtitle, subtitleStyle);
@@ -118,4 +115,4 @@ class CardTitle extends Component {
   }
 }
 
-export default CardTitle;
+export default withTheme(CardTitle);

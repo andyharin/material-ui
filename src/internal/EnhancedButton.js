@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import Events from '../utils/events';
 import keycode from 'keycode';
 import FocusRipple from './FocusRipple';
@@ -74,10 +75,6 @@ class EnhancedButton extends Component {
     onKeyboardFocus: () => {},
     tabIndex: 0,
     type: 'button',
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -263,13 +260,13 @@ class EnhancedButton extends Component {
     const {
       prepareStyles,
       enhancedButton,
-    } = this.context.muiTheme;
+    } = this.props.muiTheme;
 
     const mergedStyles = Object.assign({
       border: 10,
       boxSizing: 'border-box',
       display: 'inline-block',
-      fontFamily: this.context.muiTheme.baseTheme.fontFamily,
+      fontFamily: this.props.muiTheme.baseTheme.fontFamily,
       WebkitTapHighlightColor: enhancedButton.tapHighlightColor, // Remove mobile color flashing (deprecated)
       cursor: disabled ? 'default' : 'pointer',
       textDecoration: 'none',
@@ -328,4 +325,4 @@ class EnhancedButton extends Component {
   }
 }
 
-export default EnhancedButton;
+export default withTheme(EnhancedButton);

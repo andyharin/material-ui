@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
-  const {tableRowColumn} = context.muiTheme;
+function getStyles(props) {
+  const {tableRowColumn} = props.muiTheme;
 
   const styles = {
     root: {
@@ -62,10 +62,6 @@ class TableRowColumn extends Component {
     hoverable: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
   };
@@ -107,8 +103,8 @@ class TableRowColumn extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     const handlers = {
       onClick: this.onClick,
@@ -129,4 +125,4 @@ class TableRowColumn extends Component {
   }
 }
 
-export default TableRowColumn;
+export default withTheme(TableRowColumn);

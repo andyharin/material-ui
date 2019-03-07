@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import {isInner} from './timeUtils';
 
 function calcAngle(value, base) {
@@ -8,10 +9,10 @@ function calcAngle(value, base) {
   return angle;
 }
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {hasSelected, type, value} = props;
   const {inner} = state;
-  const {timePicker} = context.muiTheme;
+  const {timePicker} = props.muiTheme;
   const angle = type === 'hour' ? calcAngle(value, 12) : calcAngle(value, 60);
 
   const styles = {
@@ -56,10 +57,6 @@ class ClockPointer extends Component {
     type: 'minute',
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     inner: false,
   };
@@ -81,8 +78,8 @@ class ClockPointer extends Component {
       return <span />;
     }
 
-    const styles = getStyles(this.props, this.context, this.state);
-    const {prepareStyles} = this.context.muiTheme;
+    const styles = getStyles(this.props, this.state);
+    const {prepareStyles} = this.props.muiTheme;
 
     return (
       <div style={prepareStyles(styles.root)} >
@@ -92,4 +89,4 @@ class ClockPointer extends Component {
   }
 }
 
-export default ClockPointer;
+export default withTheme(ClockPointer);

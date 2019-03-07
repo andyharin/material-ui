@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
+import withTheme from '../styles/withTheme';
 
 const rowsHeight = 24;
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   return {
     root: {
       position: 'relative', // because the shadow has position: 'absolute'
@@ -51,10 +52,6 @@ class EnhancedTextarea extends Component {
 
   static defaultProps = {
     rows: 1,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -157,8 +154,8 @@ class EnhancedTextarea extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
     const rootStyles = Object.assign(styles.root, style);
     const textareaStyles = Object.assign(styles.textarea, textareaStyle);
     const shadowStyles = Object.assign({}, textareaStyles, styles.shadow, shadowStyle);
@@ -194,4 +191,4 @@ class EnhancedTextarea extends Component {
   }
 }
 
-export default EnhancedTextarea;
+export default withTheme(EnhancedTextarea);

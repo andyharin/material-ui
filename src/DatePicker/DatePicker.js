@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import {dateTimeFormat, formatIso, isEqualDate} from './dateUtils';
 import DatePickerDialog from './DatePickerDialog';
 import TextField from '../TextField';
@@ -164,10 +165,6 @@ class DatePicker extends Component {
     openToYearSelection: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     date: undefined,
   };
@@ -303,7 +300,7 @@ class DatePicker extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
     const formatDate = formatDateProp || this.formatDate;
 
     return (
@@ -344,4 +341,4 @@ class DatePicker extends Component {
   }
 }
 
-export default DatePicker;
+export default withTheme(DatePicker);

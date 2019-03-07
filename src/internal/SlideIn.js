@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
 import SlideInChild from './SlideInChild';
+import withTheme from '../styles/withTheme';
 
 class SlideIn extends Component {
   static propTypes = {
@@ -15,10 +16,6 @@ class SlideIn extends Component {
   static defaultProps = {
     enterDelay: 0,
     direction: 'left',
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   getLeaveDirection = () => {
@@ -35,7 +32,7 @@ class SlideIn extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     const mergedRootStyles = Object.assign({}, {
       position: 'relative',
@@ -69,4 +66,4 @@ class SlideIn extends Component {
   }
 }
 
-export default SlideIn;
+export default withTheme(SlideIn);

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import withTheme from '../styles/withTheme';
 import YearButton from './YearButton';
 
 class CalendarYear extends Component {
@@ -13,10 +14,6 @@ class CalendarYear extends Component {
     selectedDate: PropTypes.object.isRequired,
     utils: PropTypes.object.isRequired,
     wordings: PropTypes.object,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -98,7 +95,7 @@ class CalendarYear extends Component {
       datePicker: {
         calendarYearBackgroundColor,
       },
-    } = this.context.muiTheme;
+    } = this.props.muiTheme;
 
     const styles = {
       root: {
@@ -127,4 +124,4 @@ class CalendarYear extends Component {
   }
 }
 
-export default CalendarYear;
+export default withTheme(CalendarYear);

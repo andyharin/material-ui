@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {
     color,
     hoverColor,
   } = props;
 
-  const {baseTheme} = context.muiTheme;
+  const {baseTheme} = props.muiTheme;
   const offColor = color || baseTheme.palette.textColor;
   const onColor = hoverColor || offColor;
 
@@ -52,10 +53,6 @@ class FontIcon extends Component {
     onMouseLeave: () => {},
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
   };
@@ -89,8 +86,8 @@ class FontIcon extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     return (
       <span
@@ -103,4 +100,4 @@ class FontIcon extends Component {
   }
 }
 
-export default FontIcon;
+export default withTheme(FontIcon);

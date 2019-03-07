@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import ClickAwayListener from '../internal/ClickAwayListener';
 import SnackbarBody from './SnackbarBody';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {
     muiTheme: {
       baseTheme: {
@@ -14,7 +15,7 @@ function getStyles(props, context, state) {
       },
       zIndex,
     },
-  } = context;
+  } = props;
 
   const {open} = state;
 
@@ -97,10 +98,6 @@ class Snackbar extends Component {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   static reasons = {
@@ -220,8 +217,8 @@ class Snackbar extends Component {
       open,
     } = this.state;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     return (
       <ClickAwayListener onClickAway={open ? this.componentClickAway : null}>
@@ -240,4 +237,4 @@ class Snackbar extends Component {
   }
 }
 
-export default Snackbar;
+export default withTheme(Snackbar);

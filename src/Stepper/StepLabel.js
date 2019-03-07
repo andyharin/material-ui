@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
+import { withContext } from './Context';
 import CheckCircle from '../svg-icons/action/check-circle';
 import SvgIcon from '../SvgIcon';
 
-const getStyles = ({active, completed, disabled}, {muiTheme, stepper}) => {
+const getStyles = ({active, completed, disabled, muiTheme, stepper}) => {
   const {
     textColor,
     disabledTextColor,
@@ -85,7 +87,7 @@ const renderIcon = (completed, icon, styles) => {
   return icon;
 };
 
-const StepLabel = (props, context) => {
+const StepLabel = (props) => {
   const {
     active, // eslint-disable-line no-unused-vars
     children,
@@ -97,8 +99,8 @@ const StepLabel = (props, context) => {
     ...other
   } = props;
 
-  const {prepareStyles} = context.muiTheme;
-  const styles = getStyles(props, context);
+  const {prepareStyles} = props.muiTheme;
+  const styles = getStyles(props);
   const icon = renderIcon(completed, userIcon, styles);
 
   return (
@@ -154,9 +156,4 @@ StepLabel.propTypes = {
   style: PropTypes.object,
 };
 
-StepLabel.contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
-  stepper: PropTypes.object,
-};
-
-export default StepLabel;
+export default withContext(withTheme(StepLabel));

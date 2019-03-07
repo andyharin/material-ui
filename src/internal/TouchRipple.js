@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
+import withTheme from '../styles/withTheme';
 import Dom from '../utils/dom';
 import CircleRipple from './CircleRipple';
 
@@ -22,12 +23,8 @@ class TouchRipple extends Component {
     abortOnScroll: true,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     // Touch start produces a mouse down event for compat reasons. To avoid
     // showing ripples twice we skip showing a ripple for the first mouse down
     // after a touch start. Note we don't store ignoreNextMouseDown in this.state
@@ -44,7 +41,7 @@ class TouchRipple extends Component {
   }
 
   start(event, isRippleTouchGenerated) {
-    const theme = this.context.muiTheme.ripple;
+    const theme = this.props.muiTheme.ripple;
 
     if (this.ignoreNextMouseDown && !isRippleTouchGenerated) {
       this.ignoreNextMouseDown = false;
@@ -192,7 +189,7 @@ class TouchRipple extends Component {
   render() {
     const {children, style} = this.props;
     const {hasRipples, ripples} = this.state;
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     let rippleGroup;
 
@@ -230,4 +227,4 @@ class TouchRipple extends Component {
   }
 }
 
-export default TouchRipple;
+export default withTheme(TouchRipple);

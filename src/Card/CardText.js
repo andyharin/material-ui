@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
-  const {cardText} = context.muiTheme;
+function getStyles(props) {
+  const {cardText} = props.muiTheme;
 
   return {
     root: {
@@ -39,10 +40,6 @@ class CardText extends Component {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       actAsExpander, // eslint-disable-line no-unused-vars
@@ -53,8 +50,8 @@ class CardText extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const rootStyle = Object.assign(styles.root, style);
 
     return (
@@ -65,4 +62,4 @@ class CardText extends Component {
   }
 }
 
-export default CardText;
+export default withTheme(CardText);

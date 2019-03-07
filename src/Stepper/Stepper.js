@@ -1,5 +1,7 @@
 import React, {Component, Children} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
+import { Provider } from './Context';
 import StepConnector from './StepConnector';
 
 const getStyles = (props) => {
@@ -50,15 +52,6 @@ class Stepper extends Component {
     linear: true,
   };
 
-  static contextTypes = {muiTheme: PropTypes.object.isRequired};
-
-  static childContextTypes = {stepper: PropTypes.object};
-
-  getChildContext() {
-    const {orientation} = this.props;
-    return {stepper: {orientation}};
-  }
-
   render() {
     const {
       activeStep,
@@ -66,6 +59,7 @@ class Stepper extends Component {
       connector,
       linear,
       style,
+      orientation,
     } = this.props;
 
     const {prepareStyles} = this.context.muiTheme;
@@ -103,11 +97,13 @@ class Stepper extends Component {
     });
 
     return (
-      <div style={prepareStyles(Object.assign(styles.root, style))}>
-        {steps}
-      </div>
+      <Provider value={{ stepper: { orientation } }}>
+        <div style={prepareStyles(Object.assign(styles.root, style))}>
+          {steps}
+        </div>
+      </Provider>
     );
   }
 }
 
-export default Stepper;
+export default withTheme(Stepper);

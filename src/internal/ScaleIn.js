@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
 import ScaleInChild from './ScaleInChild';
+import withTheme from '../styles/withTheme';
 
 class ScaleIn extends Component {
   static propTypes = {
@@ -20,10 +21,6 @@ class ScaleIn extends Component {
     enterDelay: 0,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       children,
@@ -35,7 +32,7 @@ class ScaleIn extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     const mergedRootStyles = Object.assign({}, {
       position: 'relative',
@@ -68,4 +65,4 @@ class ScaleIn extends Component {
   }
 }
 
-export default ScaleIn;
+export default withTheme(ScaleIn);

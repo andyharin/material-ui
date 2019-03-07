@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
+import withTheme from '../styles/withTheme';
 import autoPrefix from '../utils/autoPrefix';
 import transitions from '../styles/transitions';
 
@@ -17,10 +18,6 @@ class CircleRipple extends Component {
   static defaultProps = {
     opacity: 0.1,
     aborted: false,
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -81,7 +78,7 @@ class CircleRipple extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     const mergedStyles = Object.assign({
       position: 'absolute',
@@ -99,4 +96,4 @@ class CircleRipple extends Component {
   }
 }
 
-export default CircleRipple;
+export default withTheme(CircleRipple);

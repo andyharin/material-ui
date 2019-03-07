@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import EnhancedButton from '../internal/EnhancedButton';
 import StepLabel from './StepLabel';
+import { withContext } from './Context';
 
 const isLabel = (child) => {
   return child && child.type && child.type.muiName === 'StepLabel';
 };
 
-const getStyles = (props, context, state) => {
+const getStyles = (props, state) => {
   const {hovered} = state;
-  const {backgroundColor, hoverBackgroundColor} = context.muiTheme.stepper;
+  const {backgroundColor, hoverBackgroundColor} = props.muiTheme.stepper;
 
   const styles = {
     root: {
@@ -20,7 +22,7 @@ const getStyles = (props, context, state) => {
     },
   };
 
-  if (context.stepper.orientation === 'vertical') {
+  if (props.stepper.orientation === 'vertical') {
     styles.root.width = '100%';
   }
 
@@ -72,8 +74,7 @@ class StepButton extends Component {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
+  static propsTypes = {
     stepper: PropTypes.object,
   };
 
@@ -127,7 +128,7 @@ class StepButton extends Component {
       ...other
     } = this.props;
 
-    const styles = getStyles(this.props, this.context, this.state);
+    const styles = getStyles(this.props, this.state);
 
     const child = isLabel(children) ? children : <StepLabel>{children}</StepLabel>;
 
@@ -146,4 +147,4 @@ class StepButton extends Component {
   }
 }
 
-export default StepButton;
+export default withTheme(withContext(StepButton));

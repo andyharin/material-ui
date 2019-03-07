@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
-  const {cardMedia} = context.muiTheme;
+function getStyles(props) {
+  const {cardMedia} = props.muiTheme;
 
   return {
     root: {
@@ -77,10 +78,6 @@ class CardMedia extends Component {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       actAsExpander, // eslint-disable-line no-unused-vars
@@ -95,16 +92,16 @@ class CardMedia extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const rootStyle = Object.assign(styles.root, style);
     const extendedMediaStyle = Object.assign(styles.media, mediaStyle);
     const extendedOverlayContainerStyle = Object.assign(styles.overlayContainer, overlayContainerStyle);
     const extendedOverlayContentStyle = Object.assign(styles.overlayContent, overlayContentStyle);
     const extendedOverlayStyle = Object.assign(styles.overlay, overlayStyle);
-    const titleColor = this.context.muiTheme.cardMedia.titleColor;
-    const subtitleColor = this.context.muiTheme.cardMedia.subtitleColor;
-    const color = this.context.muiTheme.cardMedia.color;
+    const titleColor = this.props.muiTheme.cardMedia.titleColor;
+    const subtitleColor = this.props.muiTheme.cardMedia.subtitleColor;
+    const color = this.props.muiTheme.cardMedia.color;
 
     const styledChildren = React.Children.map(children, (child) => {
       if (!child) {
@@ -151,4 +148,4 @@ class CardMedia extends Component {
   }
 }
 
-export default CardMedia;
+export default withTheme(CardMedia);

@@ -1,5 +1,6 @@
 import React, {Component, Children, isValidElement} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import Subheader from '../Subheader';
 
 class List extends Component {
@@ -15,10 +16,6 @@ class List extends Component {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       children,
@@ -26,7 +23,7 @@ class List extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     let hasSubheader = false;
 
@@ -49,4 +46,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export default withTheme(List);

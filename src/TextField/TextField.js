@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import EnhancedTextarea from './EnhancedTextarea';
 import TextFieldHint from './TextFieldHint';
@@ -9,7 +10,7 @@ import TextFieldLabel from './TextFieldLabel';
 import TextFieldUnderline from './TextFieldUnderline';
 import warning from 'warning';
 
-const getStyles = (props, context, state) => {
+const getStyles = (props, state) => {
   const {
     baseTheme,
     textField: {
@@ -20,7 +21,7 @@ const getStyles = (props, context, state) => {
       backgroundColor,
       errorColor,
     },
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const styles = {
     root: {
@@ -253,10 +254,6 @@ class TextField extends Component {
     rows: 1,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     isFocused: false,
     errorText: undefined,
@@ -313,11 +310,10 @@ class TextField extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState) {
     return (
       !shallowEqual(this.props, nextProps) ||
-      !shallowEqual(this.state, nextState) ||
-      !shallowEqual(this.context, nextContext)
+      !shallowEqual(this.state, nextState)
     );
   }
 
@@ -419,8 +415,8 @@ class TextField extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
     const inputId = id || this.uniqueId;
 
     const errorTextElement = this.state.errorText && (
@@ -431,7 +427,7 @@ class TextField extends Component {
 
     const floatingLabelTextElement = floatingLabelText && (
       <TextFieldLabel
-        muiTheme={this.context.muiTheme}
+        muiTheme={this.props.muiTheme}
         style={Object.assign(
           styles.floatingLabel,
           floatingLabelStyle,
@@ -502,7 +498,7 @@ class TextField extends Component {
         {floatingLabelTextElement}
         {hintText ?
           <TextFieldHint
-            muiTheme={this.context.muiTheme}
+            muiTheme={this.props.muiTheme}
             show={!(this.state.hasValue || (floatingLabelText && !this.state.isFocused)) ||
                   (!this.state.hasValue && floatingLabelText && floatingLabelFixed && !this.state.isFocused)}
             style={hintStyle}
@@ -519,7 +515,7 @@ class TextField extends Component {
             errorStyle={errorStyle}
             focus={this.state.isFocused}
             focusStyle={underlineFocusStyle}
-            muiTheme={this.context.muiTheme}
+            muiTheme={this.props.muiTheme}
             style={underlineStyle}
           /> :
           null
@@ -530,4 +526,4 @@ class TextField extends Component {
   }
 }
 
-export default TextField;
+export default withTheme(TextField);

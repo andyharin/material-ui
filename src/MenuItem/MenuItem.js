@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
+import withTheme from '../styles/withTheme';
 import Popover from '../Popover/Popover';
 import CheckIcon from '../svg-icons/navigation/check';
 import ListItem from '../List/ListItem';
@@ -12,9 +13,9 @@ const nestedMenuStyle = {
   position: 'relative',
 };
 
-function getStyles(props, context) {
-  const disabledColor = context.muiTheme.baseTheme.palette.disabledColor;
-  const textColor = context.muiTheme.baseTheme.palette.textColor;
+function getStyles(props) {
+  const disabledColor = props.muiTheme.baseTheme.palette.disabledColor;
+  const textColor = props.muiTheme.baseTheme.palette.textColor;
   const indent = props.desktop ? 64 : 72;
   const sidePadding = props.desktop ? 24 : 16;
 
@@ -49,7 +50,7 @@ function getStyles(props, context) {
       margin: 0,
       right: 24,
       top: 4,
-      fill: context.muiTheme.menuItem.rightIconDesktopFill,
+      fill: props.muiTheme.menuItem.rightIconDesktopFill,
     },
   };
 
@@ -162,10 +163,6 @@ class MenuItem extends Component {
     targetOrigin: {horizontal: 'left', vertical: 'top'},
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     open: false,
   };
@@ -180,11 +177,10 @@ class MenuItem extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState) {
     return (
       !shallowEqual(this.props, nextProps) ||
-      !shallowEqual(this.state, nextState) ||
-      !shallowEqual(this.context, nextContext)
+      !shallowEqual(this.state, nextState)
     );
   }
 
@@ -259,8 +255,8 @@ class MenuItem extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const mergedRootStyles = Object.assign(styles.root, style);
     const mergedInnerDivStyles = Object.assign(styles.innerDivStyle, innerDivStyle);
 
@@ -315,7 +311,7 @@ class MenuItem extends Component {
       <ListItem
         {...other}
         disabled={disabled}
-        hoverColor={this.context.muiTheme.menuItem.hoverColor}
+        hoverColor={this.props.muiTheme.menuItem.hoverColor}
         innerDivStyle={mergedInnerDivStyles}
         insetChildren={insetChildren}
         leftIcon={leftIconElement}
@@ -332,4 +328,4 @@ class MenuItem extends Component {
   }
 }
 
-export default MenuItem;
+export default withTheme(MenuItem);

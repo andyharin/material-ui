@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
+import withTheme from '../styles/withTheme';
 import RenderToLayer from '../internal/RenderToLayer';
 import propTypes from '../utils/propTypes';
 import Paper from '../Paper';
@@ -121,12 +122,8 @@ class Popover extends Component {
     zDepth: 1,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.handleResize = throttle(this.setPlacement, 100);
     this.handleScroll = throttle(this.setPlacement.bind(this, true), 50);
 
@@ -218,7 +215,7 @@ class Popover extends Component {
     if (!animated) {
       styleRoot = {
         position: 'fixed',
-        zIndex: this.context.muiTheme.zIndex.popover,
+        zIndex: this.props.muiTheme.zIndex.popover,
       };
 
       if (!this.state.open) {
@@ -431,4 +428,4 @@ class Popover extends Component {
   }
 }
 
-export default Popover;
+export default withTheme(Popover);

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import AutoLockScrolling from './AutoLockScrolling';
 
-function getStyles(props, context) {
-  const {overlay} = context.muiTheme;
+function getStyles(props) {
+  const {overlay} = props.muiTheme;
 
   const style = {
     root: {
@@ -56,10 +57,6 @@ class Overlay extends Component {
     transitionEnabled: true,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   setOpacity(opacity) {
     this.refs.overlay.style.opacity = opacity;
   }
@@ -73,8 +70,8 @@ class Overlay extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div {...other} ref="overlay" style={prepareStyles(Object.assign(styles.root, style))}>
@@ -84,4 +81,4 @@ class Overlay extends Component {
   }
 }
 
-export default Overlay;
+export default withTheme(Overlay);

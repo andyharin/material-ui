@@ -1,19 +1,20 @@
 import React, {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import IconButton from '../IconButton';
 import NavigationMenu from '../svg-icons/navigation/menu';
 import Paper from '../Paper';
 import propTypes from '../utils/propTypes';
 import warning from 'warning';
 
-export function getStyles(props, context) {
+export function getStyles(props) {
   const {
     appBar,
     button: {
       iconButtonSize,
     },
     zIndex,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   const flatButtonSize = 36;
 
@@ -149,10 +150,6 @@ class AppBar extends Component {
     zDepth: 1,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     warning(!this.props.iconElementLeft || !this.props.iconClassNameLeft, `Material-UI: Properties iconElementLeft
       and iconClassNameLeft cannot be simultaneously defined. Please use one or the other.`);
@@ -200,8 +197,8 @@ class AppBar extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     let menuElementLeft;
     let menuElementRight;
@@ -327,4 +324,4 @@ class AppBar extends Component {
   }
 }
 
-export default AppBar;
+export default withTheme(AppBar);

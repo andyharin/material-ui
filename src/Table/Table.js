@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
+import withTheme from '../styles/withTheme';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {
     baseTheme,
     table,
-  } = context.muiTheme;
+  } = props.muiTheme;
 
   return {
     root: {
@@ -135,10 +136,6 @@ class Table extends Component {
     selectable: true,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     allRowsSelected: false,
   };
@@ -249,8 +246,8 @@ class Table extends Component {
       footerStyle,
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     let tHead;
     let tFoot;
@@ -324,4 +321,4 @@ class Table extends Component {
   }
 }
 
-export default Table;
+export default withTheme(Table);

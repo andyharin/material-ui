@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import RadioButton from './RadioButton';
 import warning from 'warning';
 
@@ -50,10 +51,6 @@ class RadioButtonGroup extends Component {
 
   static defaultProps = {
     style: {},
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -125,7 +122,7 @@ class RadioButtonGroup extends Component {
   }
 
   render() {
-    const {prepareStyles} = this.context.muiTheme;
+    const {prepareStyles} = this.props.muiTheme;
 
     const options = React.Children.map(this.props.children, (option) => {
       const {
@@ -162,4 +159,4 @@ class RadioButtonGroup extends Component {
   }
 }
 
-export default RadioButtonGroup;
+export default withTheme(RadioButtonGroup);

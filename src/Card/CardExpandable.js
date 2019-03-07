@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import OpenIcon from '../svg-icons/hardware/keyboard-arrow-up';
 import CloseIcon from '../svg-icons/hardware/keyboard-arrow-down';
 import IconButton from '../IconButton';
+import withTheme from '../styles/withTheme';
 
 function getStyles() {
   return {
@@ -26,17 +27,13 @@ class CardExpandable extends Component {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   static defaultProps = {
     closeIcon: <CloseIcon />,
     openIcon: <OpenIcon />,
   };
 
   render() {
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props);
 
     return (
       <IconButton
@@ -50,4 +47,4 @@ class CardExpandable extends Component {
   }
 }
 
-export default CardExpandable;
+export default withTheme(CardExpandable);

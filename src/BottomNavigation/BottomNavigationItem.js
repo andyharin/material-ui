@@ -1,14 +1,15 @@
 import React, {cloneElement} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import EnhancedButton from '../internal/EnhancedButton';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const {selected} = props;
   const {
     muiTheme: {
       bottomNavigation,
     },
-  } = context;
+  } = props;
 
   const color = selected ?
     bottomNavigation.selectedColor :
@@ -44,7 +45,7 @@ function getStyles(props, context) {
   return styles;
 }
 
-const BottomNavigationItem = (props, context) => {
+const BottomNavigationItem = (props) => {
   const {
     label,
     icon,
@@ -52,8 +53,8 @@ const BottomNavigationItem = (props, context) => {
     ...other
   } = props;
 
-  const {prepareStyles} = context.muiTheme;
-  const styles = getStyles(props, context);
+  const {prepareStyles} = props.muiTheme;
+  const styles = getStyles(props);
 
   const styledIcon = cloneElement(icon, {
     style: Object.assign({}, styles.icon, icon.props.style),
@@ -86,8 +87,4 @@ BottomNavigationItem.propTypes = {
   style: PropTypes.object,
 };
 
-BottomNavigationItem.contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
-};
-
-export default BottomNavigationItem;
+export default withTheme(BottomNavigationItem);

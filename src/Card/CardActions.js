@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
 function getStyles() {
   return {
@@ -37,10 +38,6 @@ class CardActions extends Component {
     style: PropTypes.object,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       actAsExpander, // eslint-disable-line no-unused-vars
@@ -51,8 +48,8 @@ class CardActions extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     const styledChildren = React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
@@ -70,4 +67,4 @@ class CardActions extends Component {
   }
 }
 
-export default CardActions;
+export default withTheme(CardActions);

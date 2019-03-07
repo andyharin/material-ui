@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
+import withTheme from '../styles/withTheme';
 import autoPrefix from '../utils/autoPrefix';
 import transitions from '../styles/transitions';
 import Overlay from '../internal/Overlay';
@@ -100,10 +101,6 @@ class Drawer extends Component {
     zDepth: 2,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   componentWillMount() {
     this.maybeSwiping = false;
     this.touchStartX = null;
@@ -144,7 +141,7 @@ class Drawer extends Component {
   }
 
   getStyles() {
-    const muiTheme = this.context.muiTheme;
+    const muiTheme = this.props.muiTheme;
     const theme = muiTheme.drawer;
 
     const x = this.getTranslateMultiplier() * (this.state.open ? 0 : this.getMaxTranslateX());
@@ -218,7 +215,7 @@ class Drawer extends Component {
   }
 
   getMaxTranslateX() {
-    const width = this.getTranslatedWidth() || this.context.muiTheme.drawer.width;
+    const width = this.getTranslatedWidth() || this.props.muiTheme.drawer.width;
     return width + 10;
   }
 
@@ -247,7 +244,7 @@ class Drawer extends Component {
   onBodyTouchStart = (event) => {
     const swipeAreaWidth = this.props.swipeAreaWidth;
 
-    const touchStartX = this.context.muiTheme.isRtl ?
+    const touchStartX = this.props.muiTheme.isRtl ?
       (document.body.offsetWidth - event.touches[0].pageX) :
       event.touches[0].pageX;
     const touchStartY = event.touches[0].pageY;
@@ -286,7 +283,7 @@ class Drawer extends Component {
   }
 
   setPosition(translateX) {
-    const rtlTranslateMultiplier = this.context.muiTheme.isRtl ? -1 : 1;
+    const rtlTranslateMultiplier = this.props.muiTheme.isRtl ? -1 : 1;
     const drawer = ReactDOM.findDOMNode(this.refs.clickAwayableElement);
     const transformCSS = `translate(${(this.getTranslateMultiplier() * rtlTranslateMultiplier * translateX)}px, 0)`;
     this.refs.overlay.setOpacity(1 - translateX / this.getMaxTranslateX());
@@ -306,7 +303,7 @@ class Drawer extends Component {
   }
 
   onBodyTouchMove = (event) => {
-    const currentX = this.context.muiTheme.isRtl ?
+    const currentX = this.props.muiTheme.isRtl ?
       (document.body.offsetWidth - event.touches[0].pageX) :
       event.touches[0].pageX;
     const currentY = event.touches[0].pageY;
@@ -336,7 +333,7 @@ class Drawer extends Component {
 
   onBodyTouchEnd = (event) => {
     if (this.state.swiping) {
-      const currentX = this.context.muiTheme.isRtl ?
+      const currentX = this.props.muiTheme.isRtl ?
         (document.body.offsetWidth - event.changedTouches[0].pageX) :
         event.changedTouches[0].pageX;
       const translateRatio = this.getTranslateX(currentX) / this.getMaxTranslateX();
@@ -421,4 +418,4 @@ class Drawer extends Component {
   }
 }
 
-export default Drawer;
+export default withTheme(Drawer);

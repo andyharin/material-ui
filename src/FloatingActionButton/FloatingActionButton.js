@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import {fade} from '../utils/colorManipulator';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -9,8 +10,8 @@ import {extendChildren} from '../utils/childUtils';
 import warning from 'warning';
 import propTypes from '../utils/propTypes';
 
-function getStyles(props, context) {
-  const {floatingActionButton} = context.muiTheme;
+function getStyles(props) {
+  const {floatingActionButton} = props.muiTheme;
 
   let backgroundColor = props.backgroundColor || floatingActionButton.color;
   let iconColor = floatingActionButton.iconColor;
@@ -147,10 +148,6 @@ class FloatingActionButton extends Component {
     zDepth: 2,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hovered: false,
     touch: false,
@@ -240,7 +237,7 @@ class FloatingActionButton extends Component {
     if (keyboardFocused && !this.props.disabled) {
       this.setState({zDepth: this.props.zDepth + 1});
       this.refs.overlay.style.backgroundColor =
-        fade(getStyles(this.props, this.context).icon.color, 0.4);
+        fade(getStyles(this.props).icon.color, 0.4);
     } else if (!this.state.hovered) {
       this.setState({zDepth: this.props.zDepth});
       this.refs.overlay.style.backgroundColor = 'transparent';
@@ -262,8 +259,8 @@ class FloatingActionButton extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     let iconElement;
     if (iconClassName) {
@@ -336,4 +333,4 @@ class FloatingActionButton extends Component {
   }
 }
 
-export default FloatingActionButton;
+export default withTheme(FloatingActionButton);

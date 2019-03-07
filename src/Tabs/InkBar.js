@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 
-function getStyles(props, context) {
-  const {inkBar, isRtl} = context.muiTheme;
+function getStyles(props) {
+  const {inkBar, isRtl} = props.muiTheme;
 
   return {
     root: {
@@ -31,14 +32,10 @@ class InkBar extends Component {
     width: PropTypes.string.isRequired,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {style} = this.props;
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     return (
       <div style={prepareStyles(Object.assign(styles.root, style))} />

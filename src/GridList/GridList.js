@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 
 function getStyles(props) {
   return {
@@ -49,10 +50,6 @@ class GridList extends Component {
     cellHeight: 180,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
     const {
       cols,
@@ -63,8 +60,8 @@ class GridList extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const mergedRootStyles = Object.assign(styles.root, style);
 
     const wrappedChildren = React.Children.map(children, (currentChild) => {
@@ -89,4 +86,4 @@ class GridList extends Component {
   }
 }
 
-export default GridList;
+export default withTheme(GridList);

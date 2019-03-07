@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import TransitionComponent from '../internal/ExpandTransition';
+import { withContext } from './Context';
 import warning from 'warning';
+import withTheme from '../styles/withTheme';
 
 function ExpandTransition(props) {
   return <TransitionComponent {...props} />;
 }
 
-const getStyles = (props, context) => {
+const getStyles = (props) => {
   const styles = {
     root: {
       marginTop: -14,
@@ -19,7 +21,7 @@ const getStyles = (props, context) => {
   };
 
   if (!props.last) {
-    styles.root.borderLeft = `1px solid ${context.muiTheme.stepper.connectorLineColor}`;
+    styles.root.borderLeft = `1px solid ${props.muiTheme.stepper.connectorLineColor}`;
   }
 
   return styles;
@@ -62,11 +64,6 @@ class StepContent extends Component {
     transitionDuration: 450,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-    stepper: PropTypes.object,
-  };
-
   render() {
     const {
       active,
@@ -76,16 +73,17 @@ class StepContent extends Component {
       style,
       transition,
       transitionDuration,
+      muiTheme: { prepareStyles },
+      stepper,
       ...other
     } = this.props;
-    const {stepper, muiTheme: {prepareStyles}} = this.context;
 
     if (stepper.orientation !== 'vertical') {
       warning(false, 'Material-UI: <StepContent /> is only designed for use with the vertical stepper.');
       return null;
     }
 
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props);
     const transitionProps = {
       enterDelay: transitionDuration,
       transitionDuration: transitionDuration,
@@ -100,4 +98,4 @@ class StepContent extends Component {
   }
 }
 
-export default StepContent;
+export default withTheme(withContext(StepContent));

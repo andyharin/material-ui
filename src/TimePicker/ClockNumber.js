@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import {isInner} from './timeUtils';
 
-function getStyles(props, context) {
+function getStyles(props) {
   const styles = {
     root: {
       directionInvariant: true,
@@ -22,7 +23,7 @@ function getStyles(props, context) {
     },
   };
 
-  const {muiTheme} = context;
+  const {muiTheme} = props;
 
   let pos = props.value;
 
@@ -97,13 +98,9 @@ class ClockNumber extends Component {
     isSelected: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   render() {
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
     const clockNumber = this.props.value === 0 ? '00' : this.props.value;
 
     return (
@@ -112,4 +109,4 @@ class ClockNumber extends Component {
   }
 }
 
-export default ClockNumber;
+export default withTheme(ClockNumber);

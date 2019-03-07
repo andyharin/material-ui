@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import withTheme from '../styles/withTheme';
 import Transition from '../styles/transitions';
 import {isEqualDate} from './dateUtils';
 import EnhancedButton from '../internal/EnhancedButton';
 
-function getStyles(props, context, state) {
+function getStyles(props, state) {
   const {date, disabled, selected} = props;
   const {hover} = state;
-  const {baseTheme, datePicker} = context.muiTheme;
+  const {baseTheme, datePicker} = props.muiTheme;
 
   let labelColor = baseTheme.palette.textColor;
   let buttonStateOpacity = 0;
@@ -67,10 +68,6 @@ class DayButton extends Component {
     disabled: false,
   };
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-  };
-
   state = {
     hover: false,
   };
@@ -110,8 +107,8 @@ class DayButton extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props, this.state);
 
     return date ? (
       <EnhancedButton
@@ -138,4 +135,4 @@ class DayButton extends Component {
   }
 }
 
-export default DayButton;
+export default withTheme(DayButton);

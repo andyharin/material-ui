@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
+import withTheme from '../styles/withTheme';
 import Clock from './Clock';
 import Dialog from '../Dialog';
 import FlatButton from '../FlatButton';
@@ -24,10 +25,6 @@ class TimePickerDialog extends Component {
   static defaultProps = {
     okLabel: 'OK',
     cancelLabel: 'Cancel',
-  };
-
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -90,7 +87,7 @@ class TimePickerDialog extends Component {
     const styles = {
       root: {
         fontSize: 14,
-        color: this.context.muiTheme.timePicker.clockColor,
+        color: this.props.muiTheme.timePicker.clockColor,
       },
       dialogContent: {
         width: 280,
@@ -146,4 +143,4 @@ class TimePickerDialog extends Component {
   }
 }
 
-export default TimePickerDialog;
+export default withTheme(TimePickerDialog);
