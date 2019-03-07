@@ -1,6 +1,7 @@
 import { createContext } from 'react';
+import getMuiTheme from './getMuiTheme';
 
-const ThemeContext = createContext({});
+const ThemeContext = createContext({ muiTheme: getMuiTheme() });
 
 const Provider = ThemeContext.Provider;
 const Consumer = ThemeContext.Consumer;
