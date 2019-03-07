@@ -124,6 +124,7 @@ class DatePickerDialog extends Component {
       style, // eslint-disable-line no-unused-vars
       animation,
       utils,
+      muiTheme,
       ...other
     } = this.props;
 

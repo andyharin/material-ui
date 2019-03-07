@@ -92,10 +92,11 @@ class CardTitle extends Component {
       title,
       titleColor, // eslint-disable-line no-unused-vars
       titleStyle,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
     const rootStyle = Object.assign({}, styles.root, style);
     const extendedTitleStyle = Object.assign({}, styles.title, titleStyle);

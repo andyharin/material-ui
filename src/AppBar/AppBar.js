@@ -194,10 +194,11 @@ class AppBar extends Component {
       style,
       zDepth,
       children,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     let menuElementLeft;

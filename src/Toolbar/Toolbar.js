@@ -53,6 +53,7 @@ class Toolbar extends Component {
       className,
       noGutter, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 

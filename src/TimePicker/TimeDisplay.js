@@ -57,6 +57,7 @@ class TimeDisplay extends Component {
       onSelectHour,
       onSelectMin,
       selectedTime, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 

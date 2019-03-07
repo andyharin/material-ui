@@ -20,6 +20,7 @@ class List extends Component {
     const {
       children,
       style,
+      muiTheme,
       ...other
     } = this.props;
 

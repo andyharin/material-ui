@@ -81,6 +81,7 @@ class Step extends Component {
       last, // eslint-disable-line no-unused-vars
       children,
       style,
+      muiTheme,
       ...other
     } = this.props;
 

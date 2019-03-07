@@ -130,10 +130,11 @@ class CardHeader extends Component {
       titleColor, // eslint-disable-line no-unused-vars
       titleStyle,
       iconStyle, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     let avatar = avatarProp;

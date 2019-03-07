@@ -208,6 +208,7 @@ class Snackbar extends Component {
       onRequestClose, // eslint-disable-line no-unused-vars
       onActionClick,
       style,
+      muiTheme,
       ...other
     } = this.props;
 

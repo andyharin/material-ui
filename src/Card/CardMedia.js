@@ -89,10 +89,11 @@ class CardMedia extends Component {
       overlayContentStyle,
       overlayStyle,
       style,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
     const rootStyle = Object.assign(styles.root, style);
     const extendedMediaStyle = Object.assign(styles.media, mediaStyle);

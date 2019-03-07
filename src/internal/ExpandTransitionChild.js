@@ -80,6 +80,7 @@ class ExpandTransitionChild extends Component {
       style,
       transitionDelay, // eslint-disable-line no-unused-vars
       transitionDuration,
+      muiTheme,
       ...other
     } = this.props;
 

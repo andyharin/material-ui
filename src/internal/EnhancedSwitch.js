@@ -281,10 +281,11 @@ class EnhancedSwitch extends Component {
       switchElement,
       thumbStyle,
       trackStyle,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
     const wrapStyles = Object.assign(styles.wrap, iconStyle);
     const mergedRippleStyle = Object.assign(styles.ripple, rippleStyle);

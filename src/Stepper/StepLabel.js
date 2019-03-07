@@ -96,6 +96,7 @@ const StepLabel = (props) => {
     iconContainerStyle,
     last, // eslint-disable-line no-unused-vars
     style,
+    muiTheme,
     ...other
   } = props;
 

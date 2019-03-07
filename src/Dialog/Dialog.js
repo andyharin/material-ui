@@ -57,10 +57,11 @@ class TransitionItem extends Component {
     const {
       style,
       children,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
 
     return (
       <div {...other} style={prepareStyles(Object.assign({}, this.state.style, style))}>
@@ -197,12 +198,12 @@ class DialogInline extends Component {
     const clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     const container = ReactDOM.findDOMNode(this);
     const dialogWindow = ReactDOM.findDOMNode(this.refs.dialogWindow);
-    const dialogContent = ReactDOM.findDOMNode(this.refs.dialogContent);
+    const dialogContent = ReactDOM.findDOMNode(this.refs.dialogContent) || {};
     const minPaddingTop = 16;
 
     // Reset the height in case the window was resized.
     dialogWindow.style.height = '';
-    dialogContent.style.height = '';
+    (dialogContent.style || {}).height = '';
 
     const dialogWindowHeight = dialogWindow.offsetHeight;
     let paddingTop = ((clientHeight - dialogWindowHeight) / 2) - 64;
@@ -220,16 +221,16 @@ class DialogInline extends Component {
       styles.body = Object.assign(styles.body, bodyStyle);
       let maxDialogContentHeight = clientHeight - 2 * 64;
 
-      if (title) maxDialogContentHeight -= dialogContent.previousSibling.offsetHeight;
+      if (title) maxDialogContentHeight -= (dialogContent.previousSibling || {}).offsetHeight;
 
       if (React.Children.count(actions)) {
-        maxDialogContentHeight -= dialogContent.nextSibling.offsetHeight;
+        maxDialogContentHeight -= (dialogContent.nextSibling || {}).offsetHeight;
       }
 
-      dialogContent.style.maxHeight = `${maxDialogContentHeight}px`;
+      (dialogContent.style || {}).maxHeight = `${maxDialogContentHeight}px`;
       if (maxDialogContentHeight > dialogWindowHeight) {
-        dialogContent.style.borderBottom = 'none';
-        dialogContent.style.borderTop = 'none';
+        (dialogContent.style || {}).borderBottom = 'none';
+        (dialogContent.style || {}).borderTop = 'none';
       }
     }
   }
@@ -278,9 +279,10 @@ class DialogInline extends Component {
       titleClassName,
       titleStyle,
       title,
+      muiTheme,
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     styles.root = Object.assign(styles.root, style);
@@ -329,8 +331,10 @@ class DialogInline extends Component {
         >
           {open &&
             <TransitionItem
+              key="item"
               className={contentClassName}
               style={styles.content}
+              muiTheme={muiTheme}
             >
               <Paper className={paperClassName} zDepth={4} {...paperProps}>
                 {titleElement}

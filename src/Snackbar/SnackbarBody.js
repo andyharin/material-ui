@@ -73,6 +73,7 @@ export const SnackbarBody = (props) => {
     open, // eslint-disable-line no-unused-vars
     onActionClick,
     style,
+    muiTheme,
     ...other
   } = props;
 

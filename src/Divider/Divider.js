@@ -6,6 +6,7 @@ const Divider = (props) => {
   const {
     inset,
     style,
+    muiTheme,
     ...other
   } = props;
 

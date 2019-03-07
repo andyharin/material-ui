@@ -63,6 +63,7 @@ class SlideInChild extends Component {
       enterDelay, // eslint-disable-line no-unused-vars
       getLeaveDirection, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 

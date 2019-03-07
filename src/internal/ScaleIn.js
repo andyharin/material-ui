@@ -29,10 +29,11 @@ class ScaleIn extends Component {
       maxScale,
       minScale,
       style,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
 
     const mergedRootStyles = Object.assign({}, {
       position: 'relative',

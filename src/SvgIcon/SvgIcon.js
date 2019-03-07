@@ -69,13 +69,14 @@ class SvgIcon extends Component {
       onMouseLeave, // eslint-disable-line no-unused-vars
       style,
       viewBox,
+      muiTheme,
       ...other
     } = this.props;
 
     const {
       svgIcon,
       prepareStyles,
-    } = this.props.muiTheme;
+    } = muiTheme;
 
     const offColor = color ? color : 'currentColor';
     const onColor = hoverColor ? hoverColor : offColor;

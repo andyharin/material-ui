@@ -144,10 +144,11 @@ class Tooltip extends Component {
       show, // eslint-disable-line no-unused-vars
       touch, // eslint-disable-line no-unused-vars
       verticalPosition, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
 
     return (

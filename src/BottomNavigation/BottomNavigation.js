@@ -29,10 +29,11 @@ const BottomNavigation = (props) => {
     children,
     style,
     selectedIndex,
+    muiTheme,
     ...other
   } = props;
 
-  const {prepareStyles} = props.muiTheme;
+  const {prepareStyles} = muiTheme;
   const styles = getStyles(props);
 
   const preparedChildren = Children.map(children, (child, index) => {

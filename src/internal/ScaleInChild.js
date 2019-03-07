@@ -73,6 +73,7 @@ class ScaleInChild extends Component {
       maxScale, // eslint-disable-line no-unused-vars
       minScale, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 

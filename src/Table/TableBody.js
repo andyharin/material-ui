@@ -440,6 +440,7 @@ class TableBody extends Component {
       stripedRows, // eslint-disable-line no-unused-vars
       displayRowCheckbox, // eslint-disable-line no-unused-vars
       preScanRows, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 

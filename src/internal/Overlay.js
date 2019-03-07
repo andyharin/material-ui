@@ -67,10 +67,10 @@ class Overlay extends Component {
       show,
       style,
       transitionEnabled, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
-
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme || {};
     const styles = getStyles(this.props);
 
     return (

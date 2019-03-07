@@ -130,6 +130,7 @@ class DateDisplay extends Component {
       onClickYear, // eslint-disable-line no-unused-vars
       selectedDate, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 

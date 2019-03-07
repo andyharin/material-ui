@@ -424,6 +424,7 @@ class AutoComplete extends Component {
       openOnFocus, // eslint-disable-line no-unused-vars
       popoverProps,
       searchText: searchTextProp, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 
@@ -439,7 +440,7 @@ class AutoComplete extends Component {
       focusTextField,
     } = this.state;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
 
     const requestsList = [];

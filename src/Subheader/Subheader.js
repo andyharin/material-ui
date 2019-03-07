@@ -7,6 +7,7 @@ const Subheader = (props) => {
     children,
     inset,
     style,
+    muiTheme,
     ...other
   } = props;
 

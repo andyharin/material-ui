@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import mapProps from 'recompose/mapProps';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import Events from '../utils/events';
@@ -226,7 +227,7 @@ class EnhancedButton extends Component {
     if (!this.props.disabled) {
       tabPressed = false;
       this.removeKeyboardFocus(event);
-      this.props.onClick(event);
+      (this.props.onClick || this.props.onTouchTap)(event);
     }
   };
 
@@ -254,13 +255,15 @@ class EnhancedButton extends Component {
       style,
       tabIndex,
       type,
+      muiTheme,
+      onTouchTap,
       ...other
     } = this.props;
 
     const {
       prepareStyles,
       enhancedButton,
-    } = this.props.muiTheme;
+    } = muiTheme;
 
     const mergedStyles = Object.assign({
       border: 10,

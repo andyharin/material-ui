@@ -37,6 +37,7 @@ class ToolbarSeparator extends Component {
     const {
       className,
       style,
+      muiTheme,
       ...other
     } = this.props;
 

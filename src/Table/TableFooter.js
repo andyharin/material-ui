@@ -56,6 +56,7 @@ class TableFooter extends Component {
       children,
       className,
       style,
+      muiTheme,
       ...other
     } = this.props;
 

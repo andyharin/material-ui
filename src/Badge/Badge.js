@@ -95,10 +95,11 @@ class Badge extends Component {
       primary, // eslint-disable-line no-unused-vars
       secondary, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     return (

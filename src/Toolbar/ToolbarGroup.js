@@ -106,6 +106,7 @@ class ToolbarGroup extends Component {
       firstChild, // eslint-disable-line no-unused-vars
       lastChild, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 

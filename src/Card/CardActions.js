@@ -45,10 +45,11 @@ class CardActions extends Component {
       expandable, // eslint-disable-line no-unused-vars
       showExpandableButton, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     const styledChildren = React.Children.map(children, (child) => {
