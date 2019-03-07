@@ -1,5 +1,7 @@
 #### Note
 
+##This version can work with react 16.4 (new Context API)
+
 For *how-to* questions and other non-issues,
 please use [StackOverflow](http://stackoverflow.com/questions/tagged/material-ui)
 instead of Github issues. There is a StackOverflow tag called "material-ui"
