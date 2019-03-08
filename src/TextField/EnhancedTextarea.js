@@ -151,10 +151,11 @@ class EnhancedTextarea extends Component {
       hintText, // eslint-disable-line no-unused-vars
       textareaStyle,
       valueLink,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
     const rootStyles = Object.assign(styles.root, style);
     const textareaStyles = Object.assign(styles.textarea, textareaStyle);
