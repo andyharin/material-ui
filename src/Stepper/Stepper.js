@@ -62,8 +62,8 @@ class Stepper extends Component {
       orientation,
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.props.muiTheme;
+    const styles = getStyles(this.props);
 
     /**
      * One day, we may be able to use real CSS tools

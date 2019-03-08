@@ -85,7 +85,7 @@ class Step extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     return (
@@ -96,4 +96,4 @@ class Step extends Component {
   }
 }
 
-export default withContext(Step);
+export default withContext(withTheme(Step));
