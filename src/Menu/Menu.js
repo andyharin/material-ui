@@ -495,8 +495,9 @@ class Menu extends Component {
 
   setWidth() {
     const el = ReactDOM.findDOMNode(this);
-    const listEl = ReactDOM.findDOMNode(this.refs.list);
     const elWidth = el.offsetWidth;
+    if (!el || !elWidth) return;
+    const listEl = ReactDOM.findDOMNode(this.refs.list);
     const keyWidth = this.state.keyWidth;
     const minWidth = keyWidth * 1.5;
     let keyIncrements = elWidth / keyWidth;
@@ -506,7 +507,6 @@ class Menu extends Component {
     newWidth = keyIncrements * keyWidth;
 
     if (newWidth < minWidth) newWidth = minWidth;
-
     el.style.width = `${newWidth}px`;
     listEl.style.width = `${newWidth}px`;
   }
@@ -530,10 +530,11 @@ class Menu extends Component {
       value, // eslint-disable-line no-unused-vars
       valueLink, // eslint-disable-line no-unused-vars
       width, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     const mergedRootStyles = Object.assign(styles.root, style);
@@ -565,7 +566,6 @@ class Menu extends Component {
 
       return newChild;
     });
-
     return (
       <ClickAwayListener onClickAway={this.handleClickAway}>
         <div
