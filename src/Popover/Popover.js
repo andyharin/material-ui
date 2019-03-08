@@ -207,6 +207,7 @@ class Popover extends Component {
       targetOrigin,
       useLayerForClickAway, // eslint-disable-line no-unused-vars
       scrollableContainer, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 
@@ -409,10 +410,10 @@ class Popover extends Component {
   render() {
     const eventListener = this.state.open ?
       (<EventListener
-          target={this.props.scrollableContainer}
-          onScroll={this.handleScroll}
-          onResize={this.handleResize}
-        />) : null;
+        target={this.props.scrollableContainer}
+        onScroll={this.handleScroll}
+        onResize={this.handleResize}
+      />) : null;
     return (
       <div style={styles.root}>
         {eventListener}

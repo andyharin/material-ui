@@ -63,14 +63,13 @@ class PopoverAnimationDefault extends Component {
     open: false,
   };
 
-  componentDidMount() {
-    this.setState({open: true}); // eslint-disable-line react/no-did-mount-set-state
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.open !== prevState.open) return {open: nextProps.open};
+    return null;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      open: nextProps.open,
-    });
+  componentDidMount() {
+    this.setState({open: true}); // eslint-disable-line react/no-did-mount-set-state
   }
 
   render() {
