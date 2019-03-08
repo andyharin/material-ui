@@ -469,11 +469,7 @@ class Dialog extends Component {
     repositionOnUpdate: true,
   };
 
-  renderLayer = () => {
-    return (
-      <DialogInline {...this.props} />
-    );
-  };
+  renderLayer = () => <DialogInline {...this.props} />;
 
   render() {
     return (

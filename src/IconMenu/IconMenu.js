@@ -247,10 +247,11 @@ class IconMenu extends Component {
       targetOrigin,
       clickCloseDelay, // eslint-disable-line no-unused-vars
       useLayerForClickAway,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const {open, anchorEl} = this.state;
 
     const styles = {

@@ -24,7 +24,7 @@ class List extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
 
     let hasSubheader = false;
 
