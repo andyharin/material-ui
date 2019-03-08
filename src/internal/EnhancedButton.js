@@ -227,7 +227,7 @@ class EnhancedButton extends Component {
     if (!this.props.disabled) {
       tabPressed = false;
       this.removeKeyboardFocus(event);
-      (this.props.onClick || this.props.onTouchTap)(event);
+      (this.props.onTouchTap || this.props.onClick)(event);
     }
   };
 
