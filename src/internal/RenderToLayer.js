@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import PropTypes from 'prop-types';
-import {unstable_renderSubtreeIntoContainer, unmountComponentAtNode} from 'react-dom';
+import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
 
 import Dom from '../utils/dom';
@@ -17,15 +17,33 @@ class RenderToLayer extends Component {
   static defaultProps = {
     useLayerForClickAway: true,
   };
+  constructor(props) {
+    super(props);
+    this.layer = document.createElement('div');
+    document.body.appendChild(this.layer);
 
+    if (this.props.useLayerForClickAway) {
+      this.layer.style.display = 'block';
+      this.layer.style.position = 'fixed';
+      this.layer.style.top = 0;
+      this.layer.style.bottom = 0;
+      this.layer.style.left = 0;
+      this.layer.style.right = 0;
+      this.layer.style.zIndex = this.props.muiTheme.zIndex.layer;
+    }
+  }
+  state = {isOpen: false}
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.open !== prevState.open) return {isOpen: nextProps.open};
+    return null;
+  }
   componentDidMount() {
     this.renderLayer();
   }
-
-  componentDidUpdate() {
-    this.renderLayer();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isOpen !== this.state.isOpen) this.renderLayer();
   }
-
   componentWillUnmount() {
     this.unrenderLayer();
   }
@@ -55,20 +73,7 @@ class RenderToLayer extends Component {
   }
 
   unrenderLayer() {
-    if (!this.layer) {
-      return;
-    }
-
-    if (this.props.useLayerForClickAway) {
-      this.layer.style.position = 'relative';
-      this.layer.removeEventListener('click', this.onClickAway);
-    } else {
-      window.removeEventListener('click', this.onClickAway);
-    }
-
-    unmountComponentAtNode(this.layer);
-    document.body.removeChild(this.layer);
-    this.layer = null;
+    this.setState({isOpen: false});
   }
 
   /**
@@ -77,41 +82,32 @@ class RenderToLayer extends Component {
    * funnels React's hierarchical updates through to a DOM node on an
    * entirely different part of the page.
    */
-  renderLayer() {
-    const {
-      open,
-      render,
-    } = this.props;
-
-    if (open) {
-      if (!this.layer) {
-        this.layer = document.createElement('div');
-        document.body.appendChild(this.layer);
-
-        if (this.props.useLayerForClickAway) {
-          this.layer.addEventListener('click', this.onClickAway);
-          this.layer.style.position = 'fixed';
-          this.layer.style.top = 0;
-          this.layer.style.bottom = 0;
-          this.layer.style.left = 0;
-          this.layer.style.right = 0;
-          this.layer.style.zIndex = this.props.muiTheme.zIndex.layer;
-        } else {
-          setTimeout(() => {
-            window.addEventListener('click', this.onClickAway);
-          }, 0);
-        }
+  renderLayer(props = this.props, state = this.state) {
+    if (state.isOpen) {
+      if (props.useLayerForClickAway) {
+        this.layer.style.position = 'fixed';
+        this.layer.addEventListener('click', this.onClickAway);
+      } else {
+        setTimeout(() => {
+          window.addEventListener('click', this.onClickAway);
+        }, 100);
       }
-
-      const layerElement = render();
-      this.layerElement = unstable_renderSubtreeIntoContainer(this, layerElement, this.layer);
+      this.layer.style.display = 'block';
     } else {
-      this.unrenderLayer();
+      if (props.useLayerForClickAway) {
+        this.layer.style.position = 'relative';
+        this.layer.removeEventListener('click', this.onClickAway);
+      } else {
+        window.removeEventListener('click', this.onClickAway);
+      }
+      this.layer.style.display = 'none';
     }
   }
 
   render() {
-    return null;
+    if (!this.layer || !this.state.isOpen) return null;
+    const layerElement = this.props.render();
+    return ReactDOM.createPortal(layerElement, this.layer);
   }
 }
 
