@@ -412,10 +412,11 @@ class TextField extends Component {
       rows,
       rowsMax,
       textareaStyle,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
     const inputId = id || this.uniqueId;
 
