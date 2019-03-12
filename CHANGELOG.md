@@ -1,5 +1,9 @@
 ## HEAD
 
+## 0.23.1
+###### _Mar 12, 2019_
+Rewrite to use new context API and React portals. Now compatible with `redux ^6`.
+Fix for `onTouchTap` without `react-tap-event-plugin`.
 
 ###### _Dec 3, 2017_
 
