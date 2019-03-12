@@ -440,20 +440,26 @@ class TableBody extends Component {
       stripedRows, // eslint-disable-line no-unused-vars
       displayRowCheckbox, // eslint-disable-line no-unused-vars
       preScanRows, // eslint-disable-line no-unused-vars
-      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
 
     return (
       <ClickAwayListener onClickAway={this.handleClickAway}>
-        <tbody style={prepareStyles(Object.assign({}, style))} {...other}>
-          {this.createRows()}
-        </tbody>
+        <View {...other} style={style}>{this.createRows()}</View>
       </ClickAwayListener>
     );
   }
 }
 
-export default withTheme(TableBody);
+const ViewComponent = ({muiTheme, children, style, ...other}) => {
+  const {prepareStyles} = muiTheme;
+  return (
+    <tbody style={prepareStyles(Object.assign({}, style))} {...other}>
+      {children}
+    </tbody>
+  );
+};
+const View = withTheme(ViewComponent);
+
+export default TableBody;

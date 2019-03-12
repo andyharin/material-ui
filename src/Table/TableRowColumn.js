@@ -100,10 +100,11 @@ class TableRowColumn extends Component {
       onHover, // eslint-disable-line no-unused-vars
       onHoverExit, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     const handlers = {

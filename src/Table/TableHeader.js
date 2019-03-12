@@ -179,23 +179,23 @@ class TableHeader extends Component {
   };
 
   render() {
-    const {
-      className,
-      style,
-    } = this.props;
-
-    const {prepareStyles} = this.props.muiTheme;
-    const styles = getStyles(this.props);
     const superHeaderRows = this.createSuperHeaderRows();
     const baseHeaderRow = this.createBaseHeaderRow();
-
-    return (
-      <thead className={className} style={prepareStyles(Object.assign(styles.root, style))}>
-        {superHeaderRows}
-        {baseHeaderRow}
-      </thead>
-    );
+    return <View {...this.props} {...{superHeaderRows, baseHeaderRow}} />;
   }
 }
 
-export default withTheme(TableHeader);
+const ViewComponent = ({className, superHeaderRows, baseHeaderRow, style, ...props}) => {
+  const {prepareStyles} = props.muiTheme;
+  const styles = getStyles(props);
+  return (
+    <thead className={className} style={prepareStyles(Object.assign(styles.root, style))}>
+      {superHeaderRows}
+      {baseHeaderRow}
+    </thead>
+  );
+};
+
+const View = withTheme(ViewComponent);
+
+export default TableHeader;

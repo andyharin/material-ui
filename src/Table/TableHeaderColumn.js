@@ -104,10 +104,11 @@ class TableHeaderColumn extends Component {
       style,
       tooltip,
       tooltipStyle,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     const handlers = {

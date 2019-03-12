@@ -51,46 +51,42 @@ class TableFooter extends Component {
   };
 
   render() {
-    const {
-      adjustForCheckbox,
-      children,
-      className,
-      style,
-      muiTheme,
-      ...other
-    } = this.props;
-
-    const {prepareStyles} = this.props.muiTheme;
-    const styles = getStyles(this.props);
-
-    const footerRows = React.Children.map(children, (child, rowNumber) => {
-      const newChildProps = {
-        displayBorder: false,
-        key: `f-${rowNumber}`,
-        rowNumber: rowNumber,
-        style: Object.assign({}, styles.cell, child.props.style),
-      };
-
-      let newDescendants;
-
-      if (adjustForCheckbox) {
-        newDescendants = [
-          <TableRowColumn key={`fpcb${rowNumber}`} style={{width: 24}} />,
-          ...React.Children.toArray(child.props.children),
-        ];
-      } else {
-        newDescendants = child.props.children;
-      }
-
-      return React.cloneElement(child, newChildProps, newDescendants);
-    });
-
-    return (
-      <tfoot className={className} style={prepareStyles(Object.assign({}, style))} {...other}>
-        {footerRows}
-      </tfoot>
-    );
+    return <View {...this.props} />;
   }
 }
 
-export default withTheme(TableFooter);
+const ViewComponent = ({adjustForCheckbox, children, className, style, ...props}) => {
+  const {prepareStyles} = props.muiTheme;
+  const styles = getStyles(props);
+
+  const footerRows = React.Children.map(children, (child, rowNumber) => {
+    const newChildProps = {
+      displayBorder: false,
+      key: `f-${rowNumber}`,
+      rowNumber: rowNumber,
+      style: Object.assign({}, styles.cell, child.props.style),
+    };
+
+    let newDescendants;
+
+    if (adjustForCheckbox) {
+      newDescendants = [
+        <TableRowColumn key={`fpcb${rowNumber}`} style={{width: 24}} />,
+        ...React.Children.toArray(child.props.children),
+      ];
+    } else {
+      newDescendants = child.props.children;
+    }
+
+    return React.cloneElement(child, newChildProps, newDescendants);
+  });
+
+  return (
+    <tfoot className={className} style={prepareStyles(Object.assign({}, style))} {...other}>
+      {footerRows}
+    </tfoot>
+  );
+};
+const View = withTheme(ViewComponent);
+
+export default TableFooter;

@@ -187,10 +187,11 @@ class TableRow extends Component {
       selected, // eslint-disable-line no-unused-vars
       striped, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
 
     const rowColumns = React.Children.map(this.props.children, (child, columnNumber) => {
