@@ -90,54 +90,57 @@ class Tab extends Component {
   };
 
   render() {
-    const {
-      icon,
-      index, // eslint-disable-line no-unused-vars
-      onActive, // eslint-disable-line no-unused-vars
-      onClick, // eslint-disable-line no-unused-vars
-      selected, // eslint-disable-line no-unused-vars
-      label,
-      buttonStyle,
-      style,
-      value, // eslint-disable-line no-unused-vars
-      width, // eslint-disable-line no-unused-vars
-      ...other
-    } = this.props;
-
-    const styles = getStyles(this.props);
-
-    let iconElement;
-    if (icon && React.isValidElement(icon)) {
-      iconElement = React.cloneElement(icon, {
-        style: {
-          fontSize: 24,
-          color: (icon.props && icon.props.style && icon.props.style.color) ?
-            icon.props.style.color : styles.root.color,
-          marginBottom: label ? 5 : 0,
-        },
-      });
-    }
-
-    const rippleOpacity = 0.3;
-    const rippleColor = this.props.muiTheme.tabs.selectedTextColor;
-
-    return (
-      <EnhancedButton
-        {...other}
-        style={Object.assign(styles.root, style)}
-        focusRippleColor={rippleColor}
-        touchRippleColor={rippleColor}
-        focusRippleOpacity={rippleOpacity}
-        touchRippleOpacity={rippleOpacity}
-        onClick={this.handleClick}
-      >
-        <div style={Object.assign(styles.button, buttonStyle)} >
-          {iconElement}
-          {label}
-        </div>
-      </EnhancedButton>
-    );
+    return <View {...this.props} onClick={this.handleClick} />;
   }
 }
+const ViewComponent = (props) => {
+  const {
+    icon,
+    index, // eslint-disable-line no-unused-vars
+    onActive, // eslint-disable-line no-unused-vars
+    selected, // eslint-disable-line no-unused-vars
+    label,
+    buttonStyle,
+    style,
+    value, // eslint-disable-line no-unused-vars
+    width, // eslint-disable-line no-unused-vars
+    muiTheme,
+    ...other
+  } = props;
 
-export default withTheme(Tab);
+  const styles = getStyles(props);
+
+  let iconElement;
+  if (icon && React.isValidElement(icon)) {
+    iconElement = React.cloneElement(icon, {
+      style: {
+        fontSize: 24,
+        color: (icon.props && icon.props.style && icon.props.style.color) ?
+          icon.props.style.color : styles.root.color,
+        marginBottom: label ? 5 : 0,
+      },
+    });
+  }
+
+  const rippleOpacity = 0.3;
+  const rippleColor = muiTheme.tabs.selectedTextColor;
+
+  return (
+    <EnhancedButton
+      {...other}
+      style={Object.assign(styles.root, style)}
+      focusRippleColor={rippleColor}
+      touchRippleColor={rippleColor}
+      focusRippleOpacity={rippleOpacity}
+      touchRippleOpacity={rippleOpacity}
+    >
+      <div style={Object.assign(styles.button, buttonStyle)} >
+        {iconElement}
+        {label}
+      </div>
+    </EnhancedButton>
+  );
+};
+const View = withTheme(ViewComponent);
+
+export default Tab;

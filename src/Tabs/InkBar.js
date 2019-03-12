@@ -43,4 +43,4 @@ class InkBar extends Component {
   }
 }
 
-export default InkBar;
+export default withTheme(InkBar);
