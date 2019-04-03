@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
 
-import Dom from '../utils/dom';
-
+import Dom, {canUseDom} from '../utils/dom';
+const document = canUseDom ? window.document : undefined;
 // heavily inspired by https://github.com/Khan/react-components/blob/master/js/layered-component-mixin.jsx
 class RenderToLayer extends Component {
   static propTypes = {
@@ -19,6 +19,9 @@ class RenderToLayer extends Component {
   };
   constructor(props) {
     super(props);
+    this.layer = {style: {}};
+    if (!canUseDom) return;
+    if (!document) return;
     this.layer = document.createElement('div');
     document.body.appendChild(this.layer);
 
@@ -49,6 +52,10 @@ class RenderToLayer extends Component {
   }
 
   onClickAway = (event) => {
+    if (!canUseDom || !document) {
+      return;
+    }
+
     if (event.defaultPrevented) {
       return;
     }
@@ -83,6 +90,9 @@ class RenderToLayer extends Component {
    * entirely different part of the page.
    */
   renderLayer(props = this.props, state = this.state) {
+    if (!canUseDom || !document) {
+      return null;
+    }
     if (state.isOpen) {
       if (props.useLayerForClickAway) {
         this.layer.style.position = 'fixed';
@@ -105,7 +115,7 @@ class RenderToLayer extends Component {
   }
 
   render() {
-    if (!this.layer || !this.state.isOpen) return null;
+    if (!canUseDom || !document || !this.layer || !this.state.isOpen) return null;
     const layerElement = this.props.render();
     return ReactDOM.createPortal(layerElement, this.layer);
   }
