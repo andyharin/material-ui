@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
+import {getWindowDim} from '../utils/dom';
 import withTheme from '../styles/withTheme';
 import RenderToLayer from '../internal/RenderToLayer';
 import propTypes from '../utils/propTypes';
@@ -322,14 +323,14 @@ class Popover extends Component {
 
     targetEl.style.top = `${targetPosition.top}px`;
     targetEl.style.left = `${targetPosition.left}px`;
-    targetEl.style.maxHeight = `${window.innerHeight}px`;
+    targetEl.style.maxHeight = `${getWindowDim().height}px`;
   };
 
   autoCloseWhenOffScreen(anchorPosition) {
     if (anchorPosition.top < 0 ||
-      anchorPosition.top > window.innerHeight ||
+      anchorPosition.top > getWindowDim().height ||
       anchorPosition.left < 0 ||
-      anchorPosition.left > window.innerWidth) {
+      anchorPosition.left > getWindowDim().width) {
       this.requestClose('offScreen');
     }
   }
@@ -379,26 +380,27 @@ class Popover extends Component {
 
   applyAutoPositionIfNeeded(anchor, target, targetOrigin, anchorOrigin, targetPosition) {
     const {positions, anchorPos} = this.getPositions(anchorOrigin, targetOrigin);
+    const wHeight = getWindowDim().height;
 
-    if (targetPosition.top < 0 || targetPosition.top + target.bottom > window.innerHeight) {
+    if (targetPosition.top < 0 || targetPosition.top + target.bottom > wHeight) {
       let newTop = anchor[anchorPos.vertical] - target[positions.y[0]];
-      if (newTop + target.bottom <= window.innerHeight) {
+      if (newTop + target.bottom <= wHeight) {
         targetPosition.top = Math.max(0, newTop);
       } else {
         newTop = anchor[anchorPos.vertical] - target[positions.y[1]];
-        if (newTop + target.bottom <= window.innerHeight) {
+        if (newTop + target.bottom <= wHeight) {
           targetPosition.top = Math.max(0, newTop);
         }
       }
     }
-
-    if (targetPosition.left < 0 || targetPosition.left + target.right > window.innerWidth) {
+    const wWidth = getWindowDim().width;
+    if (targetPosition.left < 0 || targetPosition.left + target.right > wWidth) {
       let newLeft = anchor[anchorPos.horizontal] - target[positions.x[0]];
-      if (newLeft + target.right <= window.innerWidth) {
+      if (newLeft + target.right <= wWidth) {
         targetPosition.left = Math.max(0, newLeft);
       } else {
         newLeft = anchor[anchorPos.horizontal] - target[positions.x[1]];
-        if (newLeft + target.right <= window.innerWidth) {
+        if (newLeft + target.right <= wWidth) {
           targetPosition.left = Math.max(0, newLeft);
         }
       }

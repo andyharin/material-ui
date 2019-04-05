@@ -2,8 +2,8 @@ import {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
-
 import Dom, {canUseDom} from '../utils/dom';
+
 const document = canUseDom ? window.document : undefined;
 // heavily inspired by https://github.com/Khan/react-components/blob/master/js/layered-component-mixin.jsx
 class RenderToLayer extends Component {

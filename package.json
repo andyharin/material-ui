@@ -2,7 +2,7 @@
   "name": "material-ui-new-context",
   "private": false,
   "author": "ndivid",
-  "version": "0.23.6",
+  "version": "0.23.7",
   "description": "React Components that Implement Google's Material Design. New Context Api for v0.x",
   "main": "./src/index.js",
   "keywords": [

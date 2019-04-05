@@ -1,5 +1,9 @@
 ## HEAD
 
+## 0.23.7
+###### _Apr 4, 2019_
+SSR. Check `canUseDom` and use `window` and `document` objects on server side.
+
 ## 0.23.1
 ###### _Mar 12, 2019_
 Rewrite to use new context API and React portals. Now compatible with `redux ^6`.

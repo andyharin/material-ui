@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
+import {getWindowDim} from '../utils/dom';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
 import Overlay from '../internal/Overlay';
@@ -195,7 +196,7 @@ class DialogInline extends Component {
       return;
     }
 
-    const clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    const clientHeight = getWindowDim().height;
     const container = ReactDOM.findDOMNode(this);
     const dialogWindow = ReactDOM.findDOMNode(this.refs.dialogWindow);
     const dialogContent = ReactDOM.findDOMNode(this.refs.dialogContent) || {};

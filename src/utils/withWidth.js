@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import EventListener from 'react-event-listener';
+import {getWindowDim} from './dom';
 
 export const SMALL = 1;
 export const MEDIUM = 2;
@@ -34,7 +35,7 @@ export default function withWidth(options = {}) {
       };
 
       updateWidth() {
-        const innerWidth = window.innerWidth;
+        const innerWidth = getWindowDim().width;
         let width;
 
         if (innerWidth >= largeWidth) {
