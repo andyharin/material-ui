@@ -55,8 +55,8 @@ class TableFooter extends Component {
   }
 }
 
-const ViewComponent = ({adjustForCheckbox, children, className, style, ...props}) => {
-  const {prepareStyles} = props.muiTheme;
+const ViewComponent = ({adjustForCheckbox, children, className, style, muiTheme, ...props}) => {
+  const {prepareStyles} = muiTheme;
   const styles = getStyles(props);
 
   const footerRows = React.Children.map(children, (child, rowNumber) => {
