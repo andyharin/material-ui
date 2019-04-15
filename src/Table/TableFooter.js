@@ -82,7 +82,7 @@ const ViewComponent = ({adjustForCheckbox, children, className, style, ...props}
   });
 
   return (
-    <tfoot className={className} style={prepareStyles(Object.assign({}, style))} {...other}>
+    <tfoot className={className} style={prepareStyles(Object.assign({}, style))} {...props}>
       {footerRows}
     </tfoot>
   );
