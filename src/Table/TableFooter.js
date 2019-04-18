@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import TableRowColumn from './TableRowColumn';
 
-function getStyles(props) {
-  const {tableFooter} = props.muiTheme;
+function getStyles(muiTheme) {
+  const {tableFooter} = muiTheme;
 
   return {
     cell: {
@@ -57,7 +57,7 @@ class TableFooter extends Component {
 
 const ViewComponent = ({adjustForCheckbox, children, className, style, muiTheme, ...props}) => {
   const {prepareStyles} = muiTheme;
-  const styles = getStyles(props);
+  const styles = getStyles(muiTheme);
 
   const footerRows = React.Children.map(children, (child, rowNumber) => {
     const newChildProps = {
