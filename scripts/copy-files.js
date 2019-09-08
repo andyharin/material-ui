@@ -58,7 +58,7 @@ function createPackageFile() {
     } = packageData;
 
     const minimalPackage = {
-      name: 'material-ui-new-context',
+      name: '@forabi/material-ui-new-context',
       author,
       version,
       description,
