@@ -2,7 +2,7 @@
   "name": "@remotelock/material-ui",
   "private": false,
   "author": "ndivid",
-  "version": "0.23.14",
+  "version": "0.23.15",
   "description": "React Components that Implement Google's Material Design. New Context Api for v0.x",
   "main": "./src/index.js",
   "keywords": [
