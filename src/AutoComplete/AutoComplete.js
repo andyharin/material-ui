@@ -616,4 +616,4 @@ AutoComplete.fuzzyFilter = (searchText, key) => {
 AutoComplete.Item = MenuItem;
 AutoComplete.Divider = Divider;
 
-export default AutoComplete;
+export default withTheme(AutoComplete);
