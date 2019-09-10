@@ -7,6 +7,6 @@ export default (Component) => {
     if (!(contexts || {}).muiTheme) return null;
     return <Component {...p} ref={innerRef} {...contexts} />;
   };
-  const Wrapper = hoistNonReactStatics(({innerRef, ...p}) => <Consumer>{render(innerRef, p)}</Consumer>, Component);
-  return React.forwardRef((props, ref) => <Wrapper {...props} innerRef={ref} />);
+  const Wrapper = ({innerRef, ...p}) => <Consumer>{render(innerRef, p)}</Consumer>;
+  return hoistNonReactStatics(React.forwardRef((props, ref) => <Wrapper {...props} innerRef={ref} />), Component);
 };
