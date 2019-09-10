@@ -53,6 +53,8 @@ function getStyles(props) {
 }
 
 class RadioButton extends Component {
+  enhancedSwitch = React.createRef()
+
   static propTypes = {
     /**
      * @ignore
@@ -125,17 +127,17 @@ class RadioButton extends Component {
   };
 
   isChecked() {
-    return this.refs.enhancedSwitch.isSwitched();
+    return this.enhancedSwitch.current.isSwitched();
   }
 
   // Use RadioButtonGroup.setSelectedValue(newSelectionValue) to set a
   // RadioButton's checked value.
   setChecked(newCheckedValue) {
-    this.refs.enhancedSwitch.setSwitched(newCheckedValue);
+    this.enhancedSwitch.current.setSwitched(newCheckedValue);
   }
 
   getValue() {
-    return this.refs.enhancedSwitch.getValue();
+    return this.enhancedSwitch.current.getValue();
   }
 
   render() {
@@ -183,7 +185,7 @@ class RadioButton extends Component {
     return (
       <EnhancedSwitch
         {...other}
-        ref="enhancedSwitch"
+        ref={this.enhancedSwitch}
         inputType="radio"
         checked={checked}
         switched={checked}
