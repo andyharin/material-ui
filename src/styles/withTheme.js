@@ -1,19 +1,18 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import Context from './Context';
+import { Consumer } from './Context';
 import isReact from 'is-react';
 
-export default Component => {
-  const WrappedComponent = React.forwardRef(function Component(_props, ref) {
-    const {muiTheme} = React.useContext(Context);
-    const props = {..._props};
+export default function withTheme(Component) {
+  const render = (innerRef, props) => context => {
+    return <Component {...props} ref={innerRef} {...context} />;
+  };
 
-    if (isReact.classComponent(Component)) {
-      props.ref = ref;
-    }
+  const WrappedComponent = React.forwardRef(function Component(props, _ref) {
+    const ref = isReact.classComponent(Component) ? _ref : undefined;
 
-    return <Component {...props} muiTheme={muiTheme} />;
+    return <Consumer>{render(ref, props)}</Consumer>;
   });
 
-  return hoistNonReactStatics(WrappedComponent, Component);
-};
+  return hoistNonReactStatics(React.memo(WrappedComponent), Component);
+});
