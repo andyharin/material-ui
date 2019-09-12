@@ -9,8 +9,8 @@ export default function withTheme(Component) {
     return <Component ref={ref} {...props} {...context} />;
   });
 
-  WrappedComponent.displayName = `withTheme(${Component.displayName ||
-    'unknown'})`;
+  WrappedComponent.displayName = `WithTheme(${Component.displayName ||
+    'Anonymous'})`;
 
-  return hoistNonReactStatics(React.memo(WrappedComponent), Component);
+  return hoistNonReactStatics(WrappedComponent, Component);
 }
