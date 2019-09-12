@@ -8,11 +8,14 @@ export default function withTheme(Component) {
     return <Component {...props} ref={innerRef} {...context} />;
   };
 
-  const WrappedComponent = React.forwardRef(function Component(props, _ref) {
+  const WrappedComponent = React.forwardRef(function(props, _ref) {
     const ref = isReact.classComponent(Component) ? _ref : undefined;
 
     return <Consumer>{render(ref, props)}</Consumer>;
   });
 
+  WrappedComponent.displayName = `withTheme(${Component.displayName ||
+    'unknown'})`;
+
   return hoistNonReactStatics(React.memo(WrappedComponent), Component);
-});
+}
