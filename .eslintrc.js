@@ -104,7 +104,6 @@ module.exports = {
     'react/jsx-wrap-multilines': 'error',
     'react/no-danger': 'error',
     'react/no-deprecated': 'error',
-    'react/no-did-mount-set-state': 'error',
     'react/no-did-update-set-state': 'error',
     'react/no-direct-mutation-state': 'error',
     'react/no-multi-comp': 'off', // Wishlist, one day
