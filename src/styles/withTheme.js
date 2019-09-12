@@ -1,17 +1,14 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import { Consumer } from './Context';
+import Context from './Context';
 import isReact from 'is-react';
 
 export default function withTheme(Component) {
-  const render = (innerRef, props) => context => {
-    return <Component {...props} ref={innerRef} {...context} />;
-  };
-
-  const WrappedComponent = React.forwardRef(function(props, _ref) {
+  const WrappedComponent = React.forwardRef((props, _ref) => {
+    const context = React.useContext(Context);
     const ref = isReact.classComponent(Component) ? _ref : undefined;
 
-    return <Consumer>{render(ref, props)}</Consumer>;
+    return <Component {...props} ref={ref} {...context} />;
   });
 
   WrappedComponent.displayName = `withTheme(${Component.displayName ||
