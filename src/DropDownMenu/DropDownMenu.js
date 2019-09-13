@@ -463,6 +463,7 @@ class DropDownMenu extends Component {
           animation={animation || PopoverAnimationVertical}
           open={open}
           animated={animated}
+          useLayerForClickAway={false}
           onRequestClose={this.handleRequestCloseMenu}
         >
           <Menu
