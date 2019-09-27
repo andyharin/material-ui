@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
@@ -10,7 +10,7 @@ import Menu from '../Menu/Menu';
 import propTypes from '../utils/propTypes';
 
 const nestedMenuStyle = {
-  position: 'relative',
+  position: 'relative'
 };
 
 function getStyles(props) {
@@ -26,32 +26,35 @@ function getStyles(props) {
       minHeight: props.desktop ? '32px' : '48px',
       lineHeight: props.desktop ? '32px' : '48px',
       fontSize: props.desktop ? 15 : 16,
-      whiteSpace: 'nowrap',
+      whiteSpace: 'nowrap'
     },
 
     innerDivStyle: {
-      paddingLeft: props.leftIcon || props.insetChildren || props.checked ? indent : sidePadding,
+      paddingLeft:
+        props.leftIcon || props.insetChildren || props.checked
+          ? indent
+          : sidePadding,
       paddingRight: props.rightIcon ? indent : sidePadding,
       paddingBottom: 0,
-      paddingTop: 0,
+      paddingTop: 0
     },
 
     secondaryText: {
-      float: 'right',
+      float: 'right'
     },
 
     leftIconDesktop: {
       margin: 0,
       left: 24,
-      top: 4,
+      top: 4
     },
 
     rightIconDesktop: {
       margin: 0,
       right: 24,
       top: 4,
-      fill: props.muiTheme.menuItem.rightIconDesktopFill,
-    },
+      fill: props.muiTheme.menuItem.rightIconDesktopFill
+    }
   };
 
   return styles;
@@ -95,11 +98,7 @@ class MenuItem extends Component {
      * The focus state of the menu item. This prop is used to set the focus
      * state of the underlying `ListItem`.
      */
-    focusState: PropTypes.oneOf([
-      'none',
-      'focused',
-      'keyboard-focused',
-    ]),
+    focusState: PropTypes.oneOf(['none', 'focused', 'keyboard-focused']),
     /**
      * Override the inline-styles of the inner div.
      */
@@ -150,21 +149,21 @@ class MenuItem extends Component {
     /**
      * The value of the menu item.
      */
-    value: PropTypes.any,
+    value: PropTypes.any
   };
 
   static defaultProps = {
-    anchorOrigin: {horizontal: 'right', vertical: 'top'},
+    anchorOrigin: { horizontal: 'right', vertical: 'top' },
     checked: false,
     desktop: false,
     disabled: false,
     focusState: 'none',
     insetChildren: false,
-    targetOrigin: {horizontal: 'left', vertical: 'top'},
+    targetOrigin: { horizontal: 'left', vertical: 'top' }
   };
 
   state = {
-    open: false,
+    open: false
   };
 
   componentDidMount() {
@@ -188,21 +187,13 @@ class MenuItem extends Component {
     this.applyFocusState();
   }
 
-  componentWillUnmount() {
-    if (this.state.open) {
-      this.setState({
-        open: false,
-      });
-    }
-  }
-
   applyFocusState() {
     this.refs.listItem.applyFocusState(this.props.focusState);
   }
 
-  cloneMenuItem = (item) => {
+  cloneMenuItem = item => {
     return React.cloneElement(item, {
-      onClick: (event) => {
+      onClick: event => {
         if (!item.props.menuItems) {
           this.handleRequestClose();
         }
@@ -210,16 +201,16 @@ class MenuItem extends Component {
         if (item.props.onClick) {
           item.props.onClick(event);
         }
-      },
+      }
     });
   };
 
-  handleClick = (event) => {
+  handleClick = event => {
     event.preventDefault();
 
     this.setState({
       open: true,
-      anchorEl: ReactDOM.findDOMNode(this),
+      anchorEl: ReactDOM.findDOMNode(this)
     });
 
     if (this.props.onClick) {
@@ -230,7 +221,7 @@ class MenuItem extends Component {
   handleRequestClose = () => {
     this.setState({
       open: false,
-      anchorEl: null,
+      anchorEl: null
     });
   };
 
@@ -255,37 +246,49 @@ class MenuItem extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const { prepareStyles } = this.props.muiTheme;
     const styles = getStyles(this.props);
     const mergedRootStyles = Object.assign(styles.root, style);
-    const mergedInnerDivStyles = Object.assign(styles.innerDivStyle, innerDivStyle);
+    const mergedInnerDivStyles = Object.assign(
+      styles.innerDivStyle,
+      innerDivStyle
+    );
 
     // Left Icon
     let leftIconElement = leftIcon ? leftIcon : checked ? <CheckIcon /> : null;
     if (leftIconElement) {
-      const mergedLeftIconStyles = desktop ?
-        Object.assign(styles.leftIconDesktop, leftIconElement.props.style) : leftIconElement.props.style;
-      leftIconElement = React.cloneElement(leftIconElement, {style: mergedLeftIconStyles});
+      const mergedLeftIconStyles = desktop
+        ? Object.assign(styles.leftIconDesktop, leftIconElement.props.style)
+        : leftIconElement.props.style;
+      leftIconElement = React.cloneElement(leftIconElement, {
+        style: mergedLeftIconStyles
+      });
     }
 
     // Right Icon
     let rightIconElement;
     if (rightIcon) {
-      const mergedRightIconStyles = desktop ?
-        Object.assign(styles.rightIconDesktop, rightIcon.props.style) : rightIcon.props.style;
-      rightIconElement = React.cloneElement(rightIcon, {style: mergedRightIconStyles});
+      const mergedRightIconStyles = desktop
+        ? Object.assign(styles.rightIconDesktop, rightIcon.props.style)
+        : rightIcon.props.style;
+      rightIconElement = React.cloneElement(rightIcon, {
+        style: mergedRightIconStyles
+      });
     }
 
     // Secondary Text
     let secondaryTextElement;
     if (secondaryText) {
       const secondaryTextIsAnElement = React.isValidElement(secondaryText);
-      const mergedSecondaryTextStyles = secondaryTextIsAnElement ?
-      Object.assign(styles.secondaryText, secondaryText.props.style) : null;
+      const mergedSecondaryTextStyles = secondaryTextIsAnElement
+        ? Object.assign(styles.secondaryText, secondaryText.props.style)
+        : null;
 
-      secondaryTextElement = secondaryTextIsAnElement ?
-        React.cloneElement(secondaryText, {style: mergedSecondaryTextStyles}) :
-        <div style={prepareStyles(styles.secondaryText)}>{secondaryText}</div>;
+      secondaryTextElement = secondaryTextIsAnElement ? (
+        React.cloneElement(secondaryText, { style: mergedSecondaryTextStyles })
+      ) : (
+        <div style={prepareStyles(styles.secondaryText)}>{secondaryText}</div>
+      );
     }
     let childMenuPopover;
     if (menuItems) {
