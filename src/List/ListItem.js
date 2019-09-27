@@ -340,21 +340,18 @@ class ListItem extends Component {
     touch: false,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.open === null) {
-      return {open: nextProps.initiallyOpen === true};
-    }
+  UNSAFE_componentWillMount() {
+    this.setState({
+      open: this.props.open === null ? this.props.initiallyOpen === true : this.props.open,
+    });
+  }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // update the state when the component is controlled.
-    if (nextProps.open !== null) {
-      return {open: nextProps.open};
-    }
-
-    if (nextProps.disabled && prevState.hovered) {
-      return {hovered: false};
-    }
-
-    return null;
+    if (nextProps.open !== null)
+      this.setState({open: nextProps.open});
+    if (nextProps.disabled && this.state.hovered)
+      this.setState({hovered: false});
   }
 
   shouldComponentUpdate(nextProps, nextState) {
