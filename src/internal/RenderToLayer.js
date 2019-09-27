@@ -1,8 +1,8 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
-import Dom, {canUseDom} from '../utils/dom';
+import Dom, { canUseDom } from '../utils/dom';
 
 const document = canUseDom ? window.document : undefined;
 // heavily inspired by https://github.com/Khan/react-components/blob/master/js/layered-component-mixin.jsx
@@ -11,15 +11,15 @@ class RenderToLayer extends Component {
     componentClickAway: PropTypes.func,
     open: PropTypes.bool.isRequired,
     render: PropTypes.func.isRequired,
-    useLayerForClickAway: PropTypes.bool,
+    useLayerForClickAway: PropTypes.bool
   };
 
   static defaultProps = {
-    useLayerForClickAway: true,
+    useLayerForClickAway: true
   };
   constructor(props) {
     super(props);
-    this.layer = {style: {}};
+    this.layer = { style: {} };
     if (!canUseDom) return;
     if (!document) return;
     this.layer = document.createElement('div');
@@ -35,10 +35,10 @@ class RenderToLayer extends Component {
       this.layer.style.zIndex = this.props.muiTheme.zIndex.layer;
     }
   }
-  state = {isOpen: false}
+  state = { isOpen: false };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.open !== prevState.open) return {isOpen: nextProps.open};
+    if (nextProps.open !== prevState.open) return { isOpen: nextProps.open };
     return null;
   }
   componentDidMount() {
@@ -51,7 +51,7 @@ class RenderToLayer extends Component {
     this.unrenderLayer();
   }
 
-  onClickAway = (event) => {
+  onClickAway = event => {
     if (!canUseDom || !document) {
       return;
     }
@@ -69,8 +69,11 @@ class RenderToLayer extends Component {
     }
 
     const el = this.layer;
-    if (event.target !== el && event.target === window ||
-      (document.documentElement.contains(event.target) && !Dom.isDescendant(el, event.target))) {
+    if (
+      (event.target !== el && event.target === window) ||
+      (document.documentElement.contains(event.target) &&
+        !Dom.isDescendant(el, event.target))
+    ) {
       this.props.componentClickAway(event);
     }
   };
@@ -80,7 +83,10 @@ class RenderToLayer extends Component {
   }
 
   unrenderLayer() {
-    this.setState({isOpen: false});
+    this.setState({ isOpen: false });
+    try {
+      document.body.removeChild(this.layer);
+    } catch (e) {}
   }
 
   /**
@@ -115,7 +121,8 @@ class RenderToLayer extends Component {
   }
 
   render() {
-    if (!canUseDom || !document || !this.layer || !this.state.isOpen) return null;
+    if (!canUseDom || !document || !this.layer || !this.state.isOpen)
+      return null;
     const layerElement = this.props.render();
     return ReactDOM.createPortal(layerElement, this.layer);
   }

@@ -119,7 +119,7 @@ class Popover extends Component {
       vertical: 'top',
       horizontal: 'left',
     },
-    useLayerForClickAway: true,
+    useLayerForClickAway: false,
     zDepth: 1,
   };
 
