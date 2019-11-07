@@ -8,7 +8,7 @@ export default function withTheme(Component) {
     const context = React.useContext(Context);
     const ref = isReact.classComponent(Component) ? _ref : undefined;
 
-    return <Component ref={ref} {...props} {...context} />;
+    return <Component innerRef={ref} {...props} {...context} />;
   });
 
   WrappedComponent.displayName = `WithTheme(${Component.displayName ||

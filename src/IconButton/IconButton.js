@@ -69,6 +69,9 @@ class IconButton extends Component {
      * Note: you can specify iconHoverColor as a String inside this object.
      */
     iconStyle: PropTypes.object,
+
+    innerRef: PropTypes.oneOf([PropTypes.func, PropTypes.object]),
+
     /** @ignore */
     onBlur: PropTypes.func,
     /**
@@ -238,6 +241,7 @@ class IconButton extends Component {
       tooltipStyles,
       touch,
       iconStyle,
+      innerRef,
       ...other
     } = this.props;
     let fonticon;
@@ -291,6 +295,7 @@ class IconButton extends Component {
     return (
       <EnhancedButton
         ref={(ref) => this.button = ref}
+        innerRef={innerRef}
         {...other}
         centerRipple={true}
         disabled={disabled}

@@ -52,6 +52,7 @@ class EnhancedButton extends Component {
     focusRippleColor: PropTypes.string,
     focusRippleOpacity: PropTypes.number,
     href: PropTypes.string,
+    innerRef: PropTypes.oneOf([PropTypes.func, PropTypes.object]),
     keyboardFocused: PropTypes.bool,
     onBlur: PropTypes.func,
     onClick: PropTypes.func,
@@ -76,6 +77,7 @@ class EnhancedButton extends Component {
     onKeyboardFocus: () => {},
     tabIndex: 0,
     type: 'button',
+    innerRef: React.createRef()
   };
 
   state = {
@@ -93,7 +95,7 @@ class EnhancedButton extends Component {
     injectStyle();
     listenForTabPresses();
     if (this.state.isKeyboardFocused) {
-      this.button.focus();
+      this.props.innerRef.current.focus();
       this.props.onKeyboardFocus(null, true);
     }
   }
@@ -257,6 +259,7 @@ class EnhancedButton extends Component {
       type,
       muiTheme,
       onTouchTap,
+      innerRef,
       ...other
     } = this.props;
 
@@ -302,7 +305,7 @@ class EnhancedButton extends Component {
     const buttonProps = {
       ...other,
       style: prepareStyles(mergedStyles),
-      ref: (node) => this.button = node,
+      ref: innerRef,
       disabled: disabled,
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
