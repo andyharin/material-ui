@@ -1,5 +1,5 @@
 {
-  "name": "@remotelock/material-ui",
+  "name": "material-ui",
   "private": false,
   "author": "ndivid",
   "version": "0.24.3",
@@ -13,11 +13,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/remotelock/material-ui.git"
+    "url": "https://github.com/andyharin/material-ui.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/remotelock/material-ui/issues"
+    "url": "https://github.com/andyharin/material-ui/issues"
   },
   "homepage": "http://material-ui.com/",
   "scripts": {

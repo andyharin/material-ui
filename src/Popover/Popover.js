@@ -119,7 +119,7 @@ class Popover extends Component {
       vertical: 'top',
       horizontal: 'left',
     },
-    useLayerForClickAway: false,
+    useLayerForClickAway: true,
     zDepth: 1,
   };
 
@@ -133,6 +133,7 @@ class Popover extends Component {
     this.state = {
       open: props.open,
       closing: false,
+      setPlacement: false,
     };
   }
 
@@ -149,10 +150,21 @@ class Popover extends Component {
       clearTimeout(this.timeout);
       this.timeout = null;
       this.anchorEl = nextProps.anchorEl || this.props.anchorEl;
-      this.setState({
-        open: true,
-        closing: false,
-      });
+      this.setState(
+        {
+          open: true,
+          closing: false,
+          setPlacement: false,
+        },
+        () => {
+          // MADE EDIT HERE
+          setTimeout(() => {
+            this.setState({
+              setPlacement: true,
+            });
+          });
+        },
+      );
     } else {
       if (nextProps.animated) {
         if (this.timeout !== null) return;
@@ -212,7 +224,10 @@ class Popover extends Component {
       ...other
     } = this.props;
 
-    let styleRoot = style;
+    let styleRoot = {
+      ...style,
+      opacity: this.state.setPlacement ? 1 : 0, // MADE EDIT HERE
+    };
 
     if (!animated) {
       styleRoot = {
