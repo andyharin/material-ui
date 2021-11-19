@@ -1,13 +1,13 @@
 #### Note
 
-## This version can work with react 16.4 (new Context API)
+## This version can work with React >= 16.4 (new Context API)
 
 For *how-to* questions and other non-issues,
 please use [StackOverflow](http://stackoverflow.com/questions/tagged/material-ui)
 instead of Github issues. There is a StackOverflow tag called "material-ui"
 that you can use to tag your questions.
 
-# [Material-UI](http://www.material-ui.com/)
+# [Material-UI](http://v0.mui.com/)
 
 [![npm package](https://img.shields.io/npm/v/material-ui.svg?style=flat-square)](https://www.npmjs.org/package/material-ui)
 [![Build Status](https://travis-ci.org/callemall/material-ui.svg?branch=master)](https://travis-ci.org/callemall/material-ui)
@@ -22,7 +22,7 @@ Material-UI is a set of [React](http://facebook.github.io/react/) components tha
 [Google's Material Design](https://www.google.com/design/spec/material-design/introduction.html)
 specification.
 
-Check out our [documentation site](http://www.material-ui.com/) for live examples.
+Check out our [documentation site](http://v0.mui.com/) for live examples.
 It's still a work in progress, but hopefully you can see where we're headed.
 
 **Recently Updated?** Please read the [changelog](https://github.com/callemall/material-ui/releases), this README and the documentation before posting an issue.
@@ -34,21 +34,21 @@ before diving into material-ui. Material-UI is a set of React components,
 so understanding how React fits into web development is important.
 
 (If you're not familiar with Node, or with the concept of Single Page Applications (SPAs),
-head over to the [documentation website](http://material-ui.com/#/get-started/required-knowledge)
+head over to the [documentation website](http://v0.mui.com/#/get-started/required-knowledge)
 for a quick introduction before you read on.)
 
 ## Installation
 
-Material-UI is available as an [npm package](https://www.npmjs.org/package/material-ui).
+Material-UI is available as an [npm package](https://www.npmjs.org/package/material-ui-v0).
 
 **Stable channel**
 ```sh
-npm install material-ui
+npm install material-ui-v0
 ```
 
 **Pre-release channel**
 ```sh
-npm install material-ui@next
+npm install material-ui-v0@next
 ```
 
 Please note that `@next` will only point to pre-releases; to get the latest stable release use `@latest` instead.
