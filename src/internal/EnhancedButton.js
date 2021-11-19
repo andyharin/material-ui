@@ -76,8 +76,7 @@ class EnhancedButton extends Component {
     onKeyUp: () => {},
     onKeyboardFocus: () => {},
     tabIndex: 0,
-    type: 'button',
-    innerRef: React.createRef()
+    type: 'button'
   };
 
   state = {

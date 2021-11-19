@@ -98,7 +98,10 @@ class DropDownMenu extends Component {
     /**
      * Override the default animation component used.
      */
-    animation: PropTypes.func,
+    animation: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.elementType,
+    ]),
     /**
      * The width will automatically be set according to the items inside the menu.
      * To control this width in css instead, set this prop to `false`.
@@ -377,6 +380,7 @@ class DropDownMenu extends Component {
       iconButton,
       anchorOrigin,
       targetOrigin,
+      muiTheme,
       ...other
     } = this.props;
     const {

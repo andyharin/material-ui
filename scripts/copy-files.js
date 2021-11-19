@@ -37,6 +37,7 @@ function createPackageFile() {
     .then(data => JSON.parse(data))
     .then(packageData => {
       const {
+        name,
         author,
         version,
         description,
@@ -50,7 +51,7 @@ function createPackageFile() {
       } = packageData;
 
       const minimalPackage = {
-        name: '@remotelock/material-ui',
+        name,
         author,
         version,
         description,

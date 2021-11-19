@@ -39,7 +39,10 @@ class Popover extends Component {
     /**
      * Override the default animation component used.
      */
-    animation: PropTypes.func,
+    animation: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.elementType,
+    ]),
     /**
      * If true, the popover will hide when the anchor is scrolled off the screen.
      */
