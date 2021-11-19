@@ -52,7 +52,10 @@ class EnhancedButton extends Component {
     focusRippleColor: PropTypes.string,
     focusRippleOpacity: PropTypes.number,
     href: PropTypes.string,
-    innerRef: PropTypes.oneOf([PropTypes.func, PropTypes.object]),
+    innerRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.any }),
+    ]),
     keyboardFocused: PropTypes.bool,
     onBlur: PropTypes.func,
     onClick: PropTypes.func,
@@ -76,7 +79,8 @@ class EnhancedButton extends Component {
     onKeyUp: () => {},
     onKeyboardFocus: () => {},
     tabIndex: 0,
-    type: 'button'
+    type: 'button',
+    innerRef: React.createRef()
   };
 
   state = {
