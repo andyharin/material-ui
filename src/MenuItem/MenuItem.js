@@ -252,10 +252,11 @@ class MenuItem extends Component {
       anchorOrigin,
       targetOrigin,
       value, // eslint-disable-line no-unused-vars
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
     const mergedRootStyles = Object.assign(styles.root, style);
     const mergedInnerDivStyles = Object.assign(styles.innerDivStyle, innerDivStyle);
@@ -311,7 +312,7 @@ class MenuItem extends Component {
       <ListItem
         {...other}
         disabled={disabled}
-        hoverColor={this.props.muiTheme.menuItem.hoverColor}
+        hoverColor={muiTheme.menuItem.hoverColor}
         innerDivStyle={mergedInnerDivStyles}
         insetChildren={insetChildren}
         leftIcon={leftIconElement}

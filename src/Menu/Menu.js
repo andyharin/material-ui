@@ -201,6 +201,10 @@ class Menu extends Component {
 
     if (this.props.multiple !== true) {
       selectedIndex = this.getLastSelectedIndex(nextProps, filteredChildren);
+
+      if (selectedIndex === -1) {
+        selectedIndex = this.state.focusIndex;
+      }
     } else {
       selectedIndex = this.state.focusIndex;
     }
@@ -287,7 +291,7 @@ class Menu extends Component {
       style: mergedChildStyles,
     };
     if (!childIsDisabled) {
-      const isFocused = childIndex === this.state.focusIndex;
+      const isFocused = index === this.state.focusIndex;
       let focusState = 'none';
       if (isFocused) {
         focusState = this.state.isKeyboardFocused ?

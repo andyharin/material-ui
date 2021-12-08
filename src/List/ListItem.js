@@ -590,16 +590,17 @@ class ListItem extends Component {
       secondaryText,
       secondaryTextLines, // eslint-disable-line no-unused-vars
       style,
+      muiTheme,
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
     const contentChildren = [children];
 
     if (leftIcon) {
       const additionalProps = {
-        color: leftIcon.props.color || this.props.muiTheme.listItem.leftIconColor,
+        color: leftIcon.props.color || muiTheme.listItem.leftIconColor,
       };
       this.pushElement(
         contentChildren,
@@ -611,7 +612,7 @@ class ListItem extends Component {
 
     if (rightIcon) {
       const additionalProps = {
-        color: rightIcon.props.color || this.props.muiTheme.listItem.rightIconColor,
+        color: rightIcon.props.color || muiTheme.listItem.rightIconColor,
       };
       this.pushElement(
         contentChildren,
