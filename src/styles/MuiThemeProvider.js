@@ -1,4 +1,3 @@
-import React from 'react';
 import { Provider } from './Context';
 
 const MuiThemeProvider = ({ muiTheme, children }) =>

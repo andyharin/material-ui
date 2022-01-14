@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -157,10 +157,10 @@ class LinearProgress extends Component {
     const styles = getStyles(this.props);
 
     return (
-      <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
-        <div style={prepareStyles(styles.bar)}>
-          <div ref="bar1" style={prepareStyles(styles.barFragment1)} />
-          <div ref="bar2" style={prepareStyles(styles.barFragment2)} />
+      <div {...other} css={prepareStyles(Object.assign(styles.root, style))}>
+        <div css={prepareStyles(styles.bar)}>
+          <div ref="bar1" css={prepareStyles(styles.barFragment1)} />
+          <div ref="bar2" css={prepareStyles(styles.barFragment2)} />
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -141,7 +141,7 @@ class StepButton extends Component {
         onTouchStart={this.handleTouchStart}
         {...other}
       >
-        {React.cloneElement(child, {active, completed, disabled, icon, iconContainerStyle})}
+        {cloneElement(child, {active, completed, disabled, icon, iconContainerStyle})}
       </EnhancedButton>
     );
   }

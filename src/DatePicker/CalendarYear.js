@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
@@ -115,8 +115,8 @@ class CalendarYear extends Component {
     };
 
     return (
-      <div style={prepareStyles(styles.root)}>
-        <div style={prepareStyles(styles.child)}>
+      <div css={prepareStyles(styles.root)}>
+        <div css={prepareStyles(styles.child)}>
           {this.getYears()}
         </div>
       </div>

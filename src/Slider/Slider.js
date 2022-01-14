@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import warning from 'warning';
@@ -823,9 +823,9 @@ class Slider extends Component {
     );
 
     return (
-      <div {...other} style={prepareStyles(Object.assign({}, style))}>
+      <div {...other} css={prepareStyles(Object.assign({}, style))}>
         <div
-          style={prepareStyles(Object.assign({}, styles.slider, sliderStyle))}
+          css={prepareStyles(Object.assign({}, styles.slider, sliderStyle))}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onMouseDown={this.handleMouseDown}
@@ -835,12 +835,12 @@ class Slider extends Component {
           onTouchStart={this.handleTouchStart}
           onKeyDown={!disabled ? this.handleKeyDown : undefined}
         >
-          <div ref={(node) => this.track = node} style={prepareStyles(styles.track)}>
-            <div style={prepareStyles(styles.filled)} />
-            <div style={prepareStyles(styles.remaining)} />
+          <div ref={(node) => this.track = node} css={prepareStyles(styles.track)}>
+            <div css={prepareStyles(styles.filled)} />
+            <div css={prepareStyles(styles.remaining)} />
             <div
               ref={(node) => this.handle = node}
-              style={prepareStyles(handleStyles)}
+              css={prepareStyles(handleStyles)}
               tabIndex={0}
             >
               {!disabled && !disableFocusRipple && (

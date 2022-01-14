@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import {isInner} from './timeUtils';
@@ -82,8 +82,8 @@ class ClockPointer extends Component {
     const {prepareStyles} = this.props.muiTheme;
 
     return (
-      <div style={prepareStyles(styles.root)} >
-        <div style={prepareStyles(styles.mark)} />
+      <div css={prepareStyles(styles.root)} >
+        <div css={prepareStyles(styles.mark)} />
       </div>
     );
   }

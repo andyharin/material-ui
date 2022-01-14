@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -155,7 +155,7 @@ class Tooltip extends Component {
       <div
         {...other}
         ref="tooltip"
-        style={prepareStyles(Object.assign(
+        css={prepareStyles(Object.assign(
           styles.root,
           this.props.show && styles.rootWhenShown,
           this.props.touch && styles.rootWhenTouched,
@@ -164,12 +164,12 @@ class Tooltip extends Component {
       >
         <div
           ref="ripple"
-          style={prepareStyles(Object.assign(
+          css={prepareStyles(Object.assign(
             styles.ripple,
             this.props.show && styles.rippleWhenShown
           ))}
         />
-        <span style={prepareStyles(styles.label)}>
+        <span css={prepareStyles(styles.label)}>
           {label}
         </span>
       </div>

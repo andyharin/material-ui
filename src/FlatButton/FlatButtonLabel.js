@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -31,7 +31,7 @@ class FlatButtonLabel extends Component {
     const styles = getStyles(this.props);
 
     return (
-      <span style={prepareStyles(Object.assign(styles.root, style))}>{label}</span>
+      <span css={prepareStyles(Object.assign(styles.root, style))}>{label}</span>
     );
   }
 }

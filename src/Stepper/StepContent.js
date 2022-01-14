@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
+import {jsx} from '@emotion/react';
 import PropTypes from 'prop-types';
 import TransitionComponent from '../internal/ExpandTransition';
 import { withContext } from './Context';
@@ -91,8 +92,8 @@ class StepContent extends Component {
     };
 
     return (
-      <div style={prepareStyles(Object.assign(styles.root, style))} {...other}>
-        {React.createElement(transition, transitionProps, <div style={{overflow: 'hidden'}}>{children}</div>)}
+      <div css={prepareStyles(Object.assign(styles.root, style))} {...other}>
+        {jsx(transition, transitionProps, <div css={{overflow: 'hidden'}}>{children}</div>)}
       </div>
     );
   }

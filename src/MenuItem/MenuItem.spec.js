@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 
-import React from 'react';
-import {assert} from 'chai';
+import { assert } from 'chai';
 import {shallow} from 'enzyme';
 import getMuiTheme from 'src/styles/getMuiTheme';
 import MenuItem from './MenuItem';

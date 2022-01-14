@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -319,7 +319,7 @@ class FloatingActionButton extends Component {
         >
           <div
             ref="overlay"
-            style={prepareStyles(Object.assign(
+            css={prepareStyles(Object.assign(
               styles.overlay,
               (this.state.hovered && !this.props.disabled) && styles.overlayWhenHovered
             ))}

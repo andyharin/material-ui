@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -87,7 +87,7 @@ class FontIcon extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
 
     return (
@@ -95,7 +95,7 @@ class FontIcon extends Component {
         {...other}
         onMouseLeave={this.handleMouseLeave}
         onMouseEnter={this.handleMouseEnter}
-        style={prepareStyles(Object.assign(styles.root, style))}
+        css={prepareStyles(Object.assign(styles.root, style))}
       />
     );
   }

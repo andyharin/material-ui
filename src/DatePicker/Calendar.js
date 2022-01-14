@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
@@ -323,7 +323,7 @@ class Calendar extends Component {
     } = this.props;
 
     return (
-      <div style={prepareStyles(styles.root)}>
+      <div css={prepareStyles(styles.root)}>
         <EventListener
           target="window"
           onKeyDown={this.handleWindowKeyDown}
@@ -340,9 +340,9 @@ class Calendar extends Component {
             selectedDate={this.state.selectedDate}
           />
         }
-        <div style={prepareStyles(styles.calendar)}>
+        <div css={prepareStyles(styles.calendar)}>
           {this.state.displayMonthDay &&
-            <div style={prepareStyles(styles.calendarContainer)}>
+            <div css={prepareStyles(styles.calendarContainer)}>
               <CalendarToolbar
                 DateTimeFormat={DateTimeFormat}
                 locale={locale}
@@ -351,9 +351,9 @@ class Calendar extends Component {
                 prevMonth={toolbarInteractions.prevMonth}
                 nextMonth={toolbarInteractions.nextMonth}
               />
-              <div style={prepareStyles(styles.weekTitle)}>
+              <div css={prepareStyles(styles.weekTitle)}>
                 {daysArray.map((event, i) => (
-                  <span key={i} style={weekTitleDayStyle}>
+                  <span key={i} css={weekTitleDayStyle}>
                     {localizedWeekday(DateTimeFormat, locale, i, firstDayOfWeek)}
                   </span>
                 ))}
@@ -377,7 +377,7 @@ class Calendar extends Component {
             </div>
           }
           {!this.state.displayMonthDay &&
-            <div style={prepareStyles(styles.yearContainer)}>
+            <div css={prepareStyles(styles.yearContainer)}>
               {this.yearSelector()}
             </div>
           }

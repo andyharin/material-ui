@@ -1,4 +1,4 @@
-import React, {Children, isValidElement, cloneElement} from 'react';
+import { Children, isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import List from './List';
 

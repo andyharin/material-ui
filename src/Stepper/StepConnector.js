@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import pure from 'recompose/pure';
 import withTheme from '../styles/withTheme';
@@ -41,8 +40,8 @@ const StepConnector = (props) => {
   const {prepareStyles} = muiTheme;
 
   return (
-    <div style={prepareStyles(styles.wrapper)}>
-      <span style={prepareStyles(styles.line)} />
+    <div css={prepareStyles(styles.wrapper)}>
+      <span css={prepareStyles(styles.line)} />
     </div>
   );
 };

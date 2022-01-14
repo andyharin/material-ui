@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -74,7 +74,7 @@ class Overlay extends Component {
     const styles = getStyles(this.props);
 
     return (
-      <div {...other} ref="overlay" style={prepareStyles(Object.assign(styles.root, style))}>
+      <div {...other} ref="overlay" css={prepareStyles(Object.assign(styles.root, style))}>
         {autoLockScrolling && <AutoLockScrolling lock={show} />}
       </div>
     );

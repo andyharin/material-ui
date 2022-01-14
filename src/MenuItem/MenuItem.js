@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, isValidElement, Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
@@ -201,7 +201,7 @@ class MenuItem extends Component {
   }
 
   cloneMenuItem = (item) => {
-    return React.cloneElement(item, {
+    return cloneElement(item, {
       onClick: (event) => {
         if (!item.props.menuItems) {
           this.handleRequestClose();
@@ -266,7 +266,7 @@ class MenuItem extends Component {
     if (leftIconElement) {
       const mergedLeftIconStyles = desktop ?
         Object.assign(styles.leftIconDesktop, leftIconElement.props.style) : leftIconElement.props.style;
-      leftIconElement = React.cloneElement(leftIconElement, {style: mergedLeftIconStyles});
+      leftIconElement = cloneElement(leftIconElement, {style: mergedLeftIconStyles});
     }
 
     // Right Icon
@@ -274,19 +274,19 @@ class MenuItem extends Component {
     if (rightIcon) {
       const mergedRightIconStyles = desktop ?
         Object.assign(styles.rightIconDesktop, rightIcon.props.style) : rightIcon.props.style;
-      rightIconElement = React.cloneElement(rightIcon, {style: mergedRightIconStyles});
+      rightIconElement = cloneElement(rightIcon, {style: mergedRightIconStyles});
     }
 
     // Secondary Text
     let secondaryTextElement;
     if (secondaryText) {
-      const secondaryTextIsAnElement = React.isValidElement(secondaryText);
+      const secondaryTextIsAnElement = isValidElement(secondaryText);
       const mergedSecondaryTextStyles = secondaryTextIsAnElement ?
       Object.assign(styles.secondaryText, secondaryText.props.style) : null;
 
       secondaryTextElement = secondaryTextIsAnElement ?
-        React.cloneElement(secondaryText, {style: mergedSecondaryTextStyles}) :
-        <div style={prepareStyles(styles.secondaryText)}>{secondaryText}</div>;
+        cloneElement(secondaryText, {style: mergedSecondaryTextStyles}) :
+        <div css={prepareStyles(styles.secondaryText)}>{secondaryText}</div>;
     }
     let childMenuPopover;
     if (menuItems) {
@@ -301,7 +301,7 @@ class MenuItem extends Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu desktop={desktop} disabled={disabled} style={nestedMenuStyle}>
-            {React.Children.map(menuItems, this.cloneMenuItem)}
+            {Children.map(menuItems, this.cloneMenuItem)}
           </Menu>
         </Popover>
       );

@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import {Component, createRef, isValidElement, cloneElement} from 'react';
+import {jsx} from '@emotion/react';
 import mapProps from 'recompose/mapProps';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
@@ -80,7 +81,7 @@ class EnhancedButton extends Component {
     onKeyboardFocus: () => {},
     tabIndex: 0,
     type: 'button',
-    innerRef: React.createRef()
+    innerRef: createRef(),
   };
 
   state = {
@@ -298,7 +299,7 @@ class EnhancedButton extends Component {
       return (
         <span
           {...other}
-          style={mergedStyles}
+          css={mergedStyles}
         >
           {children}
         </span>
@@ -307,7 +308,7 @@ class EnhancedButton extends Component {
 
     const buttonProps = {
       ...other,
-      style: prepareStyles(mergedStyles),
+      css: prepareStyles(mergedStyles),
       ref: innerRef,
       disabled: disabled,
       onBlur: this.handleBlur,
@@ -322,15 +323,15 @@ class EnhancedButton extends Component {
 
     const buttonChildren = this.createButtonChildren();
 
-    if (React.isValidElement(containerElement)) {
-      return React.cloneElement(containerElement, buttonProps, buttonChildren);
+    if (isValidElement(containerElement)) {
+      return cloneElement(containerElement, buttonProps, buttonChildren);
     }
 
     if (!href && containerElement === 'button') {
       buttonProps.type = type;
     }
 
-    return React.createElement(href ? 'a' : containerElement, buttonProps, buttonChildren);
+    return jsx(href ? 'a' : containerElement, buttonProps, buttonChildren);
   }
 }
 

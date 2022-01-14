@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 
-import React from 'react';
-import {assert} from 'chai';
+import { assert } from 'chai';
 import {shallow, mount} from 'enzyme';
 import Popover from './Popover';
 import PopoverAnimationDefault from './PopoverAnimationDefault';

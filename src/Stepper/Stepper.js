@@ -1,4 +1,4 @@
-import React, {Component, Children} from 'react';
+import { isValidElement, cloneElement, Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import { Provider } from './Context';
@@ -73,7 +73,7 @@ class Stepper extends Component {
      */
     const numChildren = Children.count(children);
     const steps = Children.map(children, (step, index) => {
-      if (!React.isValidElement(step)) {
+      if (!isValidElement(step)) {
         return null;
       }
       const controlProps = {index};
@@ -92,13 +92,13 @@ class Stepper extends Component {
 
       return [
         index > 0 && connector,
-        React.cloneElement(step, Object.assign(controlProps, step.props)),
+        cloneElement(step, Object.assign(controlProps, step.props)),
       ];
     });
 
     return (
       <Provider value={{ stepper: { orientation } }}>
-        <div style={prepareStyles(Object.assign(styles.root, style))}>
+        <div css={prepareStyles(Object.assign(styles.root, style))}>
           {steps}
         </div>
       </Provider>

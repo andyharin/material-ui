@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, isValidElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -61,12 +61,12 @@ class GridList extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
     const mergedRootStyles = Object.assign(styles.root, style);
 
-    const wrappedChildren = React.Children.map(children, (currentChild) => {
-      if (React.isValidElement(currentChild) && currentChild.type.muiName === 'Subheader') {
+    const wrappedChildren = Children.map(children, (currentChild) => {
+      if (isValidElement(currentChild) && currentChild.type.muiName === 'Subheader') {
         return currentChild;
       }
       const childCols = currentChild.props.cols || 1;
@@ -76,11 +76,11 @@ class GridList extends Component {
         height: cellHeight === 'auto' ? 'auto' : cellHeight * childRows + padding,
       });
 
-      return <div style={prepareStyles(itemStyle)}>{currentChild}</div>;
+      return <div css={prepareStyles(itemStyle)}>{currentChild}</div>;
     });
 
     return (
-      <div style={prepareStyles(mergedRootStyles)} {...other}>
+      <div css={prepareStyles(mergedRootStyles)} {...other}>
         {wrappedChildren}
       </div>
     );

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component, Children, isValidElement, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
@@ -265,7 +265,7 @@ class Menu extends Component {
 
   getFilteredChildren(children) {
     const filteredChildren = [];
-    React.Children.forEach(children, (child) => {
+    Children.forEach(children, (child) => {
       if (child) {
         filteredChildren.push(child);
       }
@@ -307,7 +307,7 @@ class Menu extends Component {
         ref: isFocused ? 'focusedMenuItem' : null,
       });
     }
-    return React.cloneElement(child, extraProps);
+    return cloneElement(child, extraProps);
   }
 
   decrementKeyboardFocusIndex(event) {
@@ -379,7 +379,7 @@ class Menu extends Component {
 
   setFocusIndexStartsWith(event, keys, filteredChildren) {
     let foundIndex = -1;
-    React.Children.forEach(filteredChildren, (child, index) => {
+    Children.forEach(filteredChildren, (child, index) => {
       if (foundIndex >= 0) {
         return;
       }
@@ -401,7 +401,7 @@ class Menu extends Component {
     const valueLink = this.getValueLink(this.props);
     let menuValue = valueLink.value;
     const itemValue = item.props.value;
-    const focusIndex = React.isValidElement(children) ? 0 : children.indexOf(item);
+    const focusIndex = isValidElement(children) ? 0 : children.indexOf(item);
 
     this.setFocusIndex(event, focusIndex, false);
 
@@ -547,7 +547,7 @@ class Menu extends Component {
     const filteredChildren = this.getFilteredChildren(children);
 
     let menuItemIndex = 0;
-    const newChildren = React.Children.map(filteredChildren, (child, index) => {
+    const newChildren = Children.map(filteredChildren, (child, index) => {
       const childIsDisabled = child.props.disabled;
       const childName = child.type ? child.type.muiName : '';
       let newChild = child;
@@ -558,7 +558,7 @@ class Menu extends Component {
           break;
 
         case 'Divider':
-          newChild = React.cloneElement(child, {
+          newChild = cloneElement(child, {
             style: Object.assign({}, styles.divider, child.props.style),
           });
           break;
@@ -575,7 +575,7 @@ class Menu extends Component {
         <div
           onKeyDown={this.handleKeyDown}
           onWheel={this.handleOnWheel}
-          style={prepareStyles(mergedRootStyles)}
+          css={prepareStyles(mergedRootStyles)}
           ref="scrollContainer"
           role="presentation"
         >

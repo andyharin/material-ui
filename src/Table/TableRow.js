@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -194,9 +194,9 @@ class TableRow extends Component {
     const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
 
-    const rowColumns = React.Children.map(this.props.children, (child, columnNumber) => {
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child, {
+    const rowColumns = Children.map(this.props.children, (child, columnNumber) => {
+      if (isValidElement(child)) {
+        return cloneElement(child, {
           columnNumber: columnNumber,
           hoverable: this.props.hoverable,
           key: `${this.props.rowNumber}-${columnNumber}`,
@@ -211,7 +211,7 @@ class TableRow extends Component {
     return (
       <tr
         className={className}
-        style={prepareStyles(Object.assign(styles.root, style))}
+        css={prepareStyles(Object.assign(styles.root, style))}
         {...other}
       >
         {rowColumns}

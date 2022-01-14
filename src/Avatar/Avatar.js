@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -99,7 +99,7 @@ class Avatar extends Component {
     if (src) {
       return (
         <img
-          style={prepareStyles(Object.assign(styles.root, style))}
+          css={prepareStyles(Object.assign(styles.root, style))}
           {...other}
           src={src}
           className={className}
@@ -109,10 +109,10 @@ class Avatar extends Component {
       return (
         <div
           {...other}
-          style={prepareStyles(Object.assign(styles.root, style))}
+          css={prepareStyles(Object.assign(styles.root, style))}
           className={className}
         >
-          {icon && React.cloneElement(icon, {
+          {icon && cloneElement(icon, {
             color: styles.icon.color,
             style: Object.assign(styles.icon, icon.props.style),
           })}

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -20,14 +20,14 @@ class AppCanvas extends Component {
       direction: 'ltr',
     };
 
-    const newChildren = React.Children.map(this.props.children, (currentChild) => {
+    const newChildren = Children.map(this.props.children, (currentChild) => {
       if (!currentChild) { // If undefined, skip it
         return null;
       }
 
       switch (currentChild.type.muiName) {
         case 'AppBar' :
-          return React.cloneElement(currentChild, {
+          return cloneElement(currentChild, {
             style: Object.assign({}, currentChild.props.style, {
               position: 'fixed',
             }),
@@ -38,7 +38,7 @@ class AppCanvas extends Component {
     }, this);
 
     return (
-      <div style={prepareStyles(styles)}>
+      <div css={prepareStyles(styles)}>
         {newChildren}
       </div>
     );

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import Checkbox from '../Checkbox';
@@ -70,14 +70,14 @@ class TableHeader extends Component {
   };
 
   createSuperHeaderRows() {
-    const numChildren = React.Children.count(this.props.children);
+    const numChildren = Children.count(this.props.children);
     if (numChildren === 1) return undefined;
 
     const superHeaders = [];
     for (let index = 0; index < numChildren - 1; index++) {
       const child = this.props.children[index];
 
-      if (!React.isValidElement(child)) continue;
+      if (!isValidElement(child)) continue;
 
       const props = {
         key: `sh${index}`,
@@ -94,15 +94,15 @@ class TableHeader extends Component {
     if (this.props.adjustForCheckbox) {
       children.push(this.getCheckboxPlaceholder(props));
     }
-    React.Children.forEach(child.props.children, (child) => {
+    Children.forEach(child.props.children, (child) => {
       children.push(child);
     });
 
-    return React.cloneElement(child, props, children);
+    return cloneElement(child, props, children);
   }
 
   createBaseHeaderRow() {
-    const childrenArray = React.Children.toArray(this.props.children);
+    const childrenArray = Children.toArray(this.props.children);
     const numChildren = childrenArray.length;
     if (numChildren < 1) {
       return null;
@@ -116,11 +116,11 @@ class TableHeader extends Component {
     };
 
     const children = [this.getSelectAllCheckboxColumn(props)];
-    React.Children.forEach(child.props.children, (child) => {
+    Children.forEach(child.props.children, (child) => {
       children.push(child);
     });
 
-    return React.cloneElement(
+    return cloneElement(
       child,
       props,
       children
@@ -189,7 +189,7 @@ const ViewComponent = ({className, superHeaderRows, baseHeaderRow, style, ...pro
   const {prepareStyles} = props.muiTheme;
   const styles = getStyles(props);
   return (
-    <thead className={className} style={prepareStyles(Object.assign(styles.root, style))}>
+    <thead className={className} css={prepareStyles(Object.assign(styles.root, style))}>
       {superHeaderRows}
       {baseHeaderRow}
     </thead>

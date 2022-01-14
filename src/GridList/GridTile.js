@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import { Children, cloneElement, isValidElement, Component } from 'react';
+import {jsx} from '@emotion/react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -195,19 +196,19 @@ class GridTile extends Component {
 
     if (title) {
       titleBar = (
-        <div key="titlebar" style={prepareStyles(styles.titleBar)}>
-          <div style={prepareStyles(styles.titleWrap)}>
-            <div style={prepareStyles(Object.assign(styles.title, titleStyle))}>
+        <div key="titlebar" css={prepareStyles(styles.titleBar)}>
+          <div css={prepareStyles(styles.titleWrap)}>
+            <div css={prepareStyles(Object.assign(styles.title, titleStyle))}>
               {title}
             </div>
             {subtitle ? (
-              <div style={prepareStyles(Object.assign(styles.subtitle, subtitleStyle))}>
+              <div css={prepareStyles(Object.assign(styles.subtitle, subtitleStyle))}>
                 {subtitle}
               </div>
             ) : null}
           </div>
           {actionIcon ? (
-            <div style={prepareStyles(styles.actionIcon)}>
+            <div css={prepareStyles(styles.actionIcon)}>
               {actionIcon}
             </div>
           ) : null}
@@ -219,10 +220,10 @@ class GridTile extends Component {
 
     // if there is a single image passed as children
     // clone it and add our styles
-    if (React.Children.count(children) === 1) {
-      newChildren = React.Children.map(children, (child) => {
+    if (Children.count(children) === 1) {
+      newChildren = Children.map(children, (child) => {
         if (child.type === 'img') {
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             key: 'img',
             ref: 'img',
             style: prepareStyles(Object.assign({}, styles.childImg, child.props.style)),
@@ -238,9 +239,9 @@ class GridTile extends Component {
       ...other,
     };
 
-    return React.isValidElement(containerElement) ?
-      React.cloneElement(containerElement, containerProps, [newChildren, titleBar]) :
-      React.createElement(containerElement, containerProps, [newChildren, titleBar]);
+    return isValidElement(containerElement) ?
+      cloneElement(containerElement, containerProps, [newChildren, titleBar]) :
+      jsx(containerElement, containerProps, [newChildren, titleBar]);
   }
 }
 

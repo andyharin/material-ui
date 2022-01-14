@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
@@ -89,7 +89,7 @@ class ScaleInChild extends Component {
     }, style);
 
     return (
-      <div {...other} style={prepareStyles(mergedRootStyles)}>
+      <div {...other} css={prepareStyles(mergedRootStyles)}>
         {children}
       </div>
     );

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import TableRowColumn from './TableRowColumn';
@@ -59,7 +59,7 @@ const ViewComponent = ({adjustForCheckbox, children, className, style, muiTheme,
   const {prepareStyles} = muiTheme;
   const styles = getStyles(muiTheme);
 
-  const footerRows = React.Children.map(children, (child, rowNumber) => {
+  const footerRows = Children.map(children, (child, rowNumber) => {
     const newChildProps = {
       displayBorder: false,
       key: `f-${rowNumber}`,
@@ -72,17 +72,17 @@ const ViewComponent = ({adjustForCheckbox, children, className, style, muiTheme,
     if (adjustForCheckbox) {
       newDescendants = [
         <TableRowColumn key={`fpcb${rowNumber}`} style={{width: 24}} />,
-        ...React.Children.toArray(child.props.children),
+        ...Children.toArray(child.props.children),
       ];
     } else {
       newDescendants = child.props.children;
     }
 
-    return React.cloneElement(child, newChildProps, newDescendants);
+    return cloneElement(child, newChildProps, newDescendants);
   });
 
   return (
-    <tfoot className={className} style={prepareStyles(Object.assign({}, style))} {...props}>
+    <tfoot className={className} css={prepareStyles(Object.assign({}, style))} {...props}>
       {footerRows}
     </tfoot>
   );

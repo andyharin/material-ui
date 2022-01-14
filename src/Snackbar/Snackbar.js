@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -218,12 +218,12 @@ class Snackbar extends Component {
       open,
     } = this.state;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props, this.state);
 
     return (
       <ClickAwayListener onClickAway={open ? this.componentClickAway : null}>
-        <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
+        <div {...other} css={prepareStyles(Object.assign(styles.root, style))}>
           <SnackbarBody
             action={action}
             contentStyle={contentStyle}

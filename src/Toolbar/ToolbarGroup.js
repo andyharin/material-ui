@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -113,7 +113,7 @@ class ToolbarGroup extends Component {
     const {prepareStyles} = this.props.muiTheme;
     const styles = getStyles(this.props);
 
-    const newChildren = React.Children.map(children, (currentChild) => {
+    const newChildren = Children.map(children, (currentChild) => {
       if (!currentChild) {
         return null;
       }
@@ -122,24 +122,24 @@ class ToolbarGroup extends Component {
       }
       switch (currentChild.type.muiName) {
         case 'DropDownMenu' :
-          return React.cloneElement(currentChild, {
+          return cloneElement(currentChild, {
             style: Object.assign({}, styles.dropDownMenu.root, currentChild.props.style),
             underlineStyle: styles.dropDownMenu.underline,
           });
         case 'RaisedButton' :
         case 'FlatButton' :
-          return React.cloneElement(currentChild, {
+          return cloneElement(currentChild, {
             style: Object.assign({}, styles.button, currentChild.props.style),
           });
         case 'FontIcon' :
-          return React.cloneElement(currentChild, {
+          return cloneElement(currentChild, {
             style: Object.assign({}, styles.icon.root, currentChild.props.style),
             color: currentChild.props.color || this.props.muiTheme.toolbar.iconColor,
             hoverColor: currentChild.props.hoverColor || this.props.muiTheme.toolbar.hoverColor,
           });
         case 'ToolbarSeparator' :
         case 'ToolbarTitle' :
-          return React.cloneElement(currentChild, {
+          return cloneElement(currentChild, {
             style: Object.assign({}, styles.span, currentChild.props.style),
           });
         default:
@@ -148,7 +148,7 @@ class ToolbarGroup extends Component {
     }, this);
 
     return (
-      <div {...other} className={className} style={prepareStyles(Object.assign({}, styles.root, style))}>
+      <div {...other} className={className} css={prepareStyles(Object.assign({}, styles.root, style))}>
         {newChildren}
       </div>
     );

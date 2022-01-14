@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import { withContext } from './Context';
@@ -105,9 +104,9 @@ const StepLabel = (props) => {
   const icon = renderIcon(completed, userIcon, styles);
 
   return (
-    <span style={prepareStyles(Object.assign(styles.root, style))} {...other}>
+    <span css={prepareStyles(Object.assign(styles.root, style))} {...other}>
       {icon && (
-        <span style={prepareStyles(Object.assign(styles.iconContainer, iconContainerStyle))}>
+        <span css={prepareStyles(Object.assign(styles.iconContainer, iconContainerStyle))}>
           {icon}
         </span>
       )}

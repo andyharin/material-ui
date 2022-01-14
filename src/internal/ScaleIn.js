@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
 import ScaleInChild from './ScaleInChild';
@@ -40,7 +40,7 @@ class ScaleIn extends Component {
       height: '100%',
     }, style);
 
-    const newChildren = React.Children.map(children, (child) => {
+    const newChildren = Children.map(children, (child) => {
       return (
         <ScaleInChild
           key={child.key}

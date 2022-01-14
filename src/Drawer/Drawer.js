@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
@@ -399,7 +399,7 @@ class Drawer extends Component {
     return (
       <div
         className={className}
-        style={style}
+        css={style}
       >
         <EventListener target="window" onKeyUp={this.handleKeyUp} />
         {overlay}

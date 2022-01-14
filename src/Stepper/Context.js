@@ -1,6 +1,6 @@
-import React from 'react';
+import { createContext } from 'react';
 
-const StepperContext = React.createContext({});
+const StepperContext = createContext({});
 
 const Provider = StepperContext.Provider;
 const Consumer = StepperContext.Consumer;

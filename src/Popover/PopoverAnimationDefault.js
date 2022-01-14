@@ -1,5 +1,5 @@
 import transitions from '../styles/transitions';
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import propTypes from '../utils/propTypes';
@@ -88,8 +88,8 @@ class PopoverAnimationDefault extends Component {
         zDepth={zDepth}
         className={className}
       >
-        <div style={prepareStyles(styles.horizontal)}>
-          <div style={prepareStyles(styles.vertical)}>
+        <div css={prepareStyles(styles.horizontal)}>
+          <div css={prepareStyles(styles.vertical)}>
             {this.props.children}
           </div>
         </div>

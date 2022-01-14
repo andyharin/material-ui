@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
@@ -421,7 +421,7 @@ class TextField extends Component {
     const inputId = id || this.uniqueId;
 
     const errorTextElement = this.state.errorText && (
-      <div style={prepareStyles(Object.assign(styles.error, errorStyle))}>
+      <div css={prepareStyles(Object.assign(styles.error, errorStyle))}>
         {this.state.errorText}
       </div>
     );
@@ -456,7 +456,7 @@ class TextField extends Component {
 
     let inputElement;
     if (children) {
-      inputElement = React.cloneElement(children,
+      inputElement = cloneElement(children,
         {
           ...inputProps,
           ...children.props,
@@ -477,7 +477,7 @@ class TextField extends Component {
       ) : (
         <input
           type={type}
-          style={prepareStyles(Object.assign(styles.inputNative, childStyleMerged))}
+          css={prepareStyles(Object.assign(styles.inputNative, childStyleMerged))}
           {...other}
           {...inputProps}
         />
@@ -494,7 +494,7 @@ class TextField extends Component {
       <div
         {...rootProps}
         className={className}
-        style={prepareStyles(Object.assign(styles.root, style))}
+        css={prepareStyles(Object.assign(styles.root, style))}
       >
         {floatingLabelTextElement}
         {hintText ?

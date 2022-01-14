@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -52,9 +52,9 @@ class CardActions extends Component {
     const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
-    const styledChildren = React.Children.map(children, (child) => {
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child, {
+    const styledChildren = Children.map(children, (child) => {
+      if (isValidElement(child)) {
+        return cloneElement(child, {
           style: Object.assign({}, styles.action, child.props.style),
         });
       }

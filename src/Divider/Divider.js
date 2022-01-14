@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -27,7 +26,7 @@ const Divider = (props) => {
   };
 
   return (
-    <hr {...other} style={prepareStyles(Object.assign(styles.root, style))} />
+    <hr {...other} css={prepareStyles(Object.assign(styles.root, style))} />
   );
 };
 

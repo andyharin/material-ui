@@ -1,4 +1,4 @@
-import React, {Component, Children} from 'react';
+import { cloneElement, isValidElement, Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import {fade} from '../utils/colorManipulator';
@@ -24,7 +24,7 @@ export const makeSelectable = (MyComponent) => {
 
         this.keyIndex += 1;
 
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           onClick: (event) => {
             this.handleItemClick(event, child);
             if (child.props.onClick) {
@@ -49,7 +49,7 @@ export const makeSelectable = (MyComponent) => {
     }
 
     hasSelectedDescendant = (previousValue, child) => {
-      if (React.isValidElement(child) && child.props.nestedItems && child.props.nestedItems.length > 0) {
+      if (isValidElement(child) && child.props.nestedItems && child.props.nestedItems.length > 0) {
         return child.props.nestedItems.reduce(this.hasSelectedDescendant, previousValue);
       }
       return previousValue || this.isChildSelected(child, this.props);

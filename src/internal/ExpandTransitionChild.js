@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
@@ -101,7 +101,7 @@ class ExpandTransitionChild extends Component {
     }, style);
 
     return (
-      <div {...other} style={prepareStyles(mergedRootStyles)}>
+      <div {...other} css={prepareStyles(mergedRootStyles)}>
         <div ref="wrapper">{children}</div>
       </div>
     );

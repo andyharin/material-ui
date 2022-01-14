@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import withTheme from '../styles/withTheme';
@@ -272,16 +272,16 @@ class Chip extends Component {
     ) : null;
 
     let children = childrenProp;
-    const childCount = React.Children.count(children);
+    const childCount = Children.count(children);
 
     // If the first child is an avatar, extract it and style it
     if (childCount > 1) {
-      children = React.Children.toArray(children);
+      children = Children.toArray(children);
 
-      if (React.isValidElement(children[0]) && children[0].type.muiName === 'Avatar') {
+      if (isValidElement(children[0]) && children[0].type.muiName === 'Avatar') {
         avatar = children.shift();
 
-        avatar = React.cloneElement(avatar, {
+        avatar = cloneElement(avatar, {
           style: Object.assign(styles.avatar, avatar.props.style),
           size: 32,
         });
@@ -299,7 +299,7 @@ class Chip extends Component {
         style={Object.assign(styles.root, style)}
       >
         {avatar}
-        <span style={prepareStyles(Object.assign(styles.label, labelStyle))}>
+        <span css={prepareStyles(Object.assign(styles.label, labelStyle))}>
           {children}
         </span>
         {deleteIcon}

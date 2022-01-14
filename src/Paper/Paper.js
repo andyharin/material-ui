@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import propTypes from '../utils/propTypes';
@@ -85,7 +85,7 @@ class Paper extends Component {
     const styles = getStyles(this.props);
 
     return (
-      <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
+      <div {...other} css={prepareStyles(Object.assign(styles.root, style))}>
         {children}
       </div>
     );

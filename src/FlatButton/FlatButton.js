@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -246,7 +246,7 @@ class FlatButton extends Component {
         marginLeft: label && labelPosition !== 'before' ? 12 : 0,
         marginRight: label && labelPosition === 'before' ? 12 : 0,
       }, icon.props.style);
-      iconCloned = React.cloneElement(icon, {
+      iconCloned = cloneElement(icon, {
         color: icon.props.color || mergedRootStyles.color,
         style: iconStyles,
         key: 'iconCloned',

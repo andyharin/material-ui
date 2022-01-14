@@ -1,5 +1,4 @@
 /* eslint-env mocha */
-import React from 'react';
 import Dialog from './Dialog';
 import {spy} from 'sinon';
 import {mount} from 'enzyme';

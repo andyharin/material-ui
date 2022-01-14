@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import { withContext } from './Context';
@@ -66,7 +66,7 @@ class Step extends Component {
 
     const icon = index + 1;
 
-    return React.cloneElement(child, Object.assign(
+    return cloneElement(child, Object.assign(
       {active, completed, disabled, icon, last},
       child.props
     ));
@@ -89,8 +89,8 @@ class Step extends Component {
     const styles = getStyles(this.props);
 
     return (
-      <div style={prepareStyles(Object.assign(styles.root, style))} {...other}>
-        {React.Children.map(children, this.renderChild)}
+      <div css={prepareStyles(Object.assign(styles.root, style))} {...other}>
+        {Children.map(children, this.renderChild)}
       </div>
     );
   }

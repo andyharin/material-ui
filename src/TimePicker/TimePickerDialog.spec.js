@@ -1,6 +1,5 @@
 /* eslint-env mocha */
-import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 import {spy, stub} from 'sinon';
 import getMuiTheme from '../styles/getMuiTheme';

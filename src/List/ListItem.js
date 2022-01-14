@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowEqual from 'recompose/shallowEqual';
@@ -397,7 +397,7 @@ class ListItem extends Component {
     return (
       <div
         {...additionalProps}
-        style={this.props.muiTheme.prepareStyles(mergedDivStyles)}
+        css={this.props.muiTheme.prepareStyles(mergedDivStyles)}
       >
         {contentChildren}
       </div>
@@ -430,19 +430,19 @@ class ListItem extends Component {
 
   createTextElement(styles, data, key) {
     const {prepareStyles} = this.props.muiTheme;
-    if (React.isValidElement(data)) {
+    if (isValidElement(data)) {
       let style = Object.assign({}, styles, data.props.style);
       if (typeof data.type === 'string') { // if element is a native dom node
         style = prepareStyles(style);
       }
-      return React.cloneElement(data, {
+      return cloneElement(data, {
         key: key,
         style: style,
       });
     }
 
     return (
-      <div key={key} style={prepareStyles(styles)}>
+      <div key={key} css={prepareStyles(styles)}>
         {data}
       </div>
     );
@@ -548,7 +548,7 @@ class ListItem extends Component {
     if (element) {
       const styles = Object.assign({}, baseStyles, element.props.style);
       children.push(
-        React.cloneElement(element, {
+        cloneElement(element, {
           key: children.length,
           style: styles,
           ...additionalProps,
@@ -731,7 +731,7 @@ class ListItem extends Component {
               ref={(node) => this.button = node}
               style={Object.assign({}, styles.root, style)}
             >
-              <div style={prepareStyles(Object.assign(styles.innerDiv, innerDivStyle))}>
+              <div css={prepareStyles(Object.assign(styles.innerDiv, innerDivStyle))}>
                 {contentChildren}
               </div>
             </EnhancedButton>

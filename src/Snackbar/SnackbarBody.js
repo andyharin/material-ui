@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -77,7 +76,7 @@ export const SnackbarBody = (props) => {
     ...other
   } = props;
 
-  const {prepareStyles} = props.muiTheme;
+  const {prepareStyles} = muiTheme;
   const styles = getStyles(props);
 
   const actionButton = action && (
@@ -89,8 +88,8 @@ export const SnackbarBody = (props) => {
   );
 
   return (
-    <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
-      <div style={prepareStyles(Object.assign(styles.content, contentStyle))}>
+    <div {...other} css={prepareStyles(Object.assign(styles.root, style))}>
+      <div css={prepareStyles(Object.assign(styles.content, contentStyle))}>
         <span>{message}</span>
         {actionButton}
       </div>

@@ -1,4 +1,4 @@
-import React, {Children, cloneElement} from 'react';
+import { Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -48,7 +48,7 @@ const BottomNavigation = (props) => {
   });
 
   return (
-    <div {...other} style={prepareStyles(Object.assign({}, styles.root, style))}>
+    <div {...other} css={prepareStyles(Object.assign({}, styles.root, style))}>
       {preparedChildren}
     </div>
   );

@@ -1,8 +1,8 @@
-import React from 'react';
+import { Children, isValidElement, cloneElement } from 'react';
 
 export function extendChildren(children, extendedProps, extendedChildren) {
-  return React.Children.map(children, (child) => {
-    if (!React.isValidElement(child)) {
+  return Children.map(children, (child) => {
+    if (!isValidElement(child)) {
       return child;
     }
 
@@ -13,7 +13,7 @@ export function extendChildren(children, extendedProps, extendedChildren) {
       extendedChildren(child) : extendedChildren ?
       extendedChildren : child.props.children;
 
-    return React.cloneElement(child, newProps, newChildren);
+    return cloneElement(child, newProps, newChildren);
   });
 }
 

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import TimePickerDialog from './TimePickerDialog';
@@ -201,7 +201,7 @@ class TimePicker extends Component {
     const {time} = this.state;
 
     return (
-      <div style={prepareStyles(Object.assign({}, style))}>
+      <div css={prepareStyles(Object.assign({}, style))}>
         <TextField
           {...other}
           style={textFieldStyle}

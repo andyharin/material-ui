@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -18,7 +18,7 @@ function getStyles(props) {
     },
   };
 
-  if (React.Children.count(props.children) === 1 && !isNaN(props.children)) {
+  if (Children.count(props.children) === 1 && !isNaN(props.children)) {
     styles.textAlign = 'right';
   }
 
@@ -116,7 +116,7 @@ class TableRowColumn extends Component {
     return (
       <td
         className={className}
-        style={prepareStyles(Object.assign(styles.root, style))}
+        css={prepareStyles(Object.assign(styles.root, style))}
         {...handlers}
         {...other}
       >

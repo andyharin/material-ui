@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import RadioButton from './RadioButton';
@@ -68,7 +68,7 @@ class RadioButtonGroup extends Component {
       selected = defaultSelected;
     }
 
-    React.Children.forEach(this.props.children, (option) => {
+    Children.forEach(this.props.children, (option) => {
       if (this.hasCheckAttribute(option)) cnt++;
     }, this);
 
@@ -124,7 +124,7 @@ class RadioButtonGroup extends Component {
   render() {
     const {prepareStyles} = this.props.muiTheme;
 
-    const options = React.Children.map(this.props.children, (option) => {
+    const options = Children.map(this.props.children, (option) => {
       const {
         name, // eslint-disable-line no-unused-vars
         value, // eslint-disable-line no-unused-vars
@@ -150,7 +150,7 @@ class RadioButtonGroup extends Component {
 
     return (
       <div
-        style={prepareStyles(Object.assign({}, this.props.style))}
+        css={prepareStyles(Object.assign({}, this.props.style))}
         className={this.props.className}
       >
         {options}

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -57,11 +57,11 @@ class Toolbar extends Component {
       ...other
     } = this.props;
 
-    const {prepareStyles} = this.props.muiTheme;
+    const {prepareStyles} = muiTheme;
     const styles = getStyles(this.props);
 
     return (
-      <div {...other} className={className} style={prepareStyles(Object.assign({}, styles.root, style))}>
+      <div {...other} className={className} css={prepareStyles(Object.assign({}, styles.root, style))}>
         {children}
       </div>
     );

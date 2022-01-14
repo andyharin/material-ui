@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import transitions from '../styles/transitions';
 
@@ -35,7 +34,7 @@ const TextFieldHint = (props) => {
   const styles = getStyles(props);
 
   return (
-    <div style={prepareStyles(Object.assign(styles.root, style))}>
+    <div css={prepareStyles(Object.assign(styles.root, style))}>
       {text}
     </div>
   );

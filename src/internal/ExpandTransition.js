@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
 import ExpandTransitionChild from './ExpandTransitionChild';
@@ -26,7 +26,7 @@ class ExpandTransition extends Component {
 
   renderChildren(children) {
     const {enterDelay, transitionDelay, transitionDuration, expandTransitionChildStyle} = this.props;
-    return React.Children.map(children, (child) => {
+    return Children.map(children, (child) => {
       return (
         <ExpandTransitionChild
           enterDelay={enterDelay}

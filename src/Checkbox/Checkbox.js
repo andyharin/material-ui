@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import { cloneElement, Component } from 'react';
+import {jsx} from '@emotion/react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import EnhancedSwitch from '../internal/EnhancedSwitch';
@@ -184,16 +185,16 @@ class Checkbox extends Component {
         iconStyle,
         this.props.disabled && styles.checkWhenDisabled);
 
-    const checkedElement = checkedIcon ? React.cloneElement(checkedIcon, {
+    const checkedElement = checkedIcon ? cloneElement(checkedIcon, {
       style: Object.assign(checkStyles, checkedIcon.props.style),
-    }) : React.createElement(CheckboxChecked, {
-      style: checkStyles,
+    }) : jsx(CheckboxChecked, {
+      css: checkStyles,
     });
 
-    const unCheckedElement = uncheckedIcon ? React.cloneElement(uncheckedIcon, {
+    const unCheckedElement = uncheckedIcon ? cloneElement(uncheckedIcon, {
       style: Object.assign(boxStyles, uncheckedIcon.props.style),
-    }) : React.createElement(CheckboxOutline, {
-      style: boxStyles,
+    }) : jsx(CheckboxOutline, {
+      css: boxStyles,
     });
 
     const checkboxElement = (

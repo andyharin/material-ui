@@ -1,4 +1,4 @@
-import React, {cloneElement} from 'react';
+import { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -64,7 +64,7 @@ const BottomNavigationItem = (props) => {
   return (
     <EnhancedButton {...other} style={Object.assign({}, styles.root, style)}>
       {styledIcon}
-      <div style={prepareStyles(styles.label)}>
+      <div css={prepareStyles(styles.label)}>
         {label}
       </div>
     </EnhancedButton>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import autoPrefix from '../utils/autoPrefix';
@@ -103,14 +103,14 @@ class RefreshIndicator extends Component {
       childrenCmp = (
         <div
           ref="wrapper"
-          style={prepareStyles({
+          css={prepareStyles({
             transition: transitions.create('transform', '20s', null, 'linear'),
             width: '100%',
             height: '100%',
           })}
         >
           <svg
-            style={{
+            css={{
               width: paperSize,
               height: paperSize,
             }}
@@ -118,7 +118,7 @@ class RefreshIndicator extends Component {
           >
             <circle
               ref="path"
-              style={prepareStyles(Object.assign(circleStyle.style, {
+              css={prepareStyles(Object.assign(circleStyle.style, {
                 transition: transitions.create('all', '1.5s', null, 'ease-in-out'),
               }))}
               {...circleStyle.attr}
@@ -131,18 +131,18 @@ class RefreshIndicator extends Component {
       const polygonStyle = this.getPolygonStyle(paperSize);
       childrenCmp = (
         <svg
-          style={{
+          css={{
             width: paperSize,
             height: paperSize,
           }}
           viewBox={`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
         >
           <circle
-            style={prepareStyles(circleStyle.style)}
+            css={prepareStyles(circleStyle.style)}
             {...circleStyle.attr}
           />
           <polygon
-            style={prepareStyles(polygonStyle.style)}
+            css={prepareStyles(polygonStyle.style)}
             {...polygonStyle.attr}
           />
         </svg>

@@ -1,4 +1,4 @@
-import React, {Component, Children, isValidElement} from 'react';
+import { Component, Children, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import Subheader from '../Subheader';
@@ -40,7 +40,7 @@ class List extends Component {
     };
 
     return (
-      <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
+      <div {...other} css={prepareStyles(Object.assign(styles.root, style))}>
         {children}
       </div>
     );

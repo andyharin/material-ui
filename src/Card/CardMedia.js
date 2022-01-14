@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -104,26 +104,26 @@ class CardMedia extends Component {
     const subtitleColor = this.props.muiTheme.cardMedia.subtitleColor;
     const color = this.props.muiTheme.cardMedia.color;
 
-    const styledChildren = React.Children.map(children, (child) => {
+    const styledChildren = Children.map(children, (child) => {
       if (!child) {
         return child;
       }
 
-      return React.cloneElement(child, {
+      return cloneElement(child, {
         style: prepareStyles(Object.assign({}, styles.mediaChild, child.props.style)),
       });
     });
 
-    const overlayChildren = React.Children.map(overlay, (child) => {
+    const overlayChildren = Children.map(overlay, (child) => {
       const childMuiName = (child && child.type) ? child.type.muiName : null;
 
       if (childMuiName === 'CardHeader' || childMuiName === 'CardTitle') {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           titleColor: titleColor,
           subtitleColor: subtitleColor,
         });
       } else if (childMuiName === 'CardText') {
-        return React.cloneElement(child, {
+        return cloneElement(child, {
           color: color,
         });
       } else {

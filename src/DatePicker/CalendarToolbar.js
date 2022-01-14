@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import IconButton from '../IconButton';
@@ -80,7 +80,7 @@ class CalendarToolbar extends Component {
 
 
     return (
-      <div style={styles.root}>
+      <div css={styles.root}>
         <IconButton
           disabled={!this.props.prevMonth}
           onClick={this.handleClickPrevMonth}
@@ -89,9 +89,9 @@ class CalendarToolbar extends Component {
         </IconButton>
         <SlideInTransitionGroup
           direction={this.state.transitionDirection}
-          style={styles.titleDiv}
+          css={styles.titleDiv}
         >
-          <div key={dateTimeFormatted} style={styles.titleText}>
+          <div key={dateTimeFormatted} css={styles.titleText}>
             {dateTimeFormatted}
           </div>
         </SlideInTransitionGroup>

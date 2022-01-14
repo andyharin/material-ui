@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import Checkbox from '../Checkbox';
@@ -166,7 +166,7 @@ class TableBody extends Component {
   };
 
   createRows() {
-    const numChildren = React.Children.count(this.props.children);
+    const numChildren = Children.count(this.props.children);
     let rowNumber = 0;
     const handlers = {
       onCellClick: this.onCellClick,
@@ -177,8 +177,8 @@ class TableBody extends Component {
       onRowClick: this.onRowClick,
     };
 
-    return React.Children.map(this.props.children, (child) => {
-      if (React.isValidElement(child)) {
+    return Children.map(this.props.children, (child) => {
+      if (isValidElement(child)) {
         const props = {
           hoverable: this.props.showRowHover,
           selected: this.isRowSelected(rowNumber),
@@ -194,11 +194,11 @@ class TableBody extends Component {
           this.createRowCheckboxColumn(props),
         ];
 
-        React.Children.forEach(child.props.children, (child) => {
+        Children.forEach(child.props.children, (child) => {
           children.push(child);
         });
 
-        return React.cloneElement(child, {...props, ...handlers}, children);
+        return cloneElement(child, {...props, ...handlers}, children);
       }
     });
   }
@@ -235,8 +235,8 @@ class TableBody extends Component {
 
     if (props.selectable) {
       let index = 0;
-      React.Children.forEach(props.children, (child) => {
-        if (React.isValidElement(child)) {
+      Children.forEach(props.children, (child) => {
+        if (isValidElement(child)) {
           if (child.props.selected !== undefined) {
             this.isControlled = true;
           }
@@ -455,7 +455,7 @@ class TableBody extends Component {
 const ViewComponent = ({muiTheme, children, style, ...other}) => {
   const {prepareStyles} = muiTheme;
   return (
-    <tbody style={prepareStyles(Object.assign({}, style))} {...other}>
+    <tbody css={prepareStyles(Object.assign({}, style))} {...other}>
       {children}
     </tbody>
   );

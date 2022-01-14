@@ -1,4 +1,5 @@
-import React, {Component, cloneElement} from 'react';
+import {Component, cloneElement} from 'react';
+import {jsx} from '@emotion/react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import IconButton from '../IconButton';
@@ -208,9 +209,9 @@ class AppBar extends Component {
     // If not, wrap in a div tag.
     const titleComponent = typeof title === 'string' || title instanceof String ? 'h1' : 'div';
 
-    const titleElement = React.createElement(titleComponent, {
+    const titleElement = jsx(titleComponent, {
       onClick: this.handleTitleClick,
-      style: prepareStyles(Object.assign(styles.title, styles.mainElement, titleStyle)),
+      css: prepareStyles(Object.assign(styles.title, styles.mainElement, titleStyle)),
     }, title);
 
     const iconLeftStyle = Object.assign({}, styles.iconButtonStyle, iconStyleLeft);
@@ -235,7 +236,7 @@ class AppBar extends Component {
         }
 
         menuElementLeft = (
-          <div style={prepareStyles(iconLeftStyle)}>
+          <div css={prepareStyles(iconLeftStyle)}>
             {Object.keys(iconElementLeftProps).length > 0 ?
               cloneElement(iconElementLeft, iconElementLeftProps) :
               iconElementLeft}
@@ -291,7 +292,7 @@ class AppBar extends Component {
       }
 
       menuElementRight = (
-        <div style={prepareStyles(iconRightStyle)}>
+        <div css={prepareStyles(iconRightStyle)}>
           {Object.keys(iconElementRightProps).length > 0 ?
             cloneElement(iconElementRight, iconElementRightProps) :
             iconElementRight}

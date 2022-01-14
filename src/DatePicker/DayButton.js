@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import Transition from '../styles/transitions';
@@ -122,15 +122,15 @@ class DayButton extends Component {
         onClick={this.handleClick}
         style={styles.root}
       >
-        <div style={prepareStyles(styles.buttonState)} />
-        <span style={prepareStyles(styles.label)}>
+        <div css={prepareStyles(styles.buttonState)} />
+        <span css={prepareStyles(styles.label)}>
           {new DateTimeFormat(locale, {
             day: 'numeric',
           }).format(date)}
         </span>
       </EnhancedButton>
     ) : (
-      <span style={prepareStyles(styles.root)} />
+      <span css={prepareStyles(styles.root)} />
     );
   }
 }

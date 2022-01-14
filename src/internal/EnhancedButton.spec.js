@@ -1,6 +1,5 @@
 /* eslint-env mocha */
-import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import {assert} from 'chai';
 import EnhancedButton from './EnhancedButton';
 import getMuiTheme from '../styles/getMuiTheme';

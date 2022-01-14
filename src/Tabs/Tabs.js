@@ -1,4 +1,5 @@
-import React, {Component, createElement, cloneElement, Children, isValidElement} from 'react';
+import { Component, cloneElement, Children, isValidElement } from 'react';
+import {jsx} from '@emotion/react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 import withTheme from '../styles/withTheme';
@@ -203,10 +204,10 @@ class Tabs extends Component {
         to be a controlled component.`);
 
       tabContent.push(tab.props.children ?
-        createElement(tabTemplate || TabTemplate, {
+        jsx(tabTemplate || TabTemplate, {
           key: index,
           selected: this.getSelected(tab, index),
-          style: tabTemplateStyle,
+          css: tabTemplateStyle,
         }, tab.props.children) : undefined);
 
       return cloneElement(tab, {
@@ -232,15 +233,15 @@ class Tabs extends Component {
       tabItemContainerStyle.width : '100%';
 
     return (
-      <div style={prepareStyles(Object.assign({}, style))} {...other}>
-        <div style={prepareStyles(Object.assign(styles.tabItemContainer, tabItemContainerStyle))}>
+      <div css={prepareStyles(Object.assign({}, style))} {...other}>
+        <div css={prepareStyles(Object.assign(styles.tabItemContainer, tabItemContainerStyle))}>
           {tabs}
         </div>
-        <div style={prepareStyles(Object.assign({width: inkBarContainerWidth}, inkBarContainerStyle))}>
+        <div css={prepareStyles(Object.assign({width: inkBarContainerWidth}, inkBarContainerStyle))}>
           {inkBar}
         </div>
         <div
-          style={prepareStyles(Object.assign({}, contentContainerStyle))}
+          css={prepareStyles(Object.assign({}, contentContainerStyle))}
           className={contentContainerClassName}
         >
           {tabContent}

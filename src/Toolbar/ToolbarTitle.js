@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -52,7 +52,7 @@ class ToolbarTitle extends Component {
 
     return (
       <span
-        style={prepareStyles(Object.assign({}, styles.root, style))}
+        css={prepareStyles(Object.assign({}, styles.root, style))}
         {...other}
       >
         {text}

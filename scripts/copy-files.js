@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 import path from 'path';
 import fse from 'fs-extra';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const files = ['README.md', 'CHANGELOG.md', 'LICENSE'];
 

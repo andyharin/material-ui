@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import transitions from '../styles/transitions';
 
@@ -40,7 +39,7 @@ const TextFieldLabel = (props) => {
   return (
     <label
       className={className}
-      style={prepareStyles(styles.root)}
+      css={prepareStyles(styles.root)}
       htmlFor={htmlFor}
       onClick={onClick}
     >

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -38,7 +38,7 @@ class InkBar extends Component {
     const styles = getStyles(this.props);
 
     return (
-      <div style={prepareStyles(Object.assign(styles.root, style))} />
+      <div css={prepareStyles(Object.assign(styles.root, style))} />
     );
   }
 }

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, Children, isValidElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 import withTheme from '../styles/withTheme';
@@ -160,7 +160,7 @@ class Table extends Component {
   }
 
   createTableHeader(base) {
-    return React.cloneElement(
+    return cloneElement(
       base,
       {
         enableSelectAll: base.props.enableSelectAll && this.props.selectable && this.props.multiSelectable,
@@ -171,7 +171,7 @@ class Table extends Component {
   }
 
   createTableBody(base) {
-    return React.cloneElement(
+    return cloneElement(
       base,
       {
         allRowsSelected: this.state.allRowsSelected,
@@ -253,8 +253,8 @@ class Table extends Component {
     let tFoot;
     let tBody;
 
-    React.Children.forEach(children, (child) => {
-      if (!React.isValidElement(child)) return;
+    Children.forEach(children, (child) => {
+      if (!isValidElement(child)) return;
 
       const {muiName} = child.type;
       if (muiName === 'TableBody') {
@@ -281,8 +281,8 @@ class Table extends Component {
 
     if (fixedHeader) {
       headerTable = (
-        <div style={prepareStyles(Object.assign({}, headerStyle))}>
-          <table className={className} style={mergedTableStyle}>
+        <div css={prepareStyles(Object.assign({}, headerStyle))}>
+          <table className={className} css={mergedTableStyle}>
             {tHead}
           </table>
         </div>
@@ -294,8 +294,8 @@ class Table extends Component {
     if (tFoot !== undefined) {
       if (fixedFooter) {
         footerTable = (
-          <div style={prepareStyles(Object.assign({}, footerStyle))}>
-            <table className={className} style={prepareStyles(mergedTableStyle)}>
+          <div css={prepareStyles(Object.assign({}, footerStyle))}>
+            <table className={className} css={prepareStyles(mergedTableStyle)}>
               {tFoot}
             </table>
           </div>
@@ -306,10 +306,10 @@ class Table extends Component {
     }
 
     return (
-      <div style={prepareStyles(Object.assign(styles.tableWrapper, wrapperStyle))}>
+      <div css={prepareStyles(Object.assign(styles.tableWrapper, wrapperStyle))}>
         {headerTable}
-        <div style={prepareStyles(Object.assign(styles.bodyTable, bodyStyle))} ref="tableDiv">
-          <table className={className} style={mergedTableStyle} ref="tableBody">
+        <div css={prepareStyles(Object.assign(styles.bodyTable, bodyStyle))} ref="tableDiv">
+          <table className={className} css={mergedTableStyle} ref="tableBody">
             {inlineHeader}
             {inlineFooter}
             {tBody}

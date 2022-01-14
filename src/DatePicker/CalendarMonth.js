@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import {isBetweenDates, isEqualDate} from './dateUtils';
 import DayButton from './DayButton';
@@ -62,7 +62,7 @@ class CalendarMonth extends Component {
 
     return weekArray.map((week, i) => {
       return (
-        <div key={i} style={styles.week}>
+        <div key={i} css={styles.week}>
           {this.getDayElements(week, i)}
         </div>
       );
@@ -101,7 +101,7 @@ class CalendarMonth extends Component {
 
   render() {
     return (
-      <div style={styles.root}>
+      <div css={styles.root}>
         {this.getWeekElements()}
       </div>
     );

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import keycode from 'keycode';
@@ -473,7 +473,7 @@ class AutoComplete extends Component {
                itemValue.type.muiName === Divider.muiName)) {
               requestsList.push({
                 text: itemText,
-                value: React.cloneElement(itemValue, {
+                value: cloneElement(itemValue, {
                   key: index,
                   disableFocusRipple: disableFocusRipple,
                 }),
@@ -520,7 +520,7 @@ class AutoComplete extends Component {
     );
 
     return (
-      <div style={prepareStyles(Object.assign(styles.root, style))} >
+      <div css={prepareStyles(Object.assign(styles.root, style))} >
         <TextField
           ref="searchTextField"
           autoComplete="off"

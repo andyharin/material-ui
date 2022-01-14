@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component, Children} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
@@ -393,7 +393,7 @@ class DropDownMenu extends Component {
 
     let displayValue = '';
     if (!multiple) {
-      React.Children.forEach(children, (child) => {
+      Children.forEach(children, (child) => {
         if (child && value === child.props.value) {
           if (selectionRenderer) {
             displayValue = selectionRenderer(value, child);
@@ -406,7 +406,7 @@ class DropDownMenu extends Component {
     } else {
       const values = [];
       const selectionRendererChildren = [];
-      React.Children.forEach(children, (child) => {
+      Children.forEach(children, (child) => {
         if (child && value && value.indexOf(child.props.value) > -1) {
           if (selectionRenderer) {
             values.push(child.props.value);
@@ -441,10 +441,10 @@ class DropDownMenu extends Component {
           this.rootNode = node;
         }}
         className={className}
-        style={prepareStyles(Object.assign({}, styles.root, open && styles.rootWhenOpen, style))}
+        css={prepareStyles(Object.assign({}, styles.root, open && styles.rootWhenOpen, style))}
       >
         <ClearFix style={styles.control} onClick={this.handleClickControl}>
-          <div style={prepareStyles(Object.assign({}, styles.label, open && styles.labelWhenOpen, labelStyle))}>
+          <div css={prepareStyles(Object.assign({}, styles.label, open && styles.labelWhenOpen, labelStyle))}>
             {displayValue}
           </div>
           <IconButton
@@ -458,7 +458,7 @@ class DropDownMenu extends Component {
           >
             {iconButton}
           </IconButton>
-          <div style={prepareStyles(Object.assign({}, styles.underline, underlineStyle))} />
+          <div css={prepareStyles(Object.assign({}, styles.underline, underlineStyle))} />
         </ClearFix>
         <Popover
           anchorOrigin={anchorOrigin}

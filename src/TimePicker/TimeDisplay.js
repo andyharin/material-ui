@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -110,14 +110,14 @@ class TimeDisplay extends Component {
       buttons = [
         <div
           key="pm"
-          style={prepareStyles(Object.assign({}, styles.clickable, affix === 'pm' ? {} : styles.inactive))}
+          css={prepareStyles(Object.assign({}, styles.clickable, affix === 'pm' ? {} : styles.inactive))}
           onClick={() => onSelectAffix('pm')}
         >
           {'PM'}
         </div>,
         <div
           key="am"
-          style={prepareStyles(Object.assign({},
+          css={prepareStyles(Object.assign({},
             styles.affixTop, styles.clickable, affix === 'am' ? {} : styles.inactive))}
           onClick={() => onSelectAffix('am')}
         >
@@ -127,26 +127,26 @@ class TimeDisplay extends Component {
     }
 
     return (
-      <div {...other} style={prepareStyles(styles.root)}>
-        <div style={prepareStyles(styles.text)}>
-          <div style={prepareStyles(Object.assign({}, styles.affix))} />
-          <div style={prepareStyles(styles.time)}>
+      <div {...other} css={prepareStyles(styles.root)}>
+        <div css={prepareStyles(styles.text)}>
+          <div css={prepareStyles(Object.assign({}, styles.affix))} />
+          <div css={prepareStyles(styles.time)}>
             <span
-              style={prepareStyles(Object.assign({}, styles.clickable, mode === 'hour' ? {} : styles.inactive))}
+              css={prepareStyles(Object.assign({}, styles.clickable, mode === 'hour' ? {} : styles.inactive))}
               onClick={onSelectHour}
             >
               {hour}
             </span>
             <span>:</span>
             <span
-              style={prepareStyles(Object.assign({},
+              css={prepareStyles(Object.assign({},
                 styles.clickable, mode === 'minute' ? {} : styles.inactive))}
               onClick={onSelectMin}
             >
               {min}
             </span>
           </div>
-          <div style={prepareStyles(Object.assign({}, styles.affix))}>
+          <div css={prepareStyles(Object.assign({}, styles.affix))}>
             {buttons}
           </div>
         </div>

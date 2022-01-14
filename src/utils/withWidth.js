@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import EventListener from 'react-event-listener';
 import {getWindowDim} from './dom';
 

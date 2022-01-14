@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import Tooltip from '../internal/Tooltip';
@@ -132,7 +132,7 @@ class TableHeaderColumn extends Component {
     return (
       <th
         className={className}
-        style={prepareStyles(Object.assign(styles.root, style))}
+        css={prepareStyles(Object.assign(styles.root, style))}
         {...handlers}
         {...other}
       >

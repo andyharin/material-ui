@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Children, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import Paper from '../Paper';
 import CardExpandable from './CardExpandable';
@@ -94,7 +94,7 @@ class Card extends Component {
 
     let lastElement;
     const expanded = this.state.expanded;
-    const newChildren = React.Children.map(children, (currentChild) => {
+    const newChildren = Children.map(children, (currentChild) => {
       let doClone = false;
       let newChild = undefined;
       const newProps = {};
@@ -122,7 +122,7 @@ class Card extends Component {
         );
       }
       if (doClone) {
-        element = React.cloneElement(currentChild, newProps, currentChild.props.children, newChild);
+        element = cloneElement(currentChild, newProps, currentChild.props.children, newChild);
       }
       lastElement = element;
       return element;
@@ -142,7 +142,7 @@ class Card extends Component {
 
     return (
       <Paper {...other} style={mergedStyles}>
-        <div style={containerMergedStyles}>
+        <div css={containerMergedStyles}>
           {newChildren}
         </div>
       </Paper>

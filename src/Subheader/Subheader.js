@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -29,7 +28,7 @@ const Subheader = (props) => {
   };
 
   return (
-    <div {...other} style={prepareStyles(Object.assign(styles.root, style))}>
+    <div {...other} css={prepareStyles(Object.assign(styles.root, style))}>
       {children}
     </div>
   );

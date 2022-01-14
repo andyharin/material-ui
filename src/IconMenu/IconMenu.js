@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import withTheme from '../styles/withTheme';
@@ -286,7 +286,7 @@ You should wrapped it with an <IconButton />.`);
         Object.assign({}, iconStyle, iconButtonElement.props.iconStyle) :
         iconButtonElement.props.iconStyle;
     }
-    const iconButton = React.cloneElement(iconButtonElement, iconButtonProps);
+    const iconButton = cloneElement(iconButtonElement, iconButtonProps);
 
     const menu = (
       <Menu
@@ -310,7 +310,7 @@ You should wrapped it with an <IconButton />.`);
         onMouseEnter={onMouseEnter}
         onMouseUp={onMouseUp}
         onClick={onClick}
-        style={prepareStyles(mergedRootStyles)}
+        css={prepareStyles(mergedRootStyles)}
       >
         {iconButton}
         <Popover

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import ClockNumber from './ClockNumber';
@@ -140,12 +140,12 @@ class ClockMinutes extends Component {
     const minutes = this.getMinuteNumbers();
 
     return (
-      <div ref="clock" style={prepareStyles(styles.root)} >
+      <div ref="clock" css={prepareStyles(styles.root)} >
         <ClockPointer value={minutes.selected} type="minute" hasSelected={minutes.hasSelected} />
         {minutes.numbers}
         <div
           ref="mask"
-          style={prepareStyles(styles.hitMask)}
+          css={prepareStyles(styles.hitMask)}
           onTouchMove={this.handleTouch}
           onTouchEnd={this.handleTouch}
           onMouseUp={this.handleUp}

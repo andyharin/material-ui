@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import keycode from 'keycode';
@@ -296,7 +296,7 @@ class EnhancedSwitch extends Component {
     }
 
     const labelElement = label && (
-      <label style={prepareStyles(Object.assign(styles.label, labelStyle))}>
+      <label css={prepareStyles(Object.assign(styles.label, labelStyle))}>
         {label}
       </label>
     );
@@ -343,7 +343,7 @@ class EnhancedSwitch extends Component {
         {...other}
         ref="checkbox"
         type={inputType}
-        style={prepareStyles(Object.assign(styles.input, inputStyle))}
+        css={prepareStyles(Object.assign(styles.input, inputStyle))}
         name={name}
         value={value}
         checked={this.state.switched}
@@ -358,31 +358,31 @@ class EnhancedSwitch extends Component {
     // If toggle component (indicated by whether the style includes thumb) manually lay out
     // elements in order to nest ripple elements
     const switchOrThumbElement = !thumbStyle ? (
-      <div style={prepareStyles(wrapStyles)}>
+      <div css={prepareStyles(wrapStyles)}>
         {switchElement}
         {ripples}
       </div>
     ) : (
-      <div style={prepareStyles(wrapStyles)}>
-        <div style={prepareStyles(Object.assign({}, trackStyle))} />
+      <div css={prepareStyles(wrapStyles)}>
+        <div css={prepareStyles(Object.assign({}, trackStyle))} />
         <Paper style={thumbStyle} zDepth={1} circle={true}> {ripples} </Paper>
       </div>
     );
 
     const elementsInOrder = labelPosition === 'right' ? (
-      <div style={styles.controls}>
+      <div css={styles.controls}>
         {switchOrThumbElement}
         {labelElement}
       </div>
     ) : (
-      <div style={styles.controls}>
+      <div css={styles.controls}>
         {labelElement}
         {switchOrThumbElement}
       </div>
     );
 
     return (
-      <div ref="root" className={className} style={prepareStyles(Object.assign(styles.root, style))}>
+      <div ref="root" className={className} css={prepareStyles(Object.assign(styles.root, style))}>
         <EventListener
           target="window"
           onKeyDown={this.handleKeyDown}

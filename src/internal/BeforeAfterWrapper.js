@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
+import {jsx} from '@emotion/react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -79,17 +80,17 @@ class BeforeAfterWrapper extends Component {
     let afterElement;
 
     if (beforeStyle) {
-      beforeElement = React.createElement(this.props.beforeElementType,
+      beforeElement = jsx(this.props.beforeElementType,
         {
-          style: prepareStyles(Object.assign({}, styles.box, beforeStyle)),
+          css: prepareStyles(Object.assign({}, styles.box, beforeStyle)),
           key: '::before',
         });
     }
 
     if (afterStyle) {
-      afterElement = React.createElement(this.props.afterElementType,
+      afterElement = jsx(this.props.afterElementType,
         {
-          style: prepareStyles(Object.assign({}, styles.box, afterStyle)),
+          css: prepareStyles(Object.assign({}, styles.box, afterStyle)),
           key: '::after',
         });
     }
@@ -97,9 +98,9 @@ class BeforeAfterWrapper extends Component {
     const children = [beforeElement, this.props.children, afterElement];
 
     const props = other;
-    props.style = prepareStyles(Object.assign({}, this.props.style));
+    props.css = prepareStyles(Object.assign({}, this.props.style));
 
-    return React.createElement(this.props.elementType, props, children);
+    return jsx(this.props.elementType, props, children);
   }
 }
 

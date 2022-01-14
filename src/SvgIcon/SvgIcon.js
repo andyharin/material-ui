@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -96,7 +96,7 @@ class SvgIcon extends Component {
         {...other}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        style={prepareStyles(mergedStyles)}
+        css={prepareStyles(mergedStyles)}
         viewBox={viewBox}
       >
         {children}

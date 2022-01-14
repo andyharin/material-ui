@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
@@ -127,7 +127,7 @@ class TouchRipple extends Component {
       const ripple = currentRipples[0];
       // This clone will replace the ripple in ReactTransitionGroup with a
       // version that will disappear immediately when removed from the DOM
-      const abortedRipple = React.cloneElement(ripple, {aborted: true});
+      const abortedRipple = cloneElement(ripple, {aborted: true});
       // Remove the old ripple and replace it with the new updated one
       currentRipples = shift(currentRipples);
       currentRipples = [...currentRipples, abortedRipple];

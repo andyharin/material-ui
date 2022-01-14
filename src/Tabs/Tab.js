@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -111,8 +111,8 @@ const ViewComponent = (props) => {
   const styles = getStyles(props);
 
   let iconElement;
-  if (icon && React.isValidElement(icon)) {
-    iconElement = React.cloneElement(icon, {
+  if (icon && isValidElement(icon)) {
+    iconElement = cloneElement(icon, {
       style: {
         fontSize: 24,
         color: (icon.props && icon.props.style && icon.props.style.color) ?
@@ -134,7 +134,7 @@ const ViewComponent = (props) => {
       focusRippleOpacity={rippleOpacity}
       touchRippleOpacity={rippleOpacity}
     >
-      <div style={Object.assign(styles.button, buttonStyle)} >
+      <div css={Object.assign(styles.button, buttonStyle)} >
         {iconElement}
         {label}
       </div>

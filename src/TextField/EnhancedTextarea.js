@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import EventListener from 'react-event-listener';
 import withTheme from '../styles/withTheme';
@@ -168,11 +168,11 @@ class EnhancedTextarea extends Component {
     }
 
     return (
-      <div style={prepareStyles(rootStyles)}>
+      <div css={prepareStyles(rootStyles)}>
         <EventListener target="window" onResize={this.handleResize} />
         <textarea
           ref="shadow"
-          style={prepareStyles(shadowStyles)}
+          css={prepareStyles(shadowStyles)}
           tabIndex="-1"
           rows={this.props.rows}
           defaultValue={this.props.defaultValue}
@@ -184,7 +184,7 @@ class EnhancedTextarea extends Component {
           {...other}
           ref="input"
           rows={this.props.rows}
-          style={prepareStyles(textareaStyles)}
+          css={prepareStyles(textareaStyles)}
           onChange={this.handleChange}
         />
       </div>

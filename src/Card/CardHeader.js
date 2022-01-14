@@ -1,4 +1,4 @@
-import React, {Component, isValidElement} from 'react';
+import { cloneElement, Component, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import Avatar from '../Avatar';
@@ -140,7 +140,7 @@ class CardHeader extends Component {
     let avatar = avatarProp;
 
     if (isValidElement(avatarProp)) {
-      avatar = React.cloneElement(avatar, {
+      avatar = cloneElement(avatar, {
         style: Object.assign(styles.avatar, avatar.props.style),
       });
     } else if (avatar !== null) {

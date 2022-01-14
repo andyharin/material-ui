@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import EnhancedButton from '../internal/EnhancedButton';
@@ -90,7 +90,7 @@ class YearButton extends Component {
         onClick={this.handleClick}
         style={styles.root}
       >
-        <span style={prepareStyles(styles.label)}>
+        <span css={prepareStyles(styles.label)}>
           {children}
         </span>
       </EnhancedButton>

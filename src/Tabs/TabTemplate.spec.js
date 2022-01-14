@@ -1,6 +1,5 @@
 /* eslint-env mocha */
-import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import {assert} from 'chai';
 import TabTemplate from './TabTemplate';
 import getMuiTheme from '../styles/getMuiTheme';

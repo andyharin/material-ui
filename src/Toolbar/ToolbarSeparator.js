@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 
@@ -45,7 +45,7 @@ class ToolbarSeparator extends Component {
     const styles = getStyles(this.props);
 
     return (
-      <span {...other} className={className} style={prepareStyles(Object.assign({}, styles.root, style))} />
+      <span {...other} className={className} css={prepareStyles(Object.assign({}, styles.root, style))} />
     );
   }
 }

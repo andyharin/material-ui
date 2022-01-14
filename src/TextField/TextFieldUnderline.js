@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import transitions from '../styles/transitions';
 
@@ -115,8 +114,8 @@ const TextFieldUnderline = (props) => {
 
   return (
     <div>
-      <hr aria-hidden="true" style={prepareStyles(underline)} />
-      <hr aria-hidden="true" style={prepareStyles(focusedUnderline)} />
+      <hr aria-hidden="true" css={prepareStyles(underline)} />
+      <hr aria-hidden="true" css={prepareStyles(focusedUnderline)} />
     </div>
   );
 };

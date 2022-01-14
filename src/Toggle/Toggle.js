@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -237,8 +237,8 @@ class Toggle extends Component {
     const styles = getStyles(this.props, this.state);
 
     const toggleElement = (
-      <div style={prepareStyles(Object.assign({}, styles.toggleElement))}>
-        <div style={prepareStyles(Object.assign({}, styles.track))} />
+      <div css={prepareStyles(Object.assign({}, styles.toggleElement))}>
+        <div css={prepareStyles(Object.assign({}, styles.track))} />
         <Paper style={styles.thumb} circle={true} zDepth={1} />
       </div>
     );

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { createRef, isValidElement, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -53,7 +53,7 @@ function getStyles(props) {
 }
 
 class RadioButton extends Component {
-  enhancedSwitch = React.createRef()
+  enhancedSwitch = createRef()
 
   static propTypes = {
     /**
@@ -169,13 +169,13 @@ class RadioButton extends Component {
       disabled && styles.fillWhenDisabled
     );
 
-    const uncheckedElement = React.isValidElement(uncheckedIcon) ?
-      React.cloneElement(uncheckedIcon, {
+    const uncheckedElement = isValidElement(uncheckedIcon) ?
+      cloneElement(uncheckedIcon, {
         style: Object.assign(uncheckedStyles, uncheckedIcon.props.style),
       }) : <RadioButtonOff style={uncheckedStyles} />;
 
-    const checkedElement = React.isValidElement(checkedIcon) ?
-      React.cloneElement(checkedIcon, {
+    const checkedElement = isValidElement(checkedIcon) ?
+      cloneElement(checkedIcon, {
         style: Object.assign(checkedStyles, checkedIcon.props.style),
       }) : <RadioButtonOn style={checkedStyles} />;
 

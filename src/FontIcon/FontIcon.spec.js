@@ -1,6 +1,5 @@
 /* eslint-env mocha */
-import React from 'react';
-import {spy} from 'sinon';
+import { spy } from 'sinon';
 import {shallow} from 'enzyme';
 import {assert} from 'chai';
 import FontIcon from './FontIcon';

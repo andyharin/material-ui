@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component, Children, isValidElement, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import EventListener from 'react-event-listener';
@@ -65,7 +65,7 @@ class TransitionItem extends Component {
     const {prepareStyles} = muiTheme;
 
     return (
-      <div {...other} style={prepareStyles(Object.assign({}, this.state.style, style))}>
+      <div {...other} css={prepareStyles(Object.assign({}, this.state.style, style))}>
         {children}
       </div>
     );
@@ -224,7 +224,7 @@ class DialogInline extends Component {
 
       if (title) maxDialogContentHeight -= (dialogContent.previousSibling || {}).offsetHeight;
 
-      if (React.Children.count(actions)) {
+      if (Children.count(actions)) {
         maxDialogContentHeight -= (dialogContent.nextSibling || {}).offsetHeight;
       }
 
@@ -293,28 +293,28 @@ class DialogInline extends Component {
     styles.overlay = Object.assign(styles.overlay, overlayStyle);
     styles.title = Object.assign(styles.title, titleStyle);
 
-    const actionsContainer = React.Children.count(actions) > 0 && (
-      <div className={actionsContainerClassName} style={prepareStyles(styles.actionsContainer)}>
-        {React.Children.toArray(actions)}
+    const actionsContainer = Children.count(actions) > 0 && (
+      <div className={actionsContainerClassName} css={prepareStyles(styles.actionsContainer)}>
+        {Children.toArray(actions)}
       </div>
     );
 
     let titleElement = title;
-    if (React.isValidElement(title)) {
-      titleElement = React.cloneElement(title, {
+    if (isValidElement(title)) {
+      titleElement = cloneElement(title, {
         className: title.props.className || titleClassName,
         style: prepareStyles(Object.assign(styles.title, title.props.style)),
       });
     } else if (typeof title === 'string') {
       titleElement = (
-        <h3 className={titleClassName} style={prepareStyles(styles.title)}>
+        <h3 className={titleClassName} css={prepareStyles(styles.title)}>
           {title}
         </h3>
       );
     }
 
     return (
-      <div className={className} style={prepareStyles(styles.root)}>
+      <div className={className} css={prepareStyles(styles.root)}>
         {open &&
           <EventListener
             target="window"
@@ -342,7 +342,7 @@ class DialogInline extends Component {
                 <div
                   ref="dialogContent"
                   className={bodyClassName}
-                  style={prepareStyles(styles.body)}
+                  css={prepareStyles(styles.body)}
                 >
                   {children}
                 </div>

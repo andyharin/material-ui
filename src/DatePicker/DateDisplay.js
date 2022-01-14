@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import transitions from '../styles/transitions';
@@ -148,17 +148,17 @@ class DateDisplay extends Component {
     }).format(selectedDate);
 
     return (
-      <div {...other} style={prepareStyles(styles.root, style)}>
-        <SlideInTransitionGroup style={styles.year} direction={this.state.transitionDirection}>
-          <div key={year} style={styles.yearTitle} onClick={this.handleClickYear}>
+      <div {...other} css={prepareStyles(styles.root, style)}>
+        <SlideInTransitionGroup css={styles.year} direction={this.state.transitionDirection}>
+          <div key={year} css={styles.yearTitle} onClick={this.handleClickYear}>
             {year}
           </div>
         </SlideInTransitionGroup>
-        <SlideInTransitionGroup style={styles.monthDay} direction={this.state.transitionDirection}>
+        <SlideInTransitionGroup css={styles.monthDay} direction={this.state.transitionDirection}>
           <div
             key={dateTime}
             onClick={this.handleClickMonthDay}
-            style={styles.monthDayTitle}
+            css={styles.monthDayTitle}
           >
             {dateTime}
           </div>

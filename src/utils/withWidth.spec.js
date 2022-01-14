@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 
-import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import {assert} from 'chai';
 import withWidth, {MEDIUM, LARGE} from './withWidth';
 

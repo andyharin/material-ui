@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../styles/withTheme';
 import TimeDisplay from './TimeDisplay';
@@ -166,7 +166,7 @@ class Clock extends Component {
     }
 
     return (
-      <div style={prepareStyles(styles.root)}>
+      <div css={prepareStyles(styles.root)}>
         <TimeDisplay
           selectedTime={this.state.selectedTime}
           mode={this.state.mode}
@@ -176,8 +176,8 @@ class Clock extends Component {
           onSelectHour={this.setMode.bind(this, 'hour')}
           onSelectMin={this.setMode.bind(this, 'minute')}
         />
-        <div style={prepareStyles(styles.container)} >
-          <div style={prepareStyles(styles.circle)} />
+        <div css={prepareStyles(styles.container)} >
+          <div css={prepareStyles(styles.circle)} />
           {clock}
         </div>
       </div>

@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -15,7 +14,7 @@ const TabTemplate = ({children, selected, style}) => {
   }
 
   return (
-    <div style={templateStyle}>
+    <div css={templateStyle}>
       {children}
     </div>
   );
